@@ -1,0 +1,27 @@
+$color-primary: #00779A;
+$color-secondary: #009A70;
+
+$color-dark-primary: #014256;
+
+$color-orange: #EF893E;
+$color-green: #ABC549;
+$color-grey: #8E8E8E;
+
+$color-white: #ffffff;
+$color-black: #000000;
+
+$color-background : #F1F1F1;
+$color-background-secondary : #faf8f8;
+
+
+.h-bg-primary {
+    background-color: $color-primary;
+}
+
+.h-bg-secondary {
+    background-color: $color-secondary;
+}
+
+.h-color-white {
+    color: $color-white;
+}

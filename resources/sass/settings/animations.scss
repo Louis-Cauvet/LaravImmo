@@ -1,0 +1,8 @@
+@keyframes leftShift {
+    50% {
+        transform: translateX(.5rem);
+    }
+    100% {
+        transform: translatex(0);
+    }
+}

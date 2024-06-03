@@ -1,0 +1,12 @@
+$mq-1 :321px;    // Mobile small
+$mq-2 :376px;    // Mobile medium
+$mq-3 :426px;    // Mobile large
+$mq-4 :618px;
+$mq-5 :769px;    // Tablet
+$mq-6 :918px;
+$mq-7 :1025px;   // Desktop small
+$mq-8 :1441px;   // Desktop large
+
+
+// Exemple :
+@media only screen and (min-width: $mq-1){}

@@ -1,0 +1,35 @@
+.slider-testimony {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    width: 100%;
+    text-align: center;
+    transform: none;
+    transition: transform .8s ease-in-out;
+
+    article {
+        min-width: 100%;
+    }
+
+    span {
+        font-weight: bold;
+    }
+}
+
+.container-testimony {
+    .slider-arrow {
+        position: absolute;
+        top: 48%;
+        font-size: 40px;
+        color: $color-secondary;
+        cursor: pointer;
+
+        &.arrow-left {
+            left: 1.5rem;
+        }
+
+        &.arrow-right {
+            right: 1.5rem;
+        }
+    }
+}

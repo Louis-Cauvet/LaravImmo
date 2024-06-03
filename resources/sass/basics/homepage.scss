@@ -1,0 +1,161 @@
+.search-bar {
+    width: 100%;
+    background-image: url("/resources/img/searchbar-bg.webp");
+    background-size: cover;
+    background-position: center;
+
+    form {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 2.5rem 3rem;
+        box-sizing: border-box;
+        background-color: $color-white;
+        border-radius: 1rem;
+
+        @media only screen and (min-width: $mq-5) {
+            flex-direction: row;
+        }
+
+        .radio-inputs {
+            display: flex;
+            gap: .5rem;
+
+            @media only screen and (min-width: $mq-5) {
+                flex-direction: column;
+            }
+
+            div {
+                display: flex;
+            }
+        }
+
+        .not-radio-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            flex-grow: 2;
+        }
+
+        button {
+            position: absolute;
+            bottom: -1rem;
+            left: calc(50%);
+            transform: translateX(-4rem);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.4rem 1rem;
+            color: $color-white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+    }
+}
+
+.container-agency {
+    .img-container {
+        @media only screen and (min-width: $mq-5) {
+            min-width: 400px;
+        }
+
+        img {
+            max-height: 20rem;
+        }
+    }
+
+    ul {
+        margin-bottom: 2rem;
+    }
+
+    .listing-expertises {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-top: 3.2rem;
+        gap: 2.5rem 1.5rem;
+
+
+        .expertise {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .expertise-icon {
+                font-size: 36px;
+                padding: 1.5rem;
+                color: $color-white;
+            }
+
+            h3 {
+                position: relative;
+                text-align: center;
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    height: .15rem;
+                    width: 4.4rem;
+                    bottom: -1.2rem;
+                    left: calc(50% - 2.2rem);
+                    background-color: red;
+                }
+            }
+
+            &:nth-child(1) {
+                .expertise-icon {
+                    background-color: $color-orange;
+                    border-radius: 42% 35% 50% 29%;
+                }
+
+                h3:after {
+                    background-color: $color-orange;
+                }
+            }
+
+            &:nth-child(2) {
+                .expertise-icon {
+                    background-color: $color-grey;
+                    border-radius: 35% 42% 38% 50%;
+                }
+
+                h3:after {
+                    background-color: $color-grey;
+                }
+            }
+
+            &:nth-child(3) {
+                .expertise-icon {
+                    background-color: $color-green;
+                    border-radius: 44% 42% 50% 35%;
+                }
+
+                h3:after {
+                    background-color: $color-green;
+                }
+            }
+        }
+    }
+}
+
+.container-testimony {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 775px;
+    margin: 0 auto;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    overflow-x: hidden;
+
+    h2 {
+        text-align: center;
+    }
+}
+

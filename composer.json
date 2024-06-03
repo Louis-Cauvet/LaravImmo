@@ -32,9 +32,11 @@
     },
     "scripts": {
         "ss" : [
-          "php -S localhost:8000 --docroot=public"
+            "Composer\\Config::disableProcessTimeout",
+            "php -S localhost:8000 --docroot=public"
         ],
         "pma" : [
+            "Composer\\Config::disableProcessTimeout",
             "php.exe -S localhost:8080 -t C:\\tools\\phpmyadmin"
         ],
         "post-autoload-dump": [

@@ -1,3 +1,17 @@
 {
-    "/css/app.css": "/css/app.css"
+    "/resources/js/app.js": "/resources/js/app.js",
+    "/resources/css/app.css": "/resources/css/app.css",
+    "/resources/img/footer-bg.jpg": "/resources/img/footer-bg.jpg",
+    "/resources/img/icon-profile.png": "/resources/img/icon-profile.png",
+    "/resources/img/laravimmo-illustration.png": "/resources/img/laravimmo-illustration.png",
+    "/resources/img/logo.png": "/resources/img/logo.png",
+    "/resources/img/logo_white.png": "/resources/img/logo_white.png",
+    "/resources/img/maison-background-1.jpg": "/resources/img/maison-background-1.jpg",
+    "/resources/img/photo-annonce1.jpg": "/resources/img/photo-annonce1.jpg",
+    "/resources/img/photo-annonce2.jpg": "/resources/img/photo-annonce2.jpg",
+    "/resources/img/photo-annonce3.jpg": "/resources/img/photo-annonce3.jpg",
+    "/resources/img/searchbar-bg.webp": "/resources/img/searchbar-bg.webp",
+    "/resources/img/icon-instagram.png": "/resources/img/icon-instagram.png",
+    "/resources/img/icon-linkedin.png": "/resources/img/icon-linkedin.png",
+    "/resources/img/icon-youtube.png": "/resources/img/icon-youtube.png"
 }

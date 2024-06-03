@@ -1,0 +1,32 @@
+.a-link {
+    position: relative;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: $color-dark-primary;
+
+
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: calc(100% + 20px);
+        height: 1px;
+        background-color: $color-primary;
+
+    }
+
+    &:after {
+        content: '>';
+        position: absolute;
+        right: -20px;
+        top: -2px;
+        font-size: 16px;
+    }
+
+    &:hover {
+        &:after{
+          animation: 1s ease-in leftShift infinite;
+        }
+    }
+}
