@@ -33,7 +33,7 @@
                 <a href="#_">Contact</a>
             </li>
         </ul>
-        <a href="#">
+        <a href="{{ route('homepage') }}">
             <img src="/resources/img/logo.png" alt="texte alternatif" class="footer-logo">
         </a>
         <div class="footer-bottom-right">

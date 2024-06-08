@@ -1,14 +1,14 @@
 .cards-container {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     flex-wrap: wrap;
     gap: 2.5rem;
     margin-bottom: 2.5rem;
 
-    @media only screen and (max-width: $mq-5) {
-        align-items: center;
-        gap: 3.5rem;
+    @media only screen and (min-width: $mq-5) {
+        align-items: flex-start;
+        gap: 4rem 3rem;
     }
 
     .card-immo {
@@ -18,6 +18,14 @@
         gap: .6rem;
         color: $color-dark-primary;
         min-width: 275px;
+
+        &:hover {
+            .img-container {
+                img {
+                    transform: scale(1.1);
+                }
+            }
+        }
 
 
         .img-container {

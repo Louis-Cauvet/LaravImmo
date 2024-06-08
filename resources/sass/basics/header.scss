@@ -62,26 +62,30 @@ header {
                 gap: 1.5rem;
             }
 
-            a {
-                position: relative;
-                font-size: 15px;
-                color: $color-primary;
+            li {
+                text-align: center;
 
-                &:after {
-                    content: '';
-                    position: absolute;
-                    bottom: -.5rem;
-                    left: 0;
-                    height: .15rem;
-                    width: 0%;
-                    background-color: $color-secondary;
-                    border-radius: 1rem;
-                    transition: width .5s ease;
-                }
+                a {
+                    position: relative;
+                    font-size: 15px;
+                    color: $color-primary;
 
-                &:hover {
                     &:after {
-                        width: 100%;
+                        content: '';
+                        position: absolute;
+                        bottom: -.5rem;
+                        left: 0;
+                        height: .15rem;
+                        width: 0%;
+                        background-color: $color-secondary;
+                        border-radius: 1rem;
+                        transition: width .5s ease;
+                    }
+
+                    &:hover {
+                        &:after {
+                            width: 100%;
+                        }
                     }
                 }
             }
@@ -95,10 +99,6 @@ header {
 
             .i-profile {
                 width: 2rem;
-            }
-
-            &:hover {
-                background-color: $color-primary;
             }
         }
     }
@@ -148,6 +148,8 @@ header {
     transition: background-color .5s ease;
     background-color: $color-background-secondary;
 
+
+    // WARNING : "max-width" and not "min-width" like the rest of media queries
     @media only screen and (max-width: $mq-5) {
         nav {
             top: 98px;

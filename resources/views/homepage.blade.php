@@ -4,37 +4,7 @@
 
 @section('content')
     <main>
-        <section class="search-bar">
-            <form class="limited-width" action="/" method="POST">
-                <span class="radio-inputs">
-                    <div>
-                        <input type="radio" id="radio-sale" name="property-status" value="acheter" checked>
-                        <label for="radio-sale">Acheter</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="radio-rental" name="property-status" value="louer">
-                        <label for="radio-rental">Louer</label>
-                    </div>
-                </span>
-
-                <span class="not-radio-inputs">
-                    <select name="property-type" id="select-type" required>
-                        <option value="maison">Maison</option>
-                        <option value="appartement">Appartement</option>
-                        <option value="terrain">Terrain</option>
-                    </select>
-
-                    <input type="text" id="text-postal-code" name="property-postal-code" placeholder="Code postal" required/>
-
-                    <input type="text" id="text-city" name="property-city" placeholder="Ville" required/>
-
-                    <input type="number" id="number-min-price" name="property-min-price" step="0.10" placeholder="Budget min." required/>
-                    <input type="number" id="number-max-price" name="property-max-price" step="0.10" placeholder="Budget max." required/>
-                </span>
-
-                <button type="submit" value="submit-search" class="a-button h-bg-primary">Rechercher<i class="fas fa-search"></i></button>
-            </form>
-        </section>
+        @include('components/searchbar')
 
         <div class="inner-page">
             <section class="container-news">
@@ -114,7 +84,7 @@
                     </a>
                 </div>
                 <div class="text-center">
-                    <a href="#_" class="a-link">Voir tous les biens</a>
+                    <a href="{{ route('listing-property') }}" class="a-link">Découvrir tous nos biens</a>
                 </div>
             </section>
 

@@ -1,57 +1,10 @@
-.search-bar {
-    width: 100%;
-    background-image: url("/resources/img/searchbar-bg.webp");
-    background-size: cover;
-    background-position: center;
+.container-news {
 
-    form {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-        padding: 2.5rem 3rem;
-        box-sizing: border-box;
-        background-color: $color-white;
-        border-radius: 1rem;
+    h2 {
+        text-align: center;
 
         @media only screen and (min-width: $mq-5) {
-            flex-direction: row;
-        }
-
-        .radio-inputs {
-            display: flex;
-            gap: .5rem;
-
-            @media only screen and (min-width: $mq-5) {
-                flex-direction: column;
-            }
-
-            div {
-                display: flex;
-            }
-        }
-
-        .not-radio-inputs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            flex-grow: 2;
-        }
-
-        button {
-            position: absolute;
-            bottom: -1rem;
-            left: calc(50%);
-            transform: translateX(-4rem);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.4rem 1rem;
-            color: $color-white;
-            font-size: 15px;
-            cursor: pointer;
+            text-align: left;
         }
     }
 }
