@@ -10,7 +10,7 @@
             <h1>Nos biens correspondant à vos envies</h1>
             <div class="cards-container news-cards">
                 @for ($i = 1; $i <= 9; $i++)
-                    <a href="#_" class="card-immo">
+                    <a href="{{ route('detail-property') }}" class="card-immo">
                         <div class="img-container">
                             <img src="/resources/img/photo-annonce1.jpg" alt="texte alternatif">
                             <span class="filter-img"></span>

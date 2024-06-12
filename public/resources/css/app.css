@@ -17,12 +17,56 @@
   background-color: #009A70;
 }
 
+.h-bg-white {
+  background-color: #ffffff;
+}
+
+.h-color-primary {
+  color: #00779A;
+}
+
+.h-color-secondary {
+  color: #009A70;
+}
+
 .h-color-dark-primary {
   color: #014256;
 }
 
 .h-color-white {
   color: #ffffff;
+}
+
+.h-fz-12 {
+  font-size: 12px;
+}
+
+.h-fz-14 {
+  font-size: 14px;
+}
+
+.h-fz-16 {
+  font-size: 16px;
+}
+
+.h-fz-18 {
+  font-size: 18px;
+}
+
+.h-fz-20 {
+  font-size: 20px;
+}
+
+.h-fz-22 {
+  font-size: 22px;
+}
+
+.h-fz-30 {
+  font-size: 30px;
+}
+
+.h-fw-bold {
+  font-weight: 700;
 }
 
 /*
@@ -98,10 +142,6 @@ footer .footer-compagny .compagny-map {
   footer .footer-compagny .compagny-map {
     width: 50%;
   }
-}
-footer .footer-compagny .compagny-map iframe {
-  width: 100%;
-  height: 100%;
 }
 footer .footer-bottom {
   display: flex;
@@ -249,8 +289,14 @@ form select,
 form label {
   cursor: pointer;
 }
+form label {
+  display: block;
+  margin-bottom: 1rem;
+}
 form input[type=text],
 form input[type=number],
+form input[type=email],
+form input[type=tel],
 form select {
   padding: 0.5rem;
   font-size: 14px;
@@ -260,6 +306,8 @@ form select {
 }
 form input[type=text]:focus,
 form input[type=number]:focus,
+form input[type=email]:focus,
+form input[type=tel]:focus,
 form select:focus {
   outline-color: #00779A;
 }
@@ -275,6 +323,11 @@ main {
   main {
     margin-top: 0;
   }
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
 }
 
 .to-top {
@@ -307,7 +360,12 @@ main {
 }
 
 .inner-page {
-  padding: 3rem;
+  padding: 3rem 2rem;
+}
+@media only screen and (min-width: 769px) {
+  .inner-page {
+    padding: 3rem;
+  }
 }
 
 .limited-width {
@@ -593,6 +651,218 @@ header .burger-menu .burger-body:after {
   text-align: center;
 }
 
+.property-presentation h1 {
+  margin-bottom: 0;
+}
+.property-presentation .presentation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 0.5rem 0;
+}
+.property-presentation .presentation-header p {
+  margin: 0.2rem;
+}
+.property-presentation .presentation-header .a-button {
+  padding: 1rem;
+  font-size: 1.1rem;
+  border-radius: 50%;
+  line-height: 1;
+  color: #F1F1F1;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.property-presentation .property-carrousel {
+  padding-bottom: 0.5rem;
+}
+.property-presentation .property-carrousel .carrousel-current-img {
+  position: relative;
+}
+@media only screen and (min-width: 769px) {
+  .property-presentation .property-carrousel .carrousel-current-img {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+.property-presentation .property-carrousel .carrousel-current-img .img-container {
+  margin: 0 auto;
+  max-width: 1020px;
+  max-height: 510px;
+}
+.property-presentation .property-carrousel .slider-tags {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 1.5rem auto;
+  max-width: 1040px;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+}
+@media only screen and (min-width: 769px) {
+  .property-presentation .property-carrousel .slider-tags {
+    justify-content: center;
+    scrollbar-width: none;
+  }
+  .property-presentation .property-carrousel .slider-tags ::-webkit-scrollbar {
+    display: none;
+  }
+}
+.property-presentation .property-carrousel .slider-tags li {
+  cursor: pointer;
+  position: relative;
+}
+.property-presentation .property-carrousel .slider-tags li.active .img-container:after {
+  content: "";
+}
+.property-presentation .property-carrousel .slider-tags li.active i {
+  display: block;
+}
+.property-presentation .property-carrousel .slider-tags li .img-container {
+  position: relative;
+  margin: 0 auto;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  max-height: 75px;
+}
+.property-presentation .property-carrousel .slider-tags li .img-container:after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.5;
+}
+.property-presentation .property-carrousel .slider-tags li .img-container img {
+  width: 140px;
+  max-height: inherit;
+}
+.property-presentation .property-carrousel .slider-tags li i {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 40px;
+  color: #ffffff;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 2;
+}
+.property-presentation .property-criterias {
+  border-top: 2px solid #8E8E8E;
+  border-bottom: 2px solid #8E8E8E;
+  padding: 1.3rem 0 1rem;
+}
+.property-presentation .property-criterias ul {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.8rem 2rem;
+}
+@media only screen and (min-width: 769px) {
+  .property-presentation .property-criterias ul {
+    justify-content: flex-start;
+  }
+}
+.property-presentation .property-criterias ul li {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  max-width: 92px;
+  font-size: 14px;
+  color: #014256;
+}
+@media only screen and (min-width: 769px) {
+  .property-presentation .property-criterias ul li {
+    font-size: 16px;
+  }
+}
+.property-presentation .property-criterias ul li p {
+  margin-bottom: 0;
+}
+.property-presentation .property-criterias ul li i {
+  font-size: 26px;
+  color: #00779A;
+}
+@media only screen and (min-width: 769px) {
+  .property-presentation .property-criterias ul li i {
+    font-size: 38px;
+  }
+}
+.property-presentation .property-description {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1.5rem;
+  padding-bottom: 3rem;
+}
+@media only screen and (min-width: 1025px) {
+  .property-presentation .property-description {
+    flex-direction: row;
+    gap: 3rem;
+    padding-bottom: 6rem;
+  }
+}
+.property-presentation .property-description .left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+@media only screen and (min-width: 1025px) {
+  .property-presentation .property-description .left {
+    width: 50%;
+    min-width: 500px;
+  }
+}
+.property-presentation .property-description .right {
+  width: 100%;
+}
+@media only screen and (min-width: 1025px) {
+  .property-presentation .property-description .right {
+    width: 50%;
+  }
+}
+.property-presentation .property-description .contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.property-presentation .property-description .contact-form form {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 2rem 3rem;
+  border-radius: 20px;
+  border: 2px solid #8E8E8E;
+  max-width: 600px;
+}
+.property-presentation .property-description .contact-form form > div {
+  width: calc(50% - 2rem);
+  min-width: 175px;
+}
+.property-presentation .property-description .contact-form form input {
+  width: 100%;
+}
+.property-presentation .property-description .contact-form form [type=submit] {
+  margin: 0 100%;
+}
+.property-presentation .property-description .property-map {
+  height: 300px;
+}
+@media only screen and (min-width: 1025px) {
+  .property-presentation .property-description .property-map {
+    max-width: 100%;
+    min-height: 100%;
+    max-height: initial;
+  }
+}
+
 /*
  ******** Components *********
  */
@@ -809,7 +1079,7 @@ header .burger-menu .burger-body:after {
   cursor: pointer;
 }
 
-.slider-testimony {
+.slider {
   display: flex;
   align-items: center;
   gap: 4rem;
@@ -818,10 +1088,10 @@ header .burger-menu .burger-body:after {
   transform: none;
   transition: transform 0.8s ease-in-out;
 }
-.slider-testimony article {
+.slider article {
   min-width: 100%;
 }
-.slider-testimony span {
+.slider span {
   font-weight: bold;
 }
 
@@ -837,4 +1107,38 @@ header .burger-menu .burger-body:after {
 }
 .container-testimony .slider-arrow.arrow-right {
   right: 1.5rem;
+}
+
+.property-carrousel .slider-arrow {
+  position: absolute;
+  padding: 0.6rem 0.8rem;
+  top: 48%;
+  font-size: 14px;
+  color: #009A70;
+  background-color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+@media only screen and (min-width: 769px) {
+  .property-carrousel .slider-arrow {
+    padding: 0.6rem 1rem;
+    font-size: 25px;
+  }
+}
+.property-carrousel .slider-arrow.arrow-left {
+  left: 0.5rem;
+}
+@media only screen and (min-width: 769px) {
+  .property-carrousel .slider-arrow.arrow-left {
+    left: 1.5rem;
+  }
+}
+.property-carrousel .slider-arrow.arrow-right {
+  right: 0.5rem;
+}
+@media only screen and (min-width: 769px) {
+  .property-carrousel .slider-arrow.arrow-right {
+    right: 1.5rem;
+  }
 }

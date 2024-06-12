@@ -1,4 +1,4 @@
-.slider-testimony {
+.slider {
     display: flex;
     align-items: center;
     gap: 4rem;
@@ -30,6 +30,41 @@
 
         &.arrow-right {
             right: 1.5rem;
+        }
+    }
+}
+
+.property-carrousel {
+    .slider-arrow {
+        position: absolute;
+        padding: .6rem .8rem;
+        top: 48%;
+        font-size: 14px;
+        color: #009A70;
+        background-color: $color-white;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 2;
+
+        @media only screen and (min-width: $mq-5) {
+            padding: .6rem 1rem;
+            font-size: 25px;
+        }
+
+        &.arrow-left {
+            left: .5rem;
+
+            @media only screen and (min-width: $mq-5) {
+                left: 1.5rem;
+            }
+        }
+
+        &.arrow-right {
+            right: .5rem;
+
+            @media only screen and (min-width: $mq-5) {
+                right: 1.5rem;
+            }
         }
     }
 }

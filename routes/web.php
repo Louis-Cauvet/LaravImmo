@@ -10,15 +10,20 @@ use App\Http\Controllers\PropertyController;
  * Templates' redirections
  **************************/
 
-// Display the homepage by default
+// Go to the homepage
 Route::get('/', function () {
     return view('homepage');
 })->name('homepage');
 
-// Display the properties' listing
+// Go to the properties' listing
 Route::get('/listing-property', function () {
    return view('listing-property');
 })->name('listing-property');
+
+// Go to the property's detail
+Route::get('/detail-property', function () {
+    return view('detail-property');
+})->name('detail-property');
 
 /*************************
  * Forms' submissions

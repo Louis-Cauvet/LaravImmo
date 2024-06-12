@@ -129,7 +129,7 @@
             <section class="container-testimony">
                 <h2>Nos clients parlent de nous</h2>
                 <i class="slider-arrow arrow-left fa-solid fa-angle-left"></i>
-                <div class="slider-testimony">
+                <div class="slider">
                     <article>
                         <p>"Larav'Immo a rendu le processus de vente de notre maison incroyablement simple et sans stress.
                             Leur équipe de professionnels a pris en charge chaque détail, de la mise en marché à la finalisation de la vente.

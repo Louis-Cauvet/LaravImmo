@@ -5,6 +5,7 @@ function changeSlide(slider, slideNumber) {
     const percentage = -100*slideNumber;
     const spaces = 4*slideNumber;
     slider.style.transform = `translateX(calc(${percentage}% - ${spaces}rem`;
+    sliderCounter = slideNumber;
 }
 
 /************************************** Events Listeners **************************************/
@@ -35,28 +36,56 @@ burgerMenu.addEventListener("click", () =>{
 
 
 /***
- * Change the slide of testimony's slider when clic on arrows
+ * Change the slide of slider when clic on arrows
  ***/
-const testimonySlider = document.querySelector(".slider-testimony");
-const testimonySliderLength = document.querySelectorAll(".slider-testimony article").length-1;
-let testimonySliderCounter = 0;
+const slider = document.querySelector(".slider");
+const sliderLength = document.querySelectorAll(".slider article").length-1;
+let sliderCounter = 0;
 
-const testimonySliderLeftArrow = document.querySelector(".container-testimony .arrow-left");
-testimonySliderLeftArrow.addEventListener("click", () => {
-    if(testimonySliderCounter == 0) {
-        testimonySliderCounter = testimonySliderLength;
+const sliderParent = slider.parentElement;
+const containerSlider = sliderParent.parentElement;
+
+const sliderLeftArrow = sliderParent.querySelector(".arrow-left");
+sliderLeftArrow.addEventListener("click", () => {
+    if(sliderCounter == 0) {
+        sliderCounter = sliderLength;
     } else {
-        testimonySliderCounter--;
+        sliderCounter--;
     }
-    changeSlide(testimonySlider, testimonySliderCounter);
+
+    if(containerSlider.querySelector(".slider-tags")) {
+        containerSlider.querySelector(".slider-tags .active").classList.remove('active');
+        containerSlider.querySelector(`.slider-tags li[data-position="${sliderCounter}"]`).classList.add('active');
+    }
+
+    changeSlide(slider, sliderCounter);
 })
 
-const testimonySliderRightArrow = document.querySelector(".container-testimony .arrow-right");
-testimonySliderRightArrow.addEventListener("click", () => {
-    if(testimonySliderCounter == testimonySliderLength) {
-        testimonySliderCounter = 0;
+const sliderRightArrow = sliderParent.querySelector(".arrow-right");
+sliderRightArrow.addEventListener("click", () => {
+    if(sliderCounter == sliderLength) {
+        sliderCounter = 0;
     } else {
-        testimonySliderCounter++;
+        sliderCounter++;
     }
-    changeSlide(testimonySlider, testimonySliderCounter);
+
+    if(containerSlider.querySelector(".slider-tags")) {
+        containerSlider.querySelector(".slider-tags .active").classList.remove('active');
+        containerSlider.querySelector(`.slider-tags li[data-position="${sliderCounter}"]`).classList.add('active');
+    }
+
+    changeSlide(slider, sliderCounter);
 })
+
+
+/***
+ * Change the slide of slider when clic on tags
+ ***/
+const sliderTags = containerSlider.querySelectorAll('.slider-tags li');
+sliderTags.forEach((tag) => {
+   tag.addEventListener("click", () => {
+       containerSlider.querySelector('.slider-tags .active').classList.remove('active');
+       tag.classList.add('active');
+       changeSlide(slider, tag.dataset.position);
+    })
+});

@@ -1,1 +1,12 @@
 $font-primary : Verdana, sans-serif;
+
+$font-sizes: (12, 14, 16, 18, 20, 22, 30);
+@each $size in $font-sizes {
+    .h-fz-#{$size} {
+        font-size: $size+px;
+    }
+}
+
+.h-fw-bold {
+    font-weight: 700;
+}
