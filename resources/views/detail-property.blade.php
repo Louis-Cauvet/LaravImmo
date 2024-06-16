@@ -109,22 +109,22 @@
                         <h2 class="text-center">Intéréssé ? Laissez-nous vos coordonnées</h2>
                         <form action="#_" method="POST">
                             <div>
-                                <label for="lastname">Nom</label>
+                                <label for="lastname">Nom <span class="required-indicator">*</span></label>
                                 <input type="text" id="lastname" name="lastname"  required>
                             </div>
 
                             <div>
-                                <label for="lastname">Prénom</label>
+                                <label for="lastname">Prénom <span class="required-indicator">*</span></label>
                                 <input type="text" id="firstname" name="firstname" required>
                             </div>
 
                             <div>
-                                <label for="mail">Email</label>
+                                <label for="mail">Email <span class="required-indicator">*</span></label>
                                 <input type="email" id="mail" name="mail" required>
                             </div>
 
                             <div>
-                                <label for="phonenum">Numéro de téléphone</label>
+                                <label for="phonenum">Numéro de téléphone <span class="required-indicator">*</span></label>
                                 <input type="tel" id="phonenum" name="phonenum" required>
                             </div>
 
@@ -139,6 +139,9 @@
                     </div>
                 </div>
             </section>
+            <div class="text-center">
+                <a href="{{ route('listing-property') }}" class="a-link">Retour à la liste de biens</a>
+            </div>
         </div>
     </main>
 @endsection

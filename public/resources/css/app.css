@@ -297,7 +297,8 @@ form input[type=text],
 form input[type=number],
 form input[type=email],
 form input[type=tel],
-form select {
+form select,
+form textarea {
   padding: 0.5rem;
   font-size: 14px;
   font-family: Verdana, sans-serif;
@@ -308,8 +309,13 @@ form input[type=text]:focus,
 form input[type=number]:focus,
 form input[type=email]:focus,
 form input[type=tel]:focus,
-form select:focus {
+form select:focus,
+form textarea:focus {
   outline-color: #00779A;
+}
+form .required-indicator {
+  color: #00779A;
+  margin-left: 0.25rem;
 }
 
 section {
@@ -562,6 +568,50 @@ header .burger-menu .burger-body:after {
   }
 }
 
+/*
+ ******** Pages *********
+ */
+.contact-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.contact-page p {
+  margin: 0;
+}
+.contact-page .contact-form {
+  margin-top: 2rem;
+  padding: 2rem 3rem;
+  width: 100%;
+  max-width: 750px;
+  border-radius: 20px;
+  border: 2px solid #8E8E8E;
+}
+.contact-page .contact-form form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.contact-page .contact-form form > div {
+  width: calc(50% - 1rem);
+  min-width: 220px;
+}
+.contact-page .contact-form form > div input {
+  width: 100%;
+}
+.contact-page .contact-form form > div:has(textarea) {
+  width: 100%;
+}
+.contact-page .contact-form form > div:has(textarea) textarea {
+  width: 100%;
+  resize: vertical;
+}
+.contact-page .contact-form form > div:has([type=submit]) {
+  width: 100%;
+  text-align: center;
+}
+
 .container-news h2 {
   text-align: center;
 }
@@ -649,6 +699,25 @@ header .burger-menu .burger-body:after {
 }
 .container-testimony h2 {
   text-align: center;
+}
+
+.title-save {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+  padding: 0 2rem;
+}
+.title-save h1 {
+  margin-bottom: 1rem;
+}
+.title-save .a-button {
+  min-height: 40px;
+  font-size: 14px;
+}
+.title-save .a-button i {
+  margin-right: 10px;
 }
 
 .property-presentation h1 {
@@ -798,13 +867,13 @@ header .burger-menu .burger-body:after {
   display: flex;
   flex-direction: column-reverse;
   gap: 1.5rem;
-  padding-bottom: 3rem;
+  padding-bottom: 5rem;
 }
 @media only screen and (min-width: 1025px) {
   .property-presentation .property-description {
     flex-direction: row;
     gap: 3rem;
-    padding-bottom: 6rem;
+    padding-bottom: 8rem;
   }
 }
 .property-presentation .property-description .left {
@@ -1029,6 +1098,8 @@ header .burger-menu .burger-body:after {
   background-image: url("/resources/img/searchbar-bg.webp");
   background-size: cover;
   background-position: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 .search-bar form {
   position: relative;
@@ -1045,6 +1116,9 @@ header .burger-menu .burger-body:after {
   .search-bar form {
     flex-direction: row;
   }
+}
+.search-bar form label {
+  margin-bottom: 0;
 }
 .search-bar form .radio-inputs {
   display: flex;

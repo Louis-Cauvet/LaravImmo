@@ -14,9 +14,18 @@
 @import
 "basics/footer",
 "basics/general",
-"basics/header",
-"basics/homepage",
-"basics/property"
+"basics/header"
+;
+
+
+/*
+ ******** Pages *********
+ */
+@import
+"pages/contact",
+"pages/homepage",
+"pages/listing",
+"pages/property"
 ;
 
 /*

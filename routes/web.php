@@ -25,6 +25,11 @@ Route::get('/detail-property', function () {
     return view('detail-property');
 })->name('detail-property');
 
+// Go to the contact page
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
 /*************************
  * Forms' submissions
  *************************/

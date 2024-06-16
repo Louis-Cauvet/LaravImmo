@@ -88,7 +88,8 @@ form {
     input[type="number"],
     input[type="email"],
     input[type="tel"],
-    select {
+    select,
+    textarea {
         padding: .5rem;
         font-size: 14px;
         font-family: $font-primary;
@@ -98,6 +99,11 @@ form {
         &:focus {
             outline-color: $color-primary;
         }
+    }
+
+    .required-indicator {
+        color: $color-primary;
+        margin-left: .25rem;
     }
 }
 

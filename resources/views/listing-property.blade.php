@@ -7,7 +7,12 @@
         @include('components/searchbar')
 
         <div class="inner-page">
-            <h1>Nos biens correspondant à vos envies</h1>
+            <div class="title-save">
+                <h1>Nos biens correspondant à vos envies</h1>
+                <button href="#" class="a-button h-bg-primary h-color-white">
+                    <i class="fa-solid fa-floppy-disk"></i>Enregistrer la recherche
+                </button>
+            </div>
             <div class="cards-container news-cards">
                 @for ($i = 1; $i <= 9; $i++)
                     <a href="{{ route('detail-property') }}" class="card-immo">

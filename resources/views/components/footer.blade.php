@@ -12,7 +12,7 @@
                 </div>
                 <div class="compagny-links">
                     <span class="a-button h-bg-primary h-color-white">07 82 75 64 98</span>
-                    <a href="#" class="a-button h-bg-primary h-color-white">Nous contacter</a>
+                    <a href="{{ route('contact') }}" class="a-button h-bg-primary h-color-white">Nous contacter</a>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                 <a href="#_">Données personnelles</a>
             </li>
             <li>
-                <a href="#_">Contact</a>
+                <a href="{{ route('contact') }}">Contact</a>
             </li>
         </ul>
         <a href="{{ route('homepage') }}">

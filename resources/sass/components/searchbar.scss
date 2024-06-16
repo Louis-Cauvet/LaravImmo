@@ -3,6 +3,8 @@
     background-image: url("/resources/img/searchbar-bg.webp");
     background-size: cover;
     background-position: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
 
     form {
         position: relative;
@@ -17,6 +19,10 @@
 
         @media only screen and (min-width: $mq-5) {
             flex-direction: row;
+        }
+
+        label {
+            margin-bottom: 0;
         }
 
         .radio-inputs {

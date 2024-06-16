@@ -88,7 +88,7 @@
                 </div>
             </section>
 
-            <section class="container-agency">
+            <section id="anchor-agency" class="container-agency">
                 <div class="double-container">
                     <div class="img-container rounded">
                         <img src="/resources/img/laravimmo-illustration.png" alt="texte alternatif">
@@ -107,7 +107,7 @@
                             <li>- la réalisation d'études d'aménagement et de stratégie immobilière</li>
                             <li>- le conseil et suivi en performance énergétique</li>
                         </ul>
-                        <a href="#_" class="a-link">Découvrir l'agence</a>
+                        <a href="{{ route('contact') }}" class="a-link">Nous contacter</a>
                     </div>
                 </div>
                 <div class="listing-expertises">

@@ -1,0 +1,21 @@
+.title-save {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+    padding: 0 2rem;
+
+    h1 {
+        margin-bottom: 1rem;
+    }
+
+    .a-button {
+        min-height: 40px;
+        font-size: 14px;
+
+        i {
+            margin-right: 10px;
+        }
+    }
+}
