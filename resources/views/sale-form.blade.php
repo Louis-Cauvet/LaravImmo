@@ -62,8 +62,8 @@
                     </div>
 
                     <div>
-                        <label for="postal">Surface (en m<sup>2</sup>)<span class="required-indicator">*</span></label>
-                        <input type="number" id="postal" name="postal" required>
+                        <label for="area">Surface (en m<sup>2</sup>)<span class="required-indicator">*</span></label>
+                        <input type="number" id="area" name="area" required>
                     </div>
 
                     <div>
@@ -105,7 +105,7 @@
 
 
                     <div>
-                        <button type="submit" value="submit-search" class="a-button h-bg-primary h-color-white">Envoyer</button>
+                        <button type="submit" value="submit-sell-property" class="a-button h-bg-primary h-color-white">Envoyer</button>
                     </div>
                 </form>
             </div>

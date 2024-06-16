@@ -6,7 +6,7 @@
                 <div class="compagny-adress">
                     <i class="fa-solid fa-location-dot"></i>
                     <div>
-                        <p>24 Rue Edison,</p>
+                        <p>24 Rue Edison</p>
                         <p>69003 Lyon</p>
                     </div>
                 </div>

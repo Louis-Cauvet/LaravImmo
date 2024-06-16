@@ -1,0 +1,97 @@
+#login-section {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+
+    @media only screen and (min-width: $mq-5) {
+        padding: 0 3rem;
+    }
+
+    &.active {
+        display: flex;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: .4;
+    }
+
+    .login-modal {
+        position: relative;
+        padding: .5rem 2rem 2rem;
+        width: 100%;
+        max-width: 800px;
+        background-color: $color-background-secondary;
+        border-radius: 20px;
+        z-index: 11;
+
+        .login-interface,
+        .register-interface {
+            display: none;
+            position: relative;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+
+            &.active {
+                display: flex;
+            }
+
+            .close-modal {
+                position: absolute;
+                top: 1.2rem;
+                right: 0rem;
+                font-size: 26px;
+                color: $color-primary;
+                cursor: pointer;
+                transition: color .25s ease;
+
+                @media only screen and (min-width: $mq-5) {
+                    right: 1rem;
+                }
+
+                &:hover {
+                    color: $color-dark-primary;
+                }
+            }
+
+            h2 {
+                margin-bottom: 0;
+            }
+
+            .contact-form {
+                margin: 0;
+            }
+
+            .a-link {
+                transition: all .25s ease;
+
+                &:before {
+                    width: 100%;
+                }
+
+                &:after {
+                    content: none;
+                }
+
+                &:hover {
+                    color: $color-secondary;
+
+                    &:before {
+                        background-color: $color-secondary;
+                    }
+                }
+            }
+        }
+    }
+}

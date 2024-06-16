@@ -5,12 +5,13 @@
     <nav>
         <ul>
             <li><a href="{{ route('homepage') . '#anchor-agency' }}">Notre agence</a></li>
+            <li><a href="{{ route('listing-property') }}">Découvrir nos biens</a></li>
             <li><a href="{{ route('sale-form') }}">Je souhaite vendre</a></li>
-            <li><a href="{{ route('contact') }}">Nous contacter</a></li>
         </ul>
-        <a href="#" class="a-button h-bg-secondary h-color-white">
-            <i class="fa-solid fa-user"></i>Connexion
-        </a>
+        <button id="open-login-modal" class="a-button h-bg-secondary h-color-white">
+            <i class="fa-solid fa-user"></i>
+            Connexion
+        </button>
     </nav>
     <button class="burger-menu">
         <div class="burger-body"></div>

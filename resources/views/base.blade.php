@@ -19,6 +19,7 @@
         <a href="#header" class="to-top">
             <i class="fa-solid fa-chevron-up"></i>
         </a>
+        @include('components/login-modal')
         @include('components/header')
         @yield('content')
         @include('components/footer')

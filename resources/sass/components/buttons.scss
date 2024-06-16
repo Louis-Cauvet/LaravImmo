@@ -1,6 +1,7 @@
 .a-button {
     padding: .6rem 1rem;
     border-radius: 1rem;
+    font-size: 15px;
     transition: all .5s ease;
     cursor: pointer;
 
@@ -15,6 +16,7 @@
     .a-button {
         text-transform: uppercase;
         border-radius: 0;
+        font-size: 14px;
         border: 1px solid $color-dark-primary;
 
         &:not(span):hover {

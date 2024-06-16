@@ -41,7 +41,7 @@
                     </div>
 
                     <div>
-                        <button type="submit" value="submit-search" class="a-button h-bg-primary h-color-white">Envoyer</button>
+                        <button type="submit" value="submit-contact" class="a-button h-bg-primary h-color-white">Envoyer</button>
                     </div>
                 </form>
             </div>

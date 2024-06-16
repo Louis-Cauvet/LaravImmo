@@ -296,6 +296,7 @@ form label {
 form input[type=text],
 form input[type=number],
 form input[type=email],
+form input[type=password],
 form input[type=tel],
 form select,
 form textarea {
@@ -308,6 +309,7 @@ form textarea {
 form input[type=text]:focus,
 form input[type=number]:focus,
 form input[type=email]:focus,
+form input[type=password]:focus,
 form input[type=tel]:focus,
 form select:focus,
 form textarea:focus {
@@ -508,6 +510,7 @@ header nav .a-button {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 15px;
   gap: 0.5rem;
 }
 header nav .a-button .i-profile {
@@ -580,99 +583,6 @@ header .burger-menu .burger-body:after {
 .contact-page p,
 .sale-page p {
   margin: 0;
-}
-.contact-page .contact-form,
-.sale-page .contact-form {
-  margin-top: 2rem;
-  padding: 2rem 3rem;
-  width: 100%;
-  max-width: 750px;
-  border-radius: 20px;
-  border: 2px solid #8E8E8E;
-}
-.contact-page .contact-form form,
-.sale-page .contact-form form {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-.contact-page .contact-form form > div,
-.sale-page .contact-form form > div {
-  width: calc(50% - 1rem);
-  min-width: 220px;
-}
-.contact-page .contact-form form > div input,
-.contact-page .contact-form form > div select,
-.sale-page .contact-form form > div input,
-.sale-page .contact-form form > div select {
-  width: 100%;
-}
-.contact-page .contact-form form > div:has(textarea),
-.sale-page .contact-form form > div:has(textarea) {
-  width: 100%;
-}
-.contact-page .contact-form form > div:has(textarea) textarea,
-.sale-page .contact-form form > div:has(textarea) textarea {
-  width: 100%;
-  resize: vertical;
-}
-.contact-page .contact-form form > div:has([type=checkbox]),
-.sale-page .contact-form form > div:has([type=checkbox]) {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-}
-.contact-page .contact-form form > div:has([type=checkbox]) div,
-.sale-page .contact-form form > div:has([type=checkbox]) div {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-.contact-page .contact-form form > div:has([type=checkbox]) label,
-.sale-page .contact-form form > div:has([type=checkbox]) label {
-  margin: 0;
-}
-.contact-page .contact-form form > div:has([type=checkbox]) [type=checkbox],
-.sale-page .contact-form form > div:has([type=checkbox]) [type=checkbox] {
-  width: 20px;
-  height: 15px;
-  margin: 0;
-}
-.contact-page .contact-form form > div:has([type=file]),
-.sale-page .contact-form form > div:has([type=file]) {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.contact-page .contact-form form > div:has([type=file]) [type=file],
-.sale-page .contact-form form > div:has([type=file]) [type=file] {
-  width: -moz-fit-content;
-  width: fit-content;
-}
-.contact-page .contact-form form > div:has([type=submit]),
-.sale-page .contact-form form > div:has([type=submit]) {
-  width: 100%;
-  text-align: center;
-}
-.contact-page .contact-form form .radio-inputs,
-.sale-page .contact-form form .radio-inputs {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-}
-.contact-page .contact-form form .radio-inputs > div,
-.sale-page .contact-form form .radio-inputs > div {
-  display: flex;
-  gap: 0.5rem;
-}
-.contact-page .contact-form form .radio-inputs > div label,
-.sale-page .contact-form form .radio-inputs > div label {
-  margin: 0;
-  white-space: nowrap;
 }
 
 .container-news h2 {
@@ -1008,6 +918,7 @@ header .burger-menu .burger-body:after {
 .a-button {
   padding: 0.6rem 1rem;
   border-radius: 1rem;
+  font-size: 15px;
   transition: all 0.5s ease;
   cursor: pointer;
 }
@@ -1021,6 +932,7 @@ header .burger-menu .burger-body:after {
 .pagination .a-button {
   text-transform: uppercase;
   border-radius: 0;
+  font-size: 14px;
   border: 1px solid #014256;
 }
 .pagination .a-button:not(span):hover {
@@ -1131,11 +1043,90 @@ header .burger-menu .burger-body:after {
   width: 30%;
 }
 
+.contact-form {
+  margin-top: 2rem;
+  padding: 2rem 3rem;
+  width: 100%;
+  max-width: 750px;
+  border-radius: 20px;
+  border: 2px solid #8E8E8E;
+}
+.contact-form form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.contact-form form > div {
+  width: calc(50% - 1rem);
+  min-width: 220px;
+}
+.contact-form form > div input,
+.contact-form form > div select {
+  width: 100%;
+}
+.contact-form form > div:has(textarea) {
+  width: 100%;
+}
+.contact-form form > div:has(textarea) textarea {
+  width: 100%;
+  resize: vertical;
+}
+.contact-form form > div:has([type=checkbox]) {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.contact-form form > div:has([type=checkbox]) div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.contact-form form > div:has([type=checkbox]) label {
+  margin: 0;
+}
+.contact-form form > div:has([type=checkbox]) [type=checkbox] {
+  width: 20px;
+  height: 15px;
+  margin: 0;
+}
+.contact-form form > div:has([type=file]) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.contact-form form > div:has([type=file]) [type=file] {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.contact-form form > div:has([type=submit]) {
+  width: 100%;
+  text-align: center;
+}
+.contact-form form .radio-inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.contact-form form .radio-inputs > div {
+  display: flex;
+  gap: 0.5rem;
+}
+.contact-form form .radio-inputs > div label {
+  margin: 0;
+  white-space: nowrap;
+}
+
 .a-link {
   position: relative;
   text-transform: uppercase;
   font-size: 14px;
   color: #014256;
+  background-color: transparent;
+  cursor: pointer;
 }
 .a-link:before {
   content: "";
@@ -1155,6 +1146,103 @@ header .burger-menu .burger-body:after {
 }
 .a-link:hover:after {
   animation: 1s ease-in leftShift infinite;
+}
+
+#login-section {
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+}
+@media only screen and (min-width: 769px) {
+  #login-section {
+    padding: 0 3rem;
+  }
+}
+#login-section.active {
+  display: flex;
+}
+#login-section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.4;
+}
+#login-section .login-modal {
+  position: relative;
+  padding: 0.5rem 2rem 2rem;
+  width: 100%;
+  max-width: 800px;
+  background-color: #faf8f8;
+  border-radius: 20px;
+  z-index: 11;
+}
+#login-section .login-modal .login-interface,
+#login-section .login-modal .register-interface {
+  display: none;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+#login-section .login-modal .login-interface.active,
+#login-section .login-modal .register-interface.active {
+  display: flex;
+}
+#login-section .login-modal .login-interface .close-modal,
+#login-section .login-modal .register-interface .close-modal {
+  position: absolute;
+  top: 1.2rem;
+  right: 0rem;
+  font-size: 26px;
+  color: #00779A;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+@media only screen and (min-width: 769px) {
+  #login-section .login-modal .login-interface .close-modal,
+  #login-section .login-modal .register-interface .close-modal {
+    right: 1rem;
+  }
+}
+#login-section .login-modal .login-interface .close-modal:hover,
+#login-section .login-modal .register-interface .close-modal:hover {
+  color: #014256;
+}
+#login-section .login-modal .login-interface h2,
+#login-section .login-modal .register-interface h2 {
+  margin-bottom: 0;
+}
+#login-section .login-modal .login-interface .contact-form,
+#login-section .login-modal .register-interface .contact-form {
+  margin: 0;
+}
+#login-section .login-modal .login-interface .a-link,
+#login-section .login-modal .register-interface .a-link {
+  transition: all 0.25s ease;
+}
+#login-section .login-modal .login-interface .a-link:before,
+#login-section .login-modal .register-interface .a-link:before {
+  width: 100%;
+}
+#login-section .login-modal .login-interface .a-link:after,
+#login-section .login-modal .register-interface .a-link:after {
+  content: none;
+}
+#login-section .login-modal .login-interface .a-link:hover,
+#login-section .login-modal .register-interface .a-link:hover {
+  color: #009A70;
+}
+#login-section .login-modal .login-interface .a-link:hover:before,
+#login-section .login-modal .register-interface .a-link:hover:before {
+  background-color: #009A70;
 }
 
 .search-bar {
