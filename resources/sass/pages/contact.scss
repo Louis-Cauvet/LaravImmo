@@ -1,4 +1,5 @@
-.contact-page {
+.contact-page,
+.sale-page {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,7 +26,8 @@
                 width: calc(50% - 1rem);
                 min-width: 220px;
 
-                input {
+                input,
+                select {
                     width: 100%;
                 }
 
@@ -38,9 +40,59 @@
                     }
                 }
 
+                &:has([type="checkbox"]) {
+                    display: flex;
+                    justify-content: center;
+                    gap: 2rem;
+
+                    div {
+                        display: flex;
+                        align-items: center;
+                        gap: .5rem;
+                        width: fit-content;
+                    }
+
+                    label {
+                        margin: 0;
+                    }
+
+                    [type="checkbox"] {
+                        width: 20px;
+                        height: 15px;
+                        margin: 0;
+                    }
+                }
+
+                &:has([type="file"]) {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    [type="file"] {
+                        width: fit-content;
+                    }
+                }
+
                 &:has([type="submit"]) {
                     width: 100%;
                     text-align: center;
+                }
+            }
+
+            .radio-inputs {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+
+                > div {
+                    display: flex;
+                    gap: .5rem;
+
+                    label {
+                        margin: 0;
+                        white-space: nowrap;
+                    }
                 }
             }
         }

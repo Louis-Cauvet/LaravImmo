@@ -36,8 +36,8 @@
                     </div>
 
                     <div>
-                        <label for="phonenum">Message</label>
-                        <textarea rows="7"></textarea>
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="7"></textarea>
                     </div>
 
                     <div>

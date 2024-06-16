@@ -5,7 +5,7 @@
     <nav>
         <ul>
             <li><a href="{{ route('homepage') . '#anchor-agency' }}">Notre agence</a></li>
-            <li><a href="#">Je souhaite vendre</a></li>
+            <li><a href="{{ route('sale-form') }}">Je souhaite vendre</a></li>
             <li><a href="{{ route('contact') }}">Nous contacter</a></li>
         </ul>
         <a href="#" class="a-button h-bg-secondary h-color-white">

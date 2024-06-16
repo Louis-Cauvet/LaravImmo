@@ -25,10 +25,15 @@ Route::get('/detail-property', function () {
     return view('detail-property');
 })->name('detail-property');
 
-// Go to the contact page
+// Go to the contact's page
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+
+// Go to the sale property's page
+Route::get('/sale-form', function () {
+    return view('sale-form');
+})->name('sale-form');
 
 /*************************
  * Forms' submissions

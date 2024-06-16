@@ -571,15 +571,18 @@ header .burger-menu .burger-body:after {
 /*
  ******** Pages *********
  */
-.contact-page {
+.contact-page,
+.sale-page {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.contact-page p {
+.contact-page p,
+.sale-page p {
   margin: 0;
 }
-.contact-page .contact-form {
+.contact-page .contact-form,
+.sale-page .contact-form {
   margin-top: 2rem;
   padding: 2rem 3rem;
   width: 100%;
@@ -587,29 +590,89 @@ header .burger-menu .burger-body:after {
   border-radius: 20px;
   border: 2px solid #8E8E8E;
 }
-.contact-page .contact-form form {
+.contact-page .contact-form form,
+.sale-page .contact-form form {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
 }
-.contact-page .contact-form form > div {
+.contact-page .contact-form form > div,
+.sale-page .contact-form form > div {
   width: calc(50% - 1rem);
   min-width: 220px;
 }
-.contact-page .contact-form form > div input {
+.contact-page .contact-form form > div input,
+.contact-page .contact-form form > div select,
+.sale-page .contact-form form > div input,
+.sale-page .contact-form form > div select {
   width: 100%;
 }
-.contact-page .contact-form form > div:has(textarea) {
+.contact-page .contact-form form > div:has(textarea),
+.sale-page .contact-form form > div:has(textarea) {
   width: 100%;
 }
-.contact-page .contact-form form > div:has(textarea) textarea {
+.contact-page .contact-form form > div:has(textarea) textarea,
+.sale-page .contact-form form > div:has(textarea) textarea {
   width: 100%;
   resize: vertical;
 }
-.contact-page .contact-form form > div:has([type=submit]) {
+.contact-page .contact-form form > div:has([type=checkbox]),
+.sale-page .contact-form form > div:has([type=checkbox]) {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.contact-page .contact-form form > div:has([type=checkbox]) div,
+.sale-page .contact-form form > div:has([type=checkbox]) div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.contact-page .contact-form form > div:has([type=checkbox]) label,
+.sale-page .contact-form form > div:has([type=checkbox]) label {
+  margin: 0;
+}
+.contact-page .contact-form form > div:has([type=checkbox]) [type=checkbox],
+.sale-page .contact-form form > div:has([type=checkbox]) [type=checkbox] {
+  width: 20px;
+  height: 15px;
+  margin: 0;
+}
+.contact-page .contact-form form > div:has([type=file]),
+.sale-page .contact-form form > div:has([type=file]) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.contact-page .contact-form form > div:has([type=file]) [type=file],
+.sale-page .contact-form form > div:has([type=file]) [type=file] {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.contact-page .contact-form form > div:has([type=submit]),
+.sale-page .contact-form form > div:has([type=submit]) {
   width: 100%;
   text-align: center;
+}
+.contact-page .contact-form form .radio-inputs,
+.sale-page .contact-form form .radio-inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.contact-page .contact-form form .radio-inputs > div,
+.sale-page .contact-form form .radio-inputs > div {
+  display: flex;
+  gap: 0.5rem;
+}
+.contact-page .contact-form form .radio-inputs > div label,
+.sale-page .contact-form form .radio-inputs > div label {
+  margin: 0;
+  white-space: nowrap;
 }
 
 .container-news h2 {
@@ -698,6 +761,7 @@ header .burger-menu .burger-body:after {
   overflow-x: hidden;
 }
 .container-testimony h2 {
+  margin-bottom: 0;
   text-align: center;
 }
 
