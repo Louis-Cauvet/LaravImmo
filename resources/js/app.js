@@ -129,3 +129,57 @@ if (slider) {
         })
     });
 }
+
+
+/***
+ * Open a notification
+ ***/
+const openNotifButton = document.querySelectorAll(".open-notification");
+openNotifButton.forEach((openNotif) => {
+    openNotif.addEventListener("click", ()=> {
+        const notification = openNotif.parentElement;
+
+        if (notification.classList.contains('open')) {
+            notification.style.height = '90px';
+            notification.classList.remove('open');
+        } else {
+            const notificationContentHeight = notification.scrollHeight + 30;
+            notification.style.height = notificationContentHeight + 'px';
+            notification.classList.add('open');
+        }
+    });
+});
+
+/***
+ * Show the interested clients' list for a property
+ ***/
+const showInterestedClients = document.querySelectorAll(".show-interested-clients");
+showInterestedClients.forEach((openInterested) => {
+    openInterested.addEventListener("click", ()=> {
+        const favoriteCard = openInterested.closest(".favorite-card");
+        const interestedList = favoriteCard.querySelector(".interested-clients");
+
+        if(interestedList.classList.contains("active")) {
+            interestedList.classList.remove("active");
+        } else {
+            interestedList.classList.add("active");
+        }
+    });
+});
+
+
+/***
+ * Open the textarea for write a client's notification
+ ***/
+const openNotificationTextarea = document.querySelectorAll(".write-notification-client");
+openNotificationTextarea.forEach((openTextarea) => {
+    openTextarea.addEventListener("click", ()=> {
+        const writeArea = openTextarea.parentElement;
+
+        if(writeArea.classList.contains("active")) {
+            writeArea.classList.remove("active");
+        } else {
+            writeArea.classList.add("active");
+        }
+    });
+});

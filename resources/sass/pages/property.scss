@@ -26,6 +26,7 @@
 
     .property-carrousel {
         padding-bottom: .5rem;
+        padding-top: 1rem;
 
         .carrousel-current-img {
             position: relative;
@@ -204,7 +205,6 @@
                 flex-wrap: wrap;
                 padding: 2rem 3rem;
                 border-radius: 20px;
-                border: 2px solid $color-grey;
                 max-width: 600px;
 
                 >div {

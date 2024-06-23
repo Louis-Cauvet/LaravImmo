@@ -34,7 +34,7 @@
                         </div>
                         <button class="a-button h-bg-primary h-color-white">Découvrir ce bien</button>
                     </a>
-                    <a href="#_" class="card-immo">
+                    <a href="{{ route('admin-account') }}" class="card-immo">
                         <div class="img-container">
                             <img src="/resources/img/photo-annonce2.jpg" alt="texte alternatif">
                             <span class="filter-img"></span>
@@ -58,7 +58,7 @@
                         </div>
                         <button class="a-button h-bg-primary h-color-white">Découvrir ce bien</button>
                     </a>
-                    <a href="#_" class="card-immo">
+                    <a href="{{ route('user-account') }}" class="card-immo">
                         <div class="img-container">
                             <img src="/resources/img/photo-annonce3.jpg" alt="texte alternatif">
                             <span class="filter-img"></span>

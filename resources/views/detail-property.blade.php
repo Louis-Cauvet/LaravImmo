@@ -105,31 +105,33 @@
                         Ne manquez pas cette opportunité unique d'acquérir un appartement de standing dans un cadre de
                         vie idéal. Pour plus d'informations ou pour organiser une visite, n'hésitez pas à nous contacter.
                     </p>
-                    <div class="contact-form">
+                    <div>
                         <h2 class="text-center">Intéréssé ? Laissez-nous vos coordonnées</h2>
-                        <form action="#_" method="POST">
-                            <div>
-                                <label for="lastname">Nom <span class="required-indicator">*</span></label>
-                                <input type="text" id="lastname" name="lastname"  required>
-                            </div>
+                        <div class="contact-form">
+                            <form action="#_" method="POST">
+                                <div>
+                                    <label for="lastname">Nom <span class="required-indicator">*</span></label>
+                                    <input type="text" id="lastname" name="lastname"  required>
+                                </div>
 
-                            <div>
-                                <label for="lastname">Prénom <span class="required-indicator">*</span></label>
-                                <input type="text" id="firstname" name="firstname" required>
-                            </div>
+                                <div>
+                                    <label for="lastname">Prénom <span class="required-indicator">*</span></label>
+                                    <input type="text" id="firstname" name="firstname" required>
+                                </div>
 
-                            <div>
-                                <label for="mail">Email <span class="required-indicator">*</span></label>
-                                <input type="email" id="mail" name="mail" required>
-                            </div>
+                                <div>
+                                    <label for="mail">Email <span class="required-indicator">*</span></label>
+                                    <input type="email" id="mail" name="mail" required>
+                                </div>
 
-                            <div>
-                                <label for="phonenum">Numéro de téléphone <span class="required-indicator">*</span></label>
-                                <input type="tel" id="phonenum" name="phonenum" required>
-                            </div>
+                                <div>
+                                    <label for="phonenum">Numéro de téléphone <span class="required-indicator">*</span></label>
+                                    <input type="tel" id="phonenum" name="phonenum" required>
+                                </div>
 
-                            <button type="submit" value="submit-search" class="a-button h-bg-primary h-color-white">Envoyer</button>
-                        </form>
+                                <button type="submit" value="submit-search" class="a-button h-bg-primary h-color-white">Envoyer</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div class="right">

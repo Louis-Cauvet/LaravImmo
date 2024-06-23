@@ -35,6 +35,16 @@ Route::get('/sale-form', function () {
     return view('sale-form');
 })->name('sale-form');
 
+// Go to the user account's page
+Route::get('/user-account', function () {
+    return view('user-account');
+})->name('user-account');
+
+// Go to the admin account's page
+Route::get('/admin-account', function () {
+    return view('admin-account');
+})->name('admin-account');
+
 /*************************
  * Forms' submissions
  *************************/

@@ -109,8 +109,11 @@ form {
 }
 
 section {
-    padding: 3rem 0;
+    padding: 2rem 0;
 
+    &:first-of-type {
+        padding-top: 0;
+    }
 }
 
 main {

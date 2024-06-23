@@ -1,0 +1,219 @@
+.favorites-container.horizontal:has(.notification) {
+    padding-bottom: 3rem;
+}
+
+.notification {
+    position: relative;
+    padding: 1rem 1rem 1.5rem;
+    background-color: $color-background-secondary;
+    min-width: calc(320px - 2*2rem);
+    max-width: min-content;
+    height: 90px;
+    border-radius: 5px;
+    transition: height .5s ease;
+
+    @media only screen and (min-width: $mq-5) {
+       min-width: initial;
+    }
+
+    &.open {
+        .notification-content {
+            height: fit-content;
+            visibility: visible;
+            opacity: 1;
+            transition: opacity .7s ease, visibility .7s ease, height .7s ease;
+        }
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .notification-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: $color-dark-primary;
+        white-space: break-spaces;
+
+        @media only screen and (min-width: $mq-5) {
+            white-space: nowrap;
+        }
+    }
+
+    .notification-date {
+        color: $color-primary;
+    }
+
+    .notification-content {
+        margin-top: 25px;
+        color: $color-black;
+        height: 0;
+        visibility: hidden;
+        opacity: 0;
+
+        p {
+            @media only screen and (min-width: $mq-5) {
+                white-space: nowrap;
+            }
+        }
+
+        a {
+            color: $color-dark-primary;
+            text-decoration: underline;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .open-notification {
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: .45rem .7rem;
+        font-size: 20px;
+        color: $color-dark-primary;
+        border: 2px solid $color-background-secondary;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+            .fa {
+                animation-name: balance;
+                animation-duration: 1s;
+                animation-timing-function: ease-in-out;
+            }
+        }
+    }
+}
+
+.user-researches {
+    .favorites-container {
+        gap: 1rem;
+
+        a {
+            border-radius: 5px;
+            border: 3px solid transparent;
+
+            &:hover {
+                border-color: $color-primary;
+            }
+
+            .register-research {
+                position: relative;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 2rem;
+                padding: .8rem 1.5rem .25rem;
+                background-color: $color-background-secondary;
+                border-radius: 5px;
+
+                li {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+
+                    i {
+                        font-size: 20px;
+                        color: $color-primary;
+                    }
+
+                    p {
+                        white-space: nowrap;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.profiles-clients {
+    .user-profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+
+        ul {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 2rem;
+            padding: .8rem 1.5rem .25rem;
+            background-color: $color-background-secondary;
+            border-radius: 5px;
+
+            li {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                i {
+                    font-size: 20px;
+                    color: $color-primary;
+                }
+
+                p {
+                    white-space: nowrap;
+                }
+            }
+        }
+
+        .write-notif-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            width: 100%;
+
+            &.active {
+                .write-notification-client {
+                    display: none;
+                }
+
+                >div {
+                    display: flex;
+                }
+            }
+
+            >div {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                gap: 1.5rem;
+            }
+
+            textarea {
+                width: 90%;
+                resize: vertical;
+            }
+        }
+    }
+}
+
+.account-form {
+    .contact-form {
+        margin: 0 auto;
+    }
+}
+
+.delete-favorite {
+    position: absolute;
+    font-size: 24px;
+    top: .3rem;
+    right: .8rem;
+    color: $color-secondary;
+    cursor: pointer;
+    transition: color .5s ease;
+
+    &:hover {
+        color: $color-dark-primary;
+    }
+}
+
