@@ -31,9 +31,21 @@
         padding: .5rem 2rem 2rem;
         width: 100%;
         max-width: 800px;
+        max-height: 500px;
+        overflow-y: scroll;
         background-color: $color-background-secondary;
         border-radius: 20px;
         z-index: 11;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media only screen and (min-width: $mq-5) {
+            max-height: 800px;
+        }
 
         .login-interface,
         .register-interface {
@@ -67,6 +79,10 @@
 
             h2 {
                 margin-bottom: 0;
+            }
+
+            p {
+                margin: 0
             }
 
             .contact-form {

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 // Controllers
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\UserController;
+
 
 
 /************************
@@ -51,3 +53,6 @@ Route::get('/admin-account', function () {
 
 // Get the form submission of properties' search
 Route::post('/search-property', [PropertyController::class, 'search'])->name('search-property');
+
+// Check the user's datas when he tried to create his account
+Route::post('/register-user', [UserController::class, 'registerUser'])->name('register-user');

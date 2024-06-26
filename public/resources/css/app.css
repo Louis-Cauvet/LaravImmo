@@ -435,6 +435,12 @@ iframe {
   }
 }
 
+.text-danger {
+  display: none;
+  margin-top: 0.5rem;
+  color: red;
+}
+
 header {
   position: fixed;
   display: flex;
@@ -1491,9 +1497,21 @@ header .burger-menu .burger-body:after {
   padding: 0.5rem 2rem 2rem;
   width: 100%;
   max-width: 800px;
+  max-height: 500px;
+  overflow-y: scroll;
   background-color: #faf8f8;
   border-radius: 20px;
   z-index: 11;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+#login-section .login-modal::-webkit-scrollbar {
+  display: none;
+}
+@media only screen and (min-width: 769px) {
+  #login-section .login-modal {
+    max-height: 800px;
+  }
 }
 #login-section .login-modal .login-interface,
 #login-section .login-modal .register-interface {
@@ -1530,6 +1548,10 @@ header .burger-menu .burger-body:after {
 #login-section .login-modal .login-interface h2,
 #login-section .login-modal .register-interface h2 {
   margin-bottom: 0;
+}
+#login-section .login-modal .login-interface p,
+#login-section .login-modal .register-interface p {
+  margin: 0;
 }
 #login-section .login-modal .login-interface .contact-form,
 #login-section .login-modal .register-interface .contact-form {

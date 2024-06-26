@@ -155,4 +155,10 @@
             </section>
         </div>
     </main>
+
+    @if(Session::has('register_user_success'))
+        <script>
+            alert("{{ Session::get('register_user_success') }}");
+        </script>
+    @endif
 @endsection

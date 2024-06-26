@@ -8,6 +8,11 @@ function changeSlide(slider, slideNumber) {
     sliderCounter = slideNumber;
 }
 
+function displayErrorMessage(errorArea, message) {
+    errorArea.textContent = message;
+    errorArea.style.display = 'inline-block';
+}
+
 /************************************** Events Listeners **************************************/
 
 /***
@@ -120,6 +125,8 @@ if (slider) {
  * Change the slide of slider when clic on tags
  ***/
 if (slider) {
+    const sliderParent = slider.parentElement;
+    const containerSlider = sliderParent.parentElement;
     const sliderTags = containerSlider.querySelectorAll('.slider-tags li');
     sliderTags.forEach((tag) => {
         tag.addEventListener("click", () => {
@@ -182,4 +189,81 @@ openNotificationTextarea.forEach((openTextarea) => {
             writeArea.classList.add("active");
         }
     });
+});
+
+/************************************** Form submissions **************************************/
+/***
+ * Register user's form
+ ***/
+document.querySelector('#register-user-form').addEventListener('submit', function(event) {
+
+    event.preventDefault();
+
+    document.querySelectorAll('.text-danger').forEach(function(element) {
+        element.style.display = 'none';
+        element.textContent = '';
+    });
+
+    let hasError = false;
+
+    const firstname = document.getElementById('firstname').value;
+    if (firstname === '') {
+        displayErrorMessage(document.getElementById('error-firstname'), 'Ce champ est obligatoire.');
+        hasError = true;
+    }
+
+    const lastname = document.getElementById('lastname').value;
+    if (lastname === '') {
+        displayErrorMessage(document.getElementById('error-lastname'), 'Ce champ est obligatoire.');
+        hasError = true;
+    }
+
+    const phone = document.getElementById('phone').value;
+    const onlyDigitPattern = /^[0-9]+$/;
+    if (phone === '') {
+        displayErrorMessage(document.getElementById('error-phone'), 'Ce champ est obligatoire.');
+        hasError = true;
+    }
+    else if (!onlyDigitPattern.test(phone)) {
+        displayErrorMessage(document.getElementById('error-phone'), 'Ce champ peut contenir uniquement des chiffres');
+        hasError = true;
+    }
+
+    const mail2 = document.getElementById('mail2').value;
+    if (mail2 === '') {
+        displayErrorMessage(document.getElementById('error-mail2'), 'Ce champ est obligatoire.');
+        hasError = true;
+    } else if (!/\S+@\S+\.\S+/.test(mail2)) {
+        displayErrorMessage(document.getElementById('error-mail2'), 'Votre adresse doit posséder une @ et un . entourés d\'autres caractères pour être valide');
+        hasError = true;
+    }
+
+    const password2 = document.getElementById('password2').value;
+    const digitPattern = /[0-9]/;
+    const letterPattern = /[a-zA-Z]/;
+    const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
+    if (password2.length < 8) {
+        displayErrorMessage(document.getElementById('error-password2'), 'Le mot de passe doit contenir au moins 8 caractères.');
+        hasError = true;
+    } else if (!digitPattern.test(password2)) {
+        displayErrorMessage(document.getElementById('error-password2'), 'Le mot de passe doit contenir au moins 1 chiffre.');
+        hasError = true;
+    } else if (!letterPattern.test(password2)) {
+        displayErrorMessage(document.getElementById('error-password2'), 'Le mot de passe doit contenir au moins 1 lettre.');
+        document.getElementById('error-password2').style.display = 'block';
+        hasError = true;
+    } else if (!specialCharPattern.test(password2)) {
+        displayErrorMessage(document.getElementById('error-password2'), 'Le mot de passe doit contenir au moins 1 caractère spécial.');
+        hasError = true;
+    }
+
+    const password2_confirmation = document.getElementById('password2_confirmation').value;
+    if (password2 !== password2_confirmation) {
+        displayErrorMessage(document.getElementById('error-password2_confirmation'), 'Vos 2 mots de passe ne correspondent pas.');
+        hasError = true;
+    }
+
+    if (!hasError) {
+        event.target.submit();
+    }
 });
