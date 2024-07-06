@@ -1,6 +1,14 @@
 "use strict";
 
-/************************************** Functions **************************************/
+/*************************************
+GLOBAL VARIABLES
+ *************************************/
+const token = window.Laravel.csrfToken;
+
+
+/*************************************
+ CLASSIC FUNCTIONS
+ *************************************/
 function changeSlide(slider, slideNumber) {
     const percentage = -100*slideNumber;
     const spaces = 4*slideNumber;
@@ -13,7 +21,26 @@ function displayErrorMessage(errorArea, message) {
     errorArea.style.display = 'inline-block';
 }
 
-/************************************** Events Listeners **************************************/
+/*************************************
+ AJAX FUNCTIONS
+ *************************************/
+
+/***
+ * Allow to make an AJAX call considering the token
+ ***/
+function csrfFetch(url, options = {}) {
+    options.headers = {
+        ...options.headers,
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': token
+    };
+    return fetch(url, options);
+}
+
+
+/*************************************
+ EVENTS LISTENERS
+ *************************************/
 
 /***
  * Display the to-top button when scrolling down
@@ -191,7 +218,9 @@ openNotificationTextarea.forEach((openTextarea) => {
     });
 });
 
-/************************************** Form submissions **************************************/
+/*************************************
+ FORM SUBMISSIONS
+ *************************************/
 /***
  * Register user's form
  ***/
@@ -238,6 +267,7 @@ document.querySelector('#register-user-form').addEventListener('submit', functio
         hasError = true;
     }
 
+
     const password2 = document.getElementById('password2').value;
     const digitPattern = /[0-9]/;
     const letterPattern = /[a-zA-Z]/;
@@ -263,7 +293,27 @@ document.querySelector('#register-user-form').addEventListener('submit', functio
         hasError = true;
     }
 
+
+    // Check if the user's mail already exists with an AJAX function
     if (!hasError) {
-        event.target.submit();
+        csrfFetch("/check-email", {
+            method: 'POST',
+            body: JSON.stringify({ email: mail2 })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.existingEmail === true) {
+                displayErrorMessage(document.getElementById('error-mail2'), 'L\'adresse mail renseignée est déja associée à un compte utilisateur.');
+                hasError = true;
+            } else {
+                // If the mail doesn't already exists, send the form submission for a server's side validation
+                event.target.submit();
+            }
+        })
+        .catch(error => {
+            console.error('Une erreur est survenue durant la vérification de l\'adresse mail :', error);
+            displayErrorMessage(document.getElementById('error-mail2'), 'Une erreur est survenue lors de la vérification de l\'e-mail.');
+            hasError = true;
+        });
     }
 });

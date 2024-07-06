@@ -3,6 +3,13 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script>
+            // Define a global variable for the CSRF token to use in JS scripts
+            window.Laravel = {
+                csrfToken: '{{ csrf_token() }}'
+            };
+        </script>
 
         <title>@yield('title')</title>
         <link rel="icon" type="image/x-icon" href="/resources/img/logo.png">
@@ -16,6 +23,13 @@
         <link rel="stylesheet" href="/resources/css/app.css">
     </head>
     <body>
+        <!-- Affichage d'un message à l'utilisateur si besoin -->
+        @if (Session::has('user_alert_message'))
+            <script>
+                alert('{{ Session::get('user_alert_message') }}');
+            </script>
+        @endif
+
         <a href="#header" class="to-top">
             <i class="fa-solid fa-chevron-up"></i>
         </a>

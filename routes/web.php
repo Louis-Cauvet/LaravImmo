@@ -7,9 +7,8 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
 
 
-
 /************************
- * Templates' redirections
+ * TEMPLATE'S REDIRECTIONS
  **************************/
 
 // Go to the homepage
@@ -47,12 +46,19 @@ Route::get('/admin-account', function () {
     return view('admin-account');
 })->name('admin-account');
 
+
 /*************************
- * Forms' submissions
+ * FORM' SUBMISSIONS
  *************************/
 
 // Get the form submission of properties' search
 Route::post('/search-property', [PropertyController::class, 'search'])->name('search-property');
 
+// Check if the user's mail already exists in database
+Route::post('/check-email', [UserController::class, 'checkExistingEmail'])->name('check-email');
+
 // Check the user's datas when he tried to create his account
 Route::post('/register-user', [UserController::class, 'registerUser'])->name('register-user');
+
+// Check the user's datas when he tried to create his account
+Route::post('/connect-user', [UserController::class, 'connectUser'])->name('connect-user');

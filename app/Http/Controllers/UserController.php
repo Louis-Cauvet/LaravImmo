@@ -4,9 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+    // Check if the user's mail already exists in the database (for the client's side verification)
+    public function checkExistingEmail(Request $request) {
+
+        $email = $request->input('email');
+        $exists = Utilisateur::where('email', $email)->exists();
+
+        // Return a boolean 'true' if the email is already exists, false else
+        return response()->json(['existingEmail' => $exists]);
+    }
+
+
+    // Check the user's data entered in the registration form, and saves it in the database if everything is correct (server's side verification
     public function registerUser(Request $request) {
 
         $validatedData = $request->validate([
@@ -27,8 +40,8 @@ class UserController extends Controller
 
         $newUser->save();
 
-//        Session::flash('success', 'Votre compte a été crée avec succès, vous pouvez dès à présent vous connecter !');
+        Session::flash('user_alert_message', 'Votre compte a été crée avec succès, vous pouvez dès à présent vous connecter !');
 
-        return redirect('/')->with('register_user_success', 'Votre compte a été crée avec succès, vous pouvez dès à présent vous connecter !!');
+        return redirect('/');
     }
 }

@@ -5,7 +5,8 @@
             <i class="close-modal fa-solid fa-xmark"></i>
             <h2>Se connecter</h2>
             <div class="contact-form">
-                <form action="#_" method="POST">
+                <form action="{{ route('connect-user') }}" method="POST">
+                    @csrf
                     <div>
                         <label for="mail">Email<span class="required-indicator">*</span></label>
                         <input type="email" id="mail" name="mail" required>

@@ -1510,7 +1510,7 @@ header .burger-menu .burger-body:after {
 }
 @media only screen and (min-width: 769px) {
   #login-section .login-modal {
-    max-height: 800px;
+    max-height: 600px;
   }
 }
 #login-section .login-modal .login-interface,
