@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Utilisateur extends Model
+class Utilisateur extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -18,5 +18,13 @@ class Utilisateur extends Model
         'mot_de_passe',
         'role_id',
     ];
+
+    protected $hidden = [
+        'mot_de_passe',
+    ];
+
+    public function getAuthPassword() {
+        return $this->mot_de_passe;
+    }
 
 }

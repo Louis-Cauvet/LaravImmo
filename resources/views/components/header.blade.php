@@ -12,6 +12,7 @@
             <i class="fa-solid fa-user"></i>
             Connexion
         </button>
+        @include('components.header-user')
     </nav>
     <button class="burger-menu">
         <div class="burger-body"></div>

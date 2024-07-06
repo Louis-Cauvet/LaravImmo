@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -19,7 +20,7 @@ class UserController extends Controller
     }
 
 
-    // Check the user's data entered in the registration form, and saves it in the database if everything is correct (server's side verification
+    // Check the user's data entered in the registration form, and saves it in the database if everything is correct (server's side verification)
     public function registerUser(Request $request) {
 
         $validatedData = $request->validate([
@@ -43,5 +44,24 @@ class UserController extends Controller
         Session::flash('user_alert_message', 'Votre compte a été crée avec succès, vous pouvez dès à présent vous connecter !');
 
         return redirect('/');
+    }
+
+
+    // Check the user's data entered in the login form, and connect it if they are valid.
+    public function connectUser(Request $request) {
+        $credentials = $request->only('mail', 'password');
+
+        $user = Utilisateur::where('email', $credentials['mail'])->first();
+
+        if ($user && $user->mot_de_passe === $credentials['password']) {
+            // If success login
+            Auth::login($user);
+            return view('homepage');
+        }
+
+        // If fail login
+        return redirect()->back()->withErrors([
+            'error' => 'Adresse mail ou mot de passe invalide.',
+        ]);
     }
 }

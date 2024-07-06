@@ -15,8 +15,8 @@ class UtilisateursSeeder extends Seeder
     public function run(): void
     {
         DB::table('Utilisateurs')->insert([
-            'prenom' => 'Louis',
-            'nom' => 'Cauvet',
+            'prenom' => 'Admin',
+            'nom' => 'n°1',
             'email' => 'admin@laravimmo.com',
             'telephone' => '0789756498',
             'mot_de_passe' => 'admin123!',
