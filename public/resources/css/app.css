@@ -464,7 +464,6 @@ header {
   }
 }
 header .site-logo {
-  margin-right: 2.5rem;
   max-height: 7rem;
   width: auto;
 }
@@ -536,9 +535,18 @@ header nav .a-button {
   align-items: center;
   font-size: 15px;
   gap: 0.5rem;
+  white-space: nowrap;
 }
 header nav .a-button .i-profile {
   width: 2rem;
+}
+header nav .account-buttons {
+  display: flex;
+  gap: 1rem;
+}
+header nav .account-buttons .logout-button {
+  padding: 7px 10px;
+  border-radius: 50%;
 }
 header .burger-menu {
   display: block;

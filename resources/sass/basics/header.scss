@@ -19,7 +19,6 @@ header {
     }
 
     .site-logo {
-        margin-right: 2.5rem;
         max-height: 7rem;
         width: auto;
     }
@@ -97,9 +96,20 @@ header {
             align-items: center;
             font-size: 15px;
             gap: .5rem;
+            white-space: nowrap;
 
             .i-profile {
                 width: 2rem;
+            }
+        }
+
+        .account-buttons {
+            display: flex;
+            gap: 1rem;
+
+            .logout-button {
+                padding: 7px 10px;
+                border-radius: 50%;
             }
         }
     }

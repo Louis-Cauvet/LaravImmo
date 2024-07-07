@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 
 class UtilisateursSeeder extends Seeder
@@ -19,7 +20,7 @@ class UtilisateursSeeder extends Seeder
             'nom' => 'n°1',
             'email' => 'admin@laravimmo.com',
             'telephone' => '0789756498',
-            'mot_de_passe' => 'admin123!',
+            'mot_de_passe' => Hash::make('admin123!'),
             'role_id' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()

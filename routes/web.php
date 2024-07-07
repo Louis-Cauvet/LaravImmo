@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // Controllers
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AccountController;
 
 Route::middleware(['web'])->group(function () {
 
@@ -39,13 +40,18 @@ Route::middleware(['web'])->group(function () {
 
     // Go to the user account's page
     Route::get('/user-account', function () {
-        return view('user-account');
+        return app(AccountController::class)->checkUserConnected('user-account');
     })->name('user-account');
 
     // Go to the admin account's page
     Route::get('/admin-account', function () {
-        return view('admin-account');
+        return app(AccountController::class)->checkUserConnected('admin-account');
     })->name('admin-account');
+
+    // Go to the user's disconnect
+    Route::get('/logout-user', function () {
+        return app(UserController::class)->logoutUser();
+    })->name('logout-user');
 
 
     /*************************

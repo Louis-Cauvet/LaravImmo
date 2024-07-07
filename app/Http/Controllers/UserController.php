@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -36,7 +37,7 @@ class UserController extends Controller
         $newUser->nom = $validatedData['lastname'];
         $newUser->telephone = $validatedData['phone'];
         $newUser->email = $validatedData['mail2'];
-        $newUser->mot_de_passe = $validatedData['password2'];
+        $newUser->mot_de_passe = Hash::make($validatedData['password2']);
         $newUser->role_id = 2;
 
         $newUser->save();
@@ -51,12 +52,12 @@ class UserController extends Controller
     public function verifyExistingUser(Request $request) {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required|string',
         ]);
 
         $user = Utilisateur::where('email', $request->email)->first();
 
-        if ($user && $request->password === $user->mot_de_passe) {
+        if ($user && Hash::check($request->password, $user->mot_de_passe)) {
             return response()->json(['existingUser' => true]);
         }
 
@@ -66,19 +67,44 @@ class UserController extends Controller
 
     // Check the user's data entered in the login form, and connect it if they are valid.
     public function connectUser(Request $request) {
+        $request->validate([
+            'mail' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
         $credentials = $request->only('mail', 'password');
 
         $user = Utilisateur::where('email', $credentials['mail'])->first();
 
-        if ($user && $user->mot_de_passe === $credentials['password']) {
+        if ($user && Hash::check($credentials['password'], $user->mot_de_passe)) {
             // If success login
-            Auth::login($user);
-            return view('homepage');
+            session_start();
+            $_SESSION['user'] = [
+                'id' => $user->id_client,
+                'prenom' =>  $user->prenom,
+                'nom' => $user->nom,
+                'email' => $user->email,
+                'email' => $user->telephone,
+                'role' => $user->getUserRole->intitule_role,
+            ];
+
+            return redirect()->route('homepage');
         }
 
         // If fail login
         return redirect()->back()->withErrors([
             'error' => 'Adresse mail ou mot de passe invalide.',
         ]);
+    }
+
+    // Logout the user and redirect in the previous page if it's possible
+    public function logoutUser(){
+        session_start();
+        session_destroy();
+
+        // Redirect to the previous page or home if not available
+        return redirect()->back()->getTargetUrl() !== url()->current()
+            ? redirect()->back()
+            : redirect('/');
     }
 }

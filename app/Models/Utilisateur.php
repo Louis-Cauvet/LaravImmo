@@ -22,4 +22,10 @@ class Utilisateur extends Authenticatable
     protected $hidden = [
         'mot_de_passe',
     ];
+
+
+    // Return the user's rôle
+    public function getUserRole() {
+        return $this->belongsTo(RoleUtilisateur::class, 'role_id', 'id_role');
+    }
 }
