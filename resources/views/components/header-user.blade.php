@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 @if(isset($_SESSION['user']))
     @php
         $user = $_SESSION['user'];

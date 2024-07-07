@@ -1,3 +1,20 @@
+@php
+    session_start();
+
+    if (!isset($_SESSION['user'])) {
+        $homeUrl = route('homepage');
+
+        header('Location: ' . $homeUrl);
+        exit();
+    } else if ($_SESSION['user']['role'] != "Admin") {
+         $homeUrl = route('homepage');
+
+        header('Location: ' . $homeUrl);
+        exit();
+    }
+@endphp
+
+
 @extends('base')
 
 @section('title', 'Compte admin de nom prenom')

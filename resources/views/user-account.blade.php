@@ -1,3 +1,15 @@
+@php
+    session_start();
+
+    if (!isset($_SESSION['user'])) {
+        $homeUrl = route('homepage');
+
+        header('Location: ' . $homeUrl);
+        exit();
+    }
+@endphp
+
+
 @extends('base')
 
 @section('title', 'Compte de nom prenom')
@@ -109,3 +121,4 @@
         </div>
     </main>
 @endsection
+

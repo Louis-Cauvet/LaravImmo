@@ -1,3 +1,7 @@
+@php
+    session_start();
+@endphp
+
 @extends('base')
 
 @section('title', 'Page d\'accueil')
