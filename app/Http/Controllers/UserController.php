@@ -47,6 +47,23 @@ class UserController extends Controller
     }
 
 
+    // Check if the user's mail already exists in the database (for the client's side verification)
+    public function verifyExistingUser(Request $request) {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $user = Utilisateur::where('email', $request->email)->first();
+
+        if ($user && $request->password === $user->mot_de_passe) {
+            return response()->json(['existingUser' => true]);
+        }
+
+        return response()->json(['existingUser' => false, 'message' => 'Aucun utilisateur avec ces données de connexion n\'a été trouvé !']);
+    }
+
+
     // Check the user's data entered in the login form, and connect it if they are valid.
     public function connectUser(Request $request) {
         $credentials = $request->only('mail', 'password');

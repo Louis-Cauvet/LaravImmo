@@ -5,16 +5,18 @@
             <i class="close-modal fa-solid fa-xmark"></i>
             <h2>Se connecter</h2>
             <div class="contact-form">
-                <form action="{{ route('connect-user') }}" method="POST">
+                <form id="connect-user-form" action="{{ route('connect-user') }}" method="POST">
                     @csrf
                     <div>
                         <label for="mail">Email<span class="required-indicator">*</span></label>
                         <input type="email" id="mail" name="mail" required>
+                        <span class="text-danger" id="error-mail"></span>
                     </div>
 
                     <div>
                         <label for="password">Mot de passe<span class="required-indicator">*</span></label>
                         <input type="password" id="password" name="password" required>
+                        <span class="text-danger" id="error-password"></span>
                     </div>
 
                     <div>

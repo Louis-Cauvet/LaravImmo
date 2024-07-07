@@ -61,6 +61,9 @@ Route::middleware(['web'])->group(function () {
     // Check the user's datas when he tried to create his account
     Route::post('/register-user', [UserController::class, 'registerUser'])->name('register-user');
 
+    // Check if the user's mail already exists in database
+    Route::post('/verify-user', [UserController::class, 'verifyExistingUser'])->name('verify-user');
+
     // Check the user's datas when he tried to create his account
     Route::post('/connect-user', [UserController::class, 'connectUser'])->name('connect-user');
 });

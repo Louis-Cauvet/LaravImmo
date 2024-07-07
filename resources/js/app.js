@@ -221,6 +221,7 @@ openNotificationTextarea.forEach((openTextarea) => {
 /*************************************
  FORM SUBMISSIONS
  *************************************/
+
 /***
  * Register user's form
  ***/
@@ -312,7 +313,63 @@ document.querySelector('#register-user-form').addEventListener('submit', functio
         })
         .catch(error => {
             console.error('Une erreur est survenue durant la vérification de l\'adresse mail :', error);
-            displayErrorMessage(document.getElementById('error-mail2'), 'Une erreur est survenue lors de la vérification de l\'e-mail.');
+            displayErrorMessage(document.getElementById('error-mail2'), 'Une erreur est survenue lors de la vérification de l\'adresse mail.');
+            hasError = true;
+        });
+    }
+});
+
+
+/***
+ * Login user's form
+ ***/
+document.querySelector('#connect-user-form').addEventListener('submit', function(event) {
+
+    event.preventDefault();
+
+    document.querySelectorAll('.text-danger').forEach(function(element) {
+        element.style.display = 'none';
+        element.textContent = '';
+    });
+
+    let hasError = false;
+
+    const mail = document.getElementById('mail').value;
+    if (mail === '') {
+        displayErrorMessage(document.getElementById('error-mail'), 'Ce champ est obligatoire.');
+        hasError = true;
+    } else if (!/\S+@\S+\.\S+/.test(mail)) {
+        displayErrorMessage(document.getElementById('error-mail'), 'Votre adresse doit posséder une @ et un . entourés d\'autres caractères pour être valide');
+        hasError = true;
+    }
+
+    const password = document.getElementById('password').value;
+    if (password === '') {
+        displayErrorMessage(document.getElementById('error-password'), 'Ce champ est obligatoire.');
+        hasError = true;
+    }
+
+    if (!hasError) {
+        csrfFetch("/verify-user", {
+            method: 'POST',
+            body: JSON.stringify({
+                email: mail,
+                password: password
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.existingUser === false) {
+                displayErrorMessage(document.getElementById('error-mail'), data.message);
+                hasError = true;
+            } else {
+                // If the mail doesn't already exists, send the form submission for a server's side validation
+                event.target.submit();
+            }
+        })
+        .catch(error => {
+            console.error('Une erreur est survenue durant la vérification de l\'utilisateur :', error);
+            displayErrorMessage(document.getElementById('error-mail'), 'Une erreur est survenue lors de la vérification de l\'utilisateur.');
             hasError = true;
         });
     }
