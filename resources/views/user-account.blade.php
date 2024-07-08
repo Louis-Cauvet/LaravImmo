@@ -6,18 +6,23 @@
 
         header('Location: ' . $homeUrl);
         exit();
+    } else {
+      $user = $_SESSION['user'];
     }
+
 @endphp
 
 
 @extends('base')
 
-@section('title', 'Compte de nom prenom')
+@section('title')
+    Compte de {{ $user['prenom'] }} {{ $user['nom'] }}
+@endsection
 
 @section('content')
     <main>
         <div class="inner-page user-account-page">
-            <h1 class="h-color-dark-primary">Compte de "Nom", "Prénom" !</h1>
+            <h1 class="h-color-dark-primary">Bonjour {{ $user['prenom'] }} {{ $user['nom'] }} !</h1>
             <section>
                 <h2>Mes notifications</h2>
                 <div class="favorites-container horizontal">
@@ -89,27 +94,27 @@
                     <form action="#_" method="POST">
                         <div>
                             <label for="firstname">Prénom<span class="required-indicator">*</span></label>
-                            <input type="text" id="firstname" name="firstname" required>
+                            <input type="text" id="firstname" name="firstname" value="{{ $user['prenom'] }}" required>
                         </div>
 
                         <div>
                             <label for="lastname">Nom de famille<span class="required-indicator">*</span></label>
-                            <input type="text" id="lastname" name="lastname" required>
+                            <input type="text" id="lastname" name="lastname" value="{{ $user['nom'] }}" required>
                         </div>
 
                         <div>
                             <label for="phone">Numéro de téléphone<span class="required-indicator">*</span></label>
-                            <input type="tel" id="phone" name="phone" required>
+                            <input type="tel" id="phone" name="phone" value="{{ $user['telephone'] }}" required>
                         </div>
 
                         <div>
                             <label for="mail">Email<span class="required-indicator">*</span></label>
-                            <input type="email" id="mail" name="mail" required>
+                            <input type="email" id="mail" name="mail" value="{{ $user['email'] }}"  required>
                         </div>
 
                         <div>
                             <label for="password">Mot de passe<span class="required-indicator">*</span></label>
-                            <input type="password" id="password" name="password" required>
+                            <input type="password" id="password" name="password" value="{{ $user['mot_de_passe'] }}" required>
                         </div>
 
                         <div>

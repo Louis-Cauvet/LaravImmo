@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'max_upload_size' => env('MAX_UPLOAD_SIZE', 100 * 1024 * 1024),
+
 ];

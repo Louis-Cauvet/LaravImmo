@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
-class UserController extends Controller
+class UtilisateurController extends Controller
 {
     // Check if the user's mail already exists in the database (for the client's side verification)
     public function checkExistingEmail(Request $request) {
@@ -84,7 +84,8 @@ class UserController extends Controller
                 'prenom' =>  $user->prenom,
                 'nom' => $user->nom,
                 'email' => $user->email,
-                'email' => $user->telephone,
+                'telephone' => $user->telephone,
+                'mot_de_passe' => $credentials['password'],
                 'role' => $user->getUserRole->intitule_role,
             ];
 

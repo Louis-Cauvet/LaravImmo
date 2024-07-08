@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 // Controllers
-use App\Http\Controllers\PropertyController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\BienController;
+use App\Http\Controllers\UtilisateurController;
 
 Route::middleware(['web'])->group(function () {
 
@@ -47,25 +47,28 @@ Route::middleware(['web'])->group(function () {
         return view('admin-account');
     })->name('admin-account');
 
-    Route::get('/logout-user', [UserController::class, 'logoutUser'])->name('logout-user');
+    Route::get('/logout-user', [UtilisateurController::class, 'logoutUser'])->name('logout-user');
 
 
     /*************************
      * FORM' SUBMISSIONS
      *************************/
 
+    // Check if the user's mail already exists in database
+    Route::post('/check-email', [UtilisateurController::class, 'checkExistingEmail'])->name('check-email');
+
+    // Check the user's datas when he tried to create his account before register it if it's good
+    Route::post('/register-user', [UtilisateurController::class, 'registerUser'])->name('register-user');
+
+    // Check if the user's mail already exists in database
+    Route::post('/verify-user', [UtilisateurController::class, 'verifyExistingUser'])->name('verify-user');
+
+    // Check the user's datas when he tried to login to his account
+    Route::post('/connect-user', [UtilisateurController::class, 'connectUser'])->name('connect-user');
+
+    // Check the property's datas when the user try to purpose a new property
+    Route::post('/register-property', [BienController::class, 'registerProperty'])->name('register-property');
+
     // Get the form submission of properties' search
-    Route::post('/search-property', [PropertyController::class, 'search'])->name('search-property');
-
-    // Check if the user's mail already exists in database
-    Route::post('/check-email', [UserController::class, 'checkExistingEmail'])->name('check-email');
-
-    // Check the user's datas when he tried to create his account
-    Route::post('/register-user', [UserController::class, 'registerUser'])->name('register-user');
-
-    // Check if the user's mail already exists in database
-    Route::post('/verify-user', [UserController::class, 'verifyExistingUser'])->name('verify-user');
-
-    // Check the user's datas when he tried to create his account
-    Route::post('/connect-user', [UserController::class, 'connectUser'])->name('connect-user');
+    Route::post('/search-property', [BienController::class, 'search'])->name('search-property');
 });
