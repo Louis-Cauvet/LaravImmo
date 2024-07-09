@@ -36,9 +36,17 @@ class BienController extends Controller
             'photos' => 'required|array|min:1',
         ]);
 
+        $typeBienMap = [
+            'maison' => 1,
+            'appartement' => 2,
+            'terrain' => 3,
+        ];
+
+        $typeBienId = $typeBienMap[$validateData['property-type']];
 
         // Register the new property in the database
         $property = BienImmo::create([
+            'typeBien_id' => $typeBienId,
             'titre_annonce' => $validateData['title'],
             'contenu_annonce' => $validateData['description'],
             'prix' => $validateData['price'],
@@ -62,7 +70,7 @@ class BienController extends Controller
                 $path = $photo->store('photos', 'public');
                 Image::create([
                     'id_bien' => $property->id_bienImmo,
-                    'image_data' => $path,
+                    'image_path' => $path,
                 ]);
             }
         }

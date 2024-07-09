@@ -9,10 +9,10 @@ class Image extends Model
 {
     use HasFactory;
 
-    protected $table = 'Image';
+    protected $table = 'Images';
     protected $primaryKey = 'id_image';
 
-    protected $fillable = ['id_bien', 'image_data'];
+    protected $fillable = ['id_bien', 'image_path'];
 
 
     // Get the property lied to each image

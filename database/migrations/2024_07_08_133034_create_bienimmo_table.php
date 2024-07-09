@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('BienImmo', function (Blueprint $table) {
+        Schema::create('Biens_Immo', function (Blueprint $table) {
             $table->id('id_bienImmo');
+            $table->unsignedBigInteger('typeBien_id');
             $table->string('titre_annonce');
             $table->text('contenu_annonce');
             $table->decimal('prix', 10, 2);
@@ -29,6 +30,8 @@ return new class extends Migration
             $table->boolean('terrain');
             $table->boolean('disponible')->default(true);
             $table->timestamps();
+
+            $table->foreign('typeBien_id')->references('id_typeBien')->on('types_biens')->onDelete('cascade');
         });
     }
 
@@ -37,6 +40,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('BienImmo');
+        Schema::table('Biens_Immo', function (Blueprint $table) {
+            $table->dropForeign(['typeBien_id']);
+        });
+        Schema::dropIfExists('Biens_Immo');
     }
 };

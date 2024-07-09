@@ -11,18 +11,22 @@
 
         header('Location: ' . $homeUrl);
         exit();
+    } else {
+      $user = $_SESSION['user'];
     }
 @endphp
 
 
 @extends('base')
 
-@section('title', 'Compte admin de nom prenom')
+@section('title')
+    Compte admin de {{ $user['prenom'] }} {{ $user['nom'] }}
+@endsection
 
 @section('content')
     <main>
         <div class="inner-page admin-account-page">
-            <h1 class="h-color-dark-primary">Compte administrateur de "Nom", "Prénom" !</h1>
+            <h1 class="h-color-dark-primary">Compte administrateur de {{ $user['prenom'] }} {{ $user['nom'] }}</h1>
             <section>
                 <h2>Nos demandes de contact</h2>
                 <div class="favorites-container horizontal">

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\BienImmo;
 use App\Models\Utilisateur;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,8 +16,10 @@ class DatabaseSeeder extends Seeder
     {
         /** Insert default datas for tables */
         $this->call([
+            TypeBienSeeder::class,
             RolesUtilisateursSeeder::class,
-            UtilisateursSeeder::class
+            BienImmoSeeder::class,
+            UtilisateursSeeder::class,
         ]);
     }
 }

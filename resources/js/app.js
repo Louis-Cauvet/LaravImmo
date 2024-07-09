@@ -382,114 +382,116 @@ document.querySelector('#connect-user-form').addEventListener('submit', function
 /***
  * Sale property's form
  ***/
-document.querySelector('#sale-property-form').addEventListener('submit', function(event) {
+if (document.querySelector('#sale-property-form')) {
+    document.querySelector('#sale-property-form').addEventListener('submit', function(event) {
 
-    event.preventDefault();
+        event.preventDefault();
 
-    const digitPattern = /^\d+$/;
+        const digitPattern = /^\d+$/;
 
-    document.querySelectorAll('.text-danger').forEach(function(element) {
-        element.style.display = 'none';
-        element.textContent = '';
-    });
+        document.querySelectorAll('.text-danger').forEach(function(element) {
+            element.style.display = 'none';
+            element.textContent = '';
+        });
 
-    let hasError = false;
+        let hasError = false;
 
-    const title = document.getElementById('title').value;
-    if (title === '') {
-        displayErrorMessage(document.getElementById('error-title'), 'Ce champ est obligatoire.');
-        hasError = true;
-    }
-
-
-    const price = document.getElementById('price').value;
-    if (price === '') {
-        displayErrorMessage(document.getElementById('error-price'), 'Ce champ est obligatoire.');
-        hasError = true;
-    } else if (price < 0) {
-        displayErrorMessage(document.getElementById('error-price'), 'Le prix de votre bien ne peut pas être négatif.');
-        hasError = true;
-    }
+        const title = document.getElementById('title').value;
+        if (title === '') {
+            displayErrorMessage(document.getElementById('error-title'), 'Ce champ est obligatoire.');
+            hasError = true;
+        }
 
 
-    const description = document.getElementById('description').value;
-    if (description === '') {
-        displayErrorMessage(document.getElementById('error-description'), 'Ce champ est obligatoire.');
-        hasError = true;
-    }
+        const price = document.getElementById('price').value;
+        if (price === '') {
+            displayErrorMessage(document.getElementById('error-price'), 'Ce champ est obligatoire.');
+            hasError = true;
+        } else if (price < 0) {
+            displayErrorMessage(document.getElementById('error-price'), 'Le prix de votre bien ne peut pas être négatif.');
+            hasError = true;
+        }
 
 
-    const address = document.getElementById('address').value;
-    if (address === '') {
-        displayErrorMessage(document.getElementById('error-address'), 'Ce champ est obligatoire.');
-        hasError = true;
-    }
+        const description = document.getElementById('description').value;
+        if (description === '') {
+            displayErrorMessage(document.getElementById('error-description'), 'Ce champ est obligatoire.');
+            hasError = true;
+        }
 
 
-    const city = document.getElementById('city').value;
-    if (city === '') {
-        displayErrorMessage(document.getElementById('error-city'), 'Ce champ est obligatoire.');
-        hasError = true;
-    }
+        const address = document.getElementById('address').value;
+        if (address === '') {
+            displayErrorMessage(document.getElementById('error-address'), 'Ce champ est obligatoire.');
+            hasError = true;
+        }
 
 
-    const postal = document.getElementById('postal').value;
-    if (postal === '') {
-        displayErrorMessage(document.getElementById('error-postal'), 'Ce champ est obligatoire.');
-        hasError = true;
-    } else if (!digitPattern.test(postal)) {
-        displayErrorMessage(document.getElementById('error-postal'), 'Ce champ ne peut contenir que des chiffres.');
-        hasError = true;
-    }
+        const city = document.getElementById('city').value;
+        if (city === '') {
+            displayErrorMessage(document.getElementById('error-city'), 'Ce champ est obligatoire.');
+            hasError = true;
+        }
 
 
-    const area = document.getElementById('area').value;
-    if (area === '') {
-        displayErrorMessage(document.getElementById('error-area'), 'Ce champ est obligatoire.');
-        hasError = true;
-    } else if (area < 0) {
-        displayErrorMessage(document.getElementById('error-area'), 'La surface de votre bien ne peut pas être négative.');
-        hasError = true;
-    }
+        const postal = document.getElementById('postal').value;
+        if (postal === '') {
+            displayErrorMessage(document.getElementById('error-postal'), 'Ce champ est obligatoire.');
+            hasError = true;
+        } else if (!digitPattern.test(postal)) {
+            displayErrorMessage(document.getElementById('error-postal'), 'Ce champ ne peut contenir que des chiffres.');
+            hasError = true;
+        }
 
 
-    const nb_rooms = document.getElementById('nb_rooms').value;
-    if (nb_rooms === '') {
-        displayErrorMessage(document.getElementById('error-nb_rooms'), 'Ce champ est obligatoire.');
-        hasError = true;
-    } else if (nb_rooms < 0) {
-        displayErrorMessage(document.getElementById('error-nb_rooms'), 'Le nombre de pièces de votre bien ne peut pas être négatif.');
-        hasError = true;
-    }
+        const area = document.getElementById('area').value;
+        if (area === '') {
+            displayErrorMessage(document.getElementById('error-area'), 'Ce champ est obligatoire.');
+            hasError = true;
+        } else if (area < 0) {
+            displayErrorMessage(document.getElementById('error-area'), 'La surface de votre bien ne peut pas être négative.');
+            hasError = true;
+        }
 
 
-    const nb_bedrooms = document.getElementById('nb_bedrooms').value;
-    if (nb_bedrooms === '') {
-        displayErrorMessage(document.getElementById('error-nb_bedrooms'), 'Ce champ est obligatoire.');
-        hasError = true;
-    } else if (nb_bedrooms < 0) {
-        displayErrorMessage(document.getElementById('error-nb_bedrooms'), 'Le nombre de chambres de votre bien ne peut pas être négatif.');
-        hasError = true;
-    } else if (nb_bedrooms > nb_rooms) {
-        displayErrorMessage(document.getElementById('error-nb_bedrooms'), 'Le nombre de chambres de votre bien ne peut pas supérieur au nombre total de pièces.');
-        hasError = true;
-    }
+        const nb_rooms = document.getElementById('nb_rooms').value;
+        if (nb_rooms === '') {
+            displayErrorMessage(document.getElementById('error-nb_rooms'), 'Ce champ est obligatoire.');
+            hasError = true;
+        } else if (nb_rooms < 0) {
+            displayErrorMessage(document.getElementById('error-nb_rooms'), 'Le nombre de pièces de votre bien ne peut pas être négatif.');
+            hasError = true;
+        }
 
 
-    const nb_bathrooms = document.getElementById('nb_bathrooms').value;
-    if (nb_bathrooms === '') {
-        displayErrorMessage(document.getElementById('error-nb_bathrooms'), 'Ce champ est obligatoire.');
-        hasError = true;
-    } else if (nb_bathrooms < 0) {
-        displayErrorMessage(document.getElementById('error-nb_bathrooms'), 'Le nombre de salles de bain de votre bien ne peut pas être négatif.');
-        hasError = true;
-    } else if (nb_bathrooms > nb_rooms) {
-        displayErrorMessage(document.getElementById('error-nb_bathrooms'), 'Le nombre de salles de bain de votre bien ne peut pas supérieur au nombre total de pièces.');
-        hasError = true;
-    }
+        const nb_bedrooms = document.getElementById('nb_bedrooms').value;
+        if (nb_bedrooms === '') {
+            displayErrorMessage(document.getElementById('error-nb_bedrooms'), 'Ce champ est obligatoire.');
+            hasError = true;
+        } else if (nb_bedrooms < 0) {
+            displayErrorMessage(document.getElementById('error-nb_bedrooms'), 'Le nombre de chambres de votre bien ne peut pas être négatif.');
+            hasError = true;
+        } else if (nb_bedrooms > nb_rooms) {
+            displayErrorMessage(document.getElementById('error-nb_bedrooms'), 'Le nombre de chambres de votre bien ne peut pas supérieur au nombre total de pièces.');
+            hasError = true;
+        }
 
 
-    if (!hasError) {
-        event.target.submit();
-    }
-})
+        const nb_bathrooms = document.getElementById('nb_bathrooms').value;
+        if (nb_bathrooms === '') {
+            displayErrorMessage(document.getElementById('error-nb_bathrooms'), 'Ce champ est obligatoire.');
+            hasError = true;
+        } else if (nb_bathrooms < 0) {
+            displayErrorMessage(document.getElementById('error-nb_bathrooms'), 'Le nombre de salles de bain de votre bien ne peut pas être négatif.');
+            hasError = true;
+        } else if (nb_bathrooms > nb_rooms) {
+            displayErrorMessage(document.getElementById('error-nb_bathrooms'), 'Le nombre de salles de bain de votre bien ne peut pas supérieur au nombre total de pièces.');
+            hasError = true;
+        }
+
+
+        if (!hasError) {
+            event.target.submit();
+        }
+    })
+}
