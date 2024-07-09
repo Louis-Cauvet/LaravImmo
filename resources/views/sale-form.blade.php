@@ -75,7 +75,7 @@
 
                     <div>
                         <label for="area">Surface (en m<sup>2</sup>)<span class="required-indicator">*</span></label>
-                        <input type="number" id="area" name="area" step="0.01" required>
+                        <input type="number" id="area" name="area" required>
                         <span class="text-danger" id="error-area"></span>
                     </div>
 
@@ -123,6 +123,8 @@
                         <span class="text-danger" id="error-photos"></span>
                     </div>
 
+
+                    <span class="text-danger" id="error-check-user-connected"></span>
 
                     <div>
                         <button type="submit" value="submit-sell-property" class="a-button h-bg-primary h-color-white">Envoyer</button>

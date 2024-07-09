@@ -14,78 +14,32 @@
             <section class="container-news">
                 <h2>Nouveautés</h2>
                 <div class="cards-container news-cards">
-                    <a href="#_" class="card-immo">
-                        <div class="img-container">
-                            <img src="/resources/img/photo-annonce1.jpg" alt="texte alternatif">
-                            <span class="filter-img"></span>
-                            <p class="price-property">115 500 €</p>
-                        </div>
-                        <p class="title-property">Appartement 5 pièces</p>
-                        <p class="city-property"><i class="fas fa-map-marker-alt"></i>Dijon</p>
-                        <div class="criterias-property">
-                            <div>
-                                <i class="fas fa-bed"></i>
-                                <p><strong>3</strong> chambre(s)</p>
+                    @foreach($recentProperties as $property)
+                        <a href="{{ route('detail-property', ['id' => $property->id_bienImmo]) }}" class="card-immo">
+                            <div class="img-container">
+                                <img src="{{ asset('storage/' . $property->getImages->first()->image_path) }}" alt="Image de {{ $property->titre_annonce }}">
+                                <span class="filter-img"></span>
+                                <p class="price-property">{{ number_format($property->prix, 2, ',', ' ') }} €</p>
                             </div>
-                            <div>
-                                <i class="fas fa-bath"></i>
-                                <p><strong>2</strong> salle(s) de bain</p>
+                            <p class="title-property">{{ $property->titre_annonce }}</p>
+                            <p class="city-property"><i class="fas fa-map-marker-alt"></i>{{ $property->ville }} ({{ $property->code_postal }})</p>
+                            <div class="criterias-property">
+                                <div>
+                                    <i class="fas fa-bed"></i>
+                                    <p><strong>{{ $property->nb_chambres }}</strong> chambre(s)</p>
+                                </div>
+                                <div>
+                                    <i class="fas fa-bath"></i>
+                                    <p><strong>{{ $property->nb_sdb }}</strong> salle(s) de bain</p>
+                                </div>
+                                <div>
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <p><strong>{{ $property->surface }}</strong> m2</p>
+                                </div>
                             </div>
-                            <div>
-                                <i class="fas fa-ruler-combined"></i>
-                                <p><strong>82</strong> m2</p>
-                            </div>
-                        </div>
-                        <button class="a-button h-bg-primary h-color-white">Découvrir ce bien</button>
-                    </a>
-                    <a href="{{ route('admin-account') }}" class="card-immo">
-                        <div class="img-container">
-                            <img src="/resources/img/photo-annonce2.jpg" alt="texte alternatif">
-                            <span class="filter-img"></span>
-                            <p class="price-property">130 000 €</p>
-                        </div>
-                        <p class="title-property">Appartement 2 pièces</p>
-                        <p class="city-property"><i class="fas fa-map-marker-alt"></i>Lyon</p>
-                        <div class="criterias-property">
-                            <div>
-                                <i class="fas fa-bed"></i>
-                                <p><strong>1</strong> chambre(s)</p>
-                            </div>
-                            <div>
-                                <i class="fas fa-bath"></i>
-                                <p><strong>1</strong> salle(s) de bain</p>
-                            </div>
-                            <div>
-                                <i class="fas fa-ruler-combined"></i>
-                                <p><strong>36</strong> m2</p>
-                            </div>
-                        </div>
-                        <button class="a-button h-bg-primary h-color-white">Découvrir ce bien</button>
-                    </a>
-                    <a href="{{ route('user-account') }}" class="card-immo">
-                        <div class="img-container">
-                            <img src="/resources/img/photo-annonce3.jpg" alt="texte alternatif">
-                            <span class="filter-img"></span>
-                            <p class="price-property">175 500 €</p>
-                        </div>
-                        <p class="title-property">Maison neuve à proximité de la mer</p>
-                        <p class="city-property"><i class="fas fa-map-marker-alt"></i>Toulouse</p>
-                        <div class="criterias-property">
-                            <div>
-                                <i class="fas fa-bed"></i>
-                                <p><strong>3</strong> chambres</p>
-                            </div>
-                            <div>
-                                <i class="fas fa-bath"></i>
-                                <p><strong>1</strong> salle(s) de bain</p>
-                            </div>
-                            <div>
-                                <i class="fas fa-ruler-combined"></i>
-                                <p><strong>140</strong> m2</p>
-                            </div>
-                        </div>
-                        <button class="a-button h-bg-primary h-color-white">Découvrir ce bien</button>
-                    </a>
+                            <button class="a-button h-bg-primary h-color-white">Découvrir ce bien</button>
+                        </a>
+                    @endforeach
                 </div>
                 <div class="text-center">
                     <a href="{{ route('listing-property') }}" class="a-link">Découvrir tous nos biens</a>

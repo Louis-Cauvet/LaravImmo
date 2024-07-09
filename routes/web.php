@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // Controllers
 use App\Http\Controllers\BienController;
 use App\Http\Controllers\UtilisateurController;
+use App\Http\Controllers\ViewsController;
 
 Route::middleware(['web'])->group(function () {
 
@@ -13,9 +14,7 @@ Route::middleware(['web'])->group(function () {
      **************************/
 
     // Go to the homepage
-    Route::get('/', function () {
-        return view('homepage');
-    })->name('homepage');
+    Route::get('/', [ViewsController::class, 'showHomepage'])->name('homepage');
 
     // Go to the properties' listing
     Route::get('/listing-property', function () {
@@ -23,9 +22,7 @@ Route::middleware(['web'])->group(function () {
     })->name('listing-property');
 
     // Go to the property's detail
-    Route::get('/detail-property', function () {
-        return view('detail-property');
-    })->name('detail-property');
+    Route::get('/detail-property/{id}', [ViewsController::class, 'showPropertyDetail'])->name('detail-property');
 
     // Go to the contact's page
     Route::get('/contact', function () {
@@ -65,6 +62,9 @@ Route::middleware(['web'])->group(function () {
 
     // Check the user's datas when he tried to login to his account
     Route::post('/connect-user', [UtilisateurController::class, 'connectUser'])->name('connect-user');
+
+    // Check if the user is connected to his account
+    Route::post('/check-user-connected', [UtilisateurController::class, 'checkConnectedUser'])->name('check-user-connected');
 
     // Check the property's datas when the user try to purpose a new property
     Route::post('/register-property', [BienController::class, 'registerProperty'])->name('register-property');

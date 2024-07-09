@@ -454,8 +454,8 @@ if (document.querySelector('#sale-property-form')) {
         }
 
 
-        const nb_rooms = document.getElementById('nb_rooms').value;
-        if (nb_rooms === '') {
+        const nb_rooms = parseInt(document.getElementById('nb_rooms').value, 10);
+        if (nb_rooms == '') {
             displayErrorMessage(document.getElementById('error-nb_rooms'), 'Ce champ est obligatoire.');
             hasError = true;
         } else if (nb_rooms < 0) {
@@ -464,8 +464,8 @@ if (document.querySelector('#sale-property-form')) {
         }
 
 
-        const nb_bedrooms = document.getElementById('nb_bedrooms').value;
-        if (nb_bedrooms === '') {
+        const nb_bedrooms = parseInt(document.getElementById('nb_bedrooms').value, 10);
+        if (nb_bedrooms == '') {
             displayErrorMessage(document.getElementById('error-nb_bedrooms'), 'Ce champ est obligatoire.');
             hasError = true;
         } else if (nb_bedrooms < 0) {
@@ -477,8 +477,8 @@ if (document.querySelector('#sale-property-form')) {
         }
 
 
-        const nb_bathrooms = document.getElementById('nb_bathrooms').value;
-        if (nb_bathrooms === '') {
+        const nb_bathrooms = parseInt(document.getElementById('nb_bathrooms').value, 10);
+        if (nb_bathrooms == '') {
             displayErrorMessage(document.getElementById('error-nb_bathrooms'), 'Ce champ est obligatoire.');
             hasError = true;
         } else if (nb_bathrooms < 0) {
@@ -491,7 +491,20 @@ if (document.querySelector('#sale-property-form')) {
 
 
         if (!hasError) {
-            event.target.submit();
+            csrfFetch('/check-user-connected' ,{
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.isConnected === true) {
+                    event.target.submit();
+                } else {
+                    displayErrorMessage(document.getElementById('error-check-user-connected'), 'Connectez-vous à votre compte pour pouvoir nous soumettre un bien à vendre ou à louer !');
+                }
+            })
+            .catch(error => {
+                console.error('Une erreur est survenue durant la vérification de la connexion de l\'utilisateur :', error);
+            });
         }
-    })
+    });
 }

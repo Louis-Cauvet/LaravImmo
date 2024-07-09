@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('adresse');
             $table->string('ville');
             $table->string('code_postal', 10);
-            $table->decimal('surface', 8, 2);
+            $table->integer('surface');
             $table->integer('nb_pieces');
             $table->integer('nb_chambres');
             $table->integer('nb_sdb');

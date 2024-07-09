@@ -89,12 +89,24 @@ class UtilisateurController extends Controller
                 'role' => $user->getUserRole->intitule_role,
             ];
 
-            return redirect()->route('homepage');
+            return redirect()->back();
         }
 
         // If fail login
         return redirect()->back()->withErrors([
             'error' => 'Adresse mail ou mot de passe invalide.',
+        ]);
+    }
+
+
+    public function checkConnectedUser(Request $request)
+    {
+        session_start();
+
+        $isConnected = isset($_SESSION['user']) && !empty($_SESSION['user']);
+
+        return response()->json([
+            'isConnected' => $isConnected
         ]);
     }
 
@@ -108,4 +120,6 @@ class UtilisateurController extends Controller
             ? redirect()->back()
             : redirect('/');
     }
+
+
 }

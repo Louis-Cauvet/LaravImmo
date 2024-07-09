@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class BienImmoSeeder extends Seeder
 {
@@ -311,12 +312,16 @@ class BienImmoSeeder extends Seeder
                 'garage' => $bien['garage'],
                 'terrain' => $bien['terrain'],
                 'disponible' => $bien['disponible'],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]);
 
             foreach ($bien['images'] as $image) {
                 DB::table('Images')->insert([
                     'id_bien' => $id_bien,
-                    'image_path' => 'photos/' .$image
+                    'image_path' => 'photos/' .$image,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
                 ]);
             }
         }

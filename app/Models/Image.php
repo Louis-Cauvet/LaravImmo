@@ -17,6 +17,6 @@ class Image extends Model
 
     // Get the property lied to each image
     public function getBienImmo() {
-        return $this->belongsTo(BienImmo::class, 'id_bien');
+        return $this->belongsTo(BienImmo::class, 'id_bien', 'id_bienImmo');
     }
 }

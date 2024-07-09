@@ -16,7 +16,6 @@ class BienController extends Controller
 
     // Check the property's data before register it in te database
     public function registerProperty(Request $request) {
-
         $validateData = $request->validate([
             'property-status' => 'required|in:A vendre,A louer',
             'property-type' => 'required|in:maison,appartement,terrain',

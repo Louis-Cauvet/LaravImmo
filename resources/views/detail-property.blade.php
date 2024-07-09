@@ -9,11 +9,11 @@
 @section('content')
     <main>
         <div class="inner-page property-presentation">
-            <h1>Superbe appartement 5 pièces en plein centre ville</h1>
+            <h1>{{ $propertyDetails->titre_annonce }}</h1>
             <div class="presentation-header">
                 <div>
-                    <p class="h-color-secondary h-fz-22 h-fw-bold">150 000 €</p>
-                    <p class="h-fz-18 h-color-primary">69003 Lyon</p>
+                    <p class="h-color-secondary h-fz-22 h-fw-bold">{{ number_format($propertyDetails->prix, 2, ',', ' ') }} €</p>
+                    <p class="h-fz-18 h-color-primary">{{ $propertyDetails->code_postal }} {{ $propertyDetails->ville }}</p>
                 </div>
                 <button class="a-button h-bg-primary" title="Ajouter aux favoris">
                     <i class="fa-solid fa-heart"></i>
@@ -24,25 +24,25 @@
                 <div class="carrousel-current-img">
                     <i class="slider-arrow arrow-left fa-solid fa-angle-left"></i>
                     <div class="slider">
-                        @for ($i = 0; $i <= 3; $i++)
+                        @foreach ($propertyDetails->images as $index => $image)
                             <article>
                                 <div class="img-container">
-                                    <img src="/resources/img/photo-annonce3.jpg" alt="texte alternatif">
+                                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="Image du bien n°{{ $index + 1 }}">
                                 </div>
                             </article>
-                        @endfor
+                        @endforeach
                     </div>
                     <i class="slider-arrow arrow-right fa-solid fa-angle-right"></i>
                 </div>
                 <ul class="slider-tags">
-                    @for ($i = 0; $i <= 3; $i++)
-                        <li data-position="{{$i}}" @if ($i == 0) class="active" @endif>
+                    @foreach ($propertyDetails->images as $index => $image)
+                        <li data-position="{{ $index }}" @if ($index == 0)  class="active" @endif>
                             <div class="img-container">
-                                <img src="/resources/img/photo-annonce3.jpg" alt="texte alternatif">
+                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="Tag de l'image n°{{ $index + 1 }}">
                                 <i class="fa-solid fa-check"></i>
                             </div>
                         </li>
-                    @endfor
+                    @endforeach
                 </ul>
             </section>
 
@@ -50,65 +50,46 @@
                 <ul>
                     <li>
                         <i class="fa-solid fa-handshake"></i>
-                        <p>A vendre</p>
+                        <p>{{ $propertyDetails->achat ? 'A vendre' : 'A louer' }}</p>
                     </li>
                     <li>
                         <i class="fa-solid fa-building"></i>
-                        <p>Appartement</p>
+                        <p>{{ $propertyDetails->typeBien->nom }}</p>
                     </li>
                     <li>
                         <i class="fa-solid fa-ruler-combined"></i>
-                        <p>80m<sup>2</sup></p>
+                        <p>{{ $propertyDetails->surface }} m<sup>2</sup></p>
                     </li>
                     <li>
                         <i class="fa-solid fa-puzzle-piece"></i>
-                        <p>5 pièces</p>
+                        <p>{{ $propertyDetails->nb_pieces }} pièces</p>
                     </li>
                     <li>
                         <i class="fa-solid fa-bed"></i>
-                        <p>1 chambre</p>
+                        <p>{{ $propertyDetails->nb_chambres }} chambre(s)</p>
                     </li>
                     <li>
                         <i class="fa-solid fa-bath"></i>
-                        <p>2 salles de bains</p>
+                        <p>{{ $propertyDetails->nb_sdb }} salle(s) de bain</p>
                     </li>
                     <li>
                         <i class="fa-solid fa-warehouse"></i>
-                        <p>Garage</p>
+                        <p>{{ $propertyDetails->garage ? 'Garage' : 'Pas de garage' }}</p>
                     </li>
                     <li>
                         <i class="fa-solid fa-leaf"></i>
-                        <p>Terrain</p>
+                        <p>{{ $propertyDetails->terrain ? 'Terrain' : 'Pas de terrain' }}</p>
                     </li>
                     <li>
                         <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        <p>Neuf</p>
+                        <p>{{ $propertyDetails->neuf ? 'Neuf' : 'Ancien' }}</p>
                     </li>
                 </ul>
             </section>
 
             <section class="property-description">
                 <div class="left">
-                    <p>En poussant la porte de cet appartement, vous serez immédiatement séduit par son charme et son élégance.
-                        Situé dans l'un des quartiers les plus recherchés de la ville, il bénéficie d'une situation idéale,
-                        à proximité de toutes les commodités : commerces, écoles, transports en commun, et espaces verts.
-                        <br><br>
-                        Le salon, baigné de lumière naturelle, offre un espace de vie convivial et chaleureux, parfait
-                        pour recevoir des amis ou passer des moments en famille. La cuisine, entièrement équipée avec des
-                        appareils modernes, vous permettra de préparer de délicieux repas en toute simplicité.
-                        <br><br>
-                        Les trois chambres, toutes dotées de grands placards intégrés, offrent un espace de repos
-                        confortable et serein. Les deux salles de bains, avec des finitions de qualité, ajoutent une
-                        touche de luxe à cet appartement.
-                        <br><br>
-                        L'appartement est situé dans une résidence bien entretenue avec un jardin commun et un service
-                        de conciergerie. Le quartier est vivant et dynamique, avec de nombreux cafés, restaurants et
-                        boutiques à quelques pas. Les transports en commun à proximité facilitent l'accès au centre-ville
-                        et aux principaux axes routiers.
-                        <br><br>
-                        Ne manquez pas cette opportunité unique d'acquérir un appartement de standing dans un cadre de
-                        vie idéal. Pour plus d'informations ou pour organiser une visite, n'hésitez pas à nous contacter.
-                    </p>
+                    <p>{{ $propertyDetails->contenu_annonce }}</p>
                     <div>
                         <h2 class="text-center">Intéréssé ? Laissez-nous vos coordonnées</h2>
                         <div class="contact-form">

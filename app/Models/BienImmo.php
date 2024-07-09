@@ -22,7 +22,7 @@ class BienImmo extends Model
     // Get all the images lied to a property
     public function getImages()
     {
-        return $this->hasMany(Image::class, 'id_bien');
+        return $this->hasMany(Image::class, 'id_bien', 'id_bienImmo');
     }
 
     // Get the property's type
