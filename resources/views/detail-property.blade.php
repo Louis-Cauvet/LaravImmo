@@ -1,5 +1,6 @@
 @php
-    session_start();
+
+    // The session is started in the viewsController
 
     if (isset($_SESSION['user'])) {
       $user = $_SESSION['user'];
@@ -19,7 +20,7 @@
                     <p class="h-color-secondary h-fz-22 h-fw-bold">{{ number_format($propertyDetails->prix, 2, ',', ' ') }} €</p>
                     <p class="h-fz-18 h-color-primary">{{ $propertyDetails->code_postal }} {{ $propertyDetails->ville }}</p>
                 </div>
-                <button id="add-to-favorite" class="a-button h-bg-primary" title="Ajouter aux favoris" data-id-bien="{{ $propertyDetails->id_bienImmo }}">
+                <button id="add-to-favorite" class="a-button h-bg-primary @if($isFavorited) as--favorite" title="Retirer des favoris" @else title="Ajouter aux favoris" @endif data-id-bien="{{ $propertyDetails->id_bienImmo }}">
                     <i class="fa-solid fa-heart"></i>
                 </button>
 

@@ -240,21 +240,42 @@ addToFavoriteButton.addEventListener("click", () => {
     .then(data => {
         if (data.isConnected === true) {
 
-            csrfFetch('/add-favorite', {
-                method: 'POST',
-                body: JSON.stringify({ id_bienImmo: id_bienImmo })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.registeredFavorite === true) {
-                    alert(data.message);
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Une erreur est survenue durant l\'ajout du bien en favoris', error);
-            });
+            if (addToFavoriteButton.classList.contains('as--favorite')) {
+                csrfFetch('/remove-favorite', {
+                    method: 'POST',
+                    body: JSON.stringify({ id_bienImmo: id_bienImmo })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.removedFavorite === true) {
+                        addToFavoriteButton.classList.remove('as--favorite');
+                        addToFavoriteButton.title = "Ajouter aux favoris";
+                        alert(data.message);
+                    }  else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Une erreur est survenue durant le retrait du bien en favoris', error);
+                })
+            } else {
+                csrfFetch('/add-favorite', {
+                    method: 'POST',
+                    body: JSON.stringify({ id_bienImmo: id_bienImmo })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.registeredFavorite === true) {
+                        addToFavoriteButton.classList.add('as--favorite');
+                        addToFavoriteButton.title = "Retirer des favoris";
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Une erreur est survenue durant l\'ajout du bien en favoris', error);
+                });
+            }
+
 
         } else {
             displayErrorMessage(document.getElementById('error-check-user-connected'), 'Connectez-vous à votre compte pour pouvoir ajouter des biens en favoris !');

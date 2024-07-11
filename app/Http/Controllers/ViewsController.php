@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BienImmo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ViewsController extends Controller
 {
@@ -16,7 +17,17 @@ class ViewsController extends Controller
     // Get the detail of the properties which have his id in the url before go to the property's detail page
     public function showPropertyDetail($id)
     {
+        session_start();
+
         $propertyDetails = BienImmo::with(['getTypeBien','getImages'])->findOrFail($id);
-        return view('detail-property', compact('propertyDetails'));
+
+        $isFavorited = false;
+        if(isset($_SESSION['user'])) {
+            $id_client = $_SESSION['user']['id'];
+            $isFavorited = DB::table('favoris')->where('id_client', $id_client)->where('id_bienImmo', $id)->exists();
+        }
+
+        return view('detail-property', compact('propertyDetails', 'isFavorited'));
+
     }
 }

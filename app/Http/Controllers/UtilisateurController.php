@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class UtilisateurController extends Controller
 {
@@ -107,11 +108,27 @@ class UtilisateurController extends Controller
         Favori::create([
             'id_client' => $_SESSION['user']['id'],
             'id_bienImmo' => $request->input('id_bienImmo'),
-            'date_ajout' => now(),
+            'date_ajout' => now()->format('Y-m-d'),
         ]);
 
 
         return response()->json(['registeredFavorite' => true, 'message' => 'Ce bien à été ajouté à vos favoris ! Retrouvez-les tous depuis votre compte.']);
+    }
+
+    // Remove a property from favorites
+    public function removeFavorite(Request $request){
+        session_start();
+
+        if (!isset($_SESSION['user'])) {
+            return response()->json(['removedFavorite' => false, 'message' => 'Aucun utilisateur n\'est connecté !']);
+        }
+
+        $id_client = $_SESSION['user']['id'];
+        $id_bienImmo = $request->input('id_bienImmo');
+
+        DB::table('favoris')->where('id_client', $id_client)->where('id_bienImmo', $id_bienImmo)->delete();
+
+        return response()->json(['removedFavorite' => true, 'message' => 'Ce bien à été retiré de vos favoris !']);
     }
 
     // Send a contact request

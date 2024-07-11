@@ -82,4 +82,7 @@ Route::middleware(['web'])->group(function () {
 
     // Add a property as user's favorite
     Route::post('/add-favorite', [UtilisateurController::class, 'addFavorite'])->name('add-favorite');
+
+    // Remove a property from user's favorite
+    Route::post('/remove-favorite', [UtilisateurController::class, 'removeFavorite'])->name('remove-favorite');
 });

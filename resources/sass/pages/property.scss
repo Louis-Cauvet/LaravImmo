@@ -21,6 +21,11 @@
             line-height: 1;
             color: $color-background;
             height: fit-content;
+
+            &.as--favorite {
+                background-color: $color-background-secondary;
+                color: red;
+            }
         }
     }
 

@@ -932,6 +932,10 @@ header .burger-menu .burger-body:after {
   height: -moz-fit-content;
   height: fit-content;
 }
+.property-presentation .presentation-header .a-button.as--favorite {
+  background-color: #faf8f8;
+  color: red;
+}
 .property-presentation .property-carrousel {
   padding-bottom: 0.5rem;
   padding-top: 1rem;
