@@ -1710,3 +1710,6 @@ header .burger-menu .burger-body:after {
     right: 1.5rem;
   }
 }
+.property-carrousel .img-container img {
+  max-height: inherit;
+}

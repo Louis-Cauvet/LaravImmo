@@ -16,7 +16,7 @@ class ViewsController extends Controller
     // Get the detail of the properties which have his id in the url before go to the property's detail page
     public function showPropertyDetail($id)
     {
-        $propertyDetails = BienImmo::with('getImages')->findOrFail($id);
+        $propertyDetails = BienImmo::with(['getTypeBien','getImages'])->findOrFail($id);
         return view('detail-property', compact('propertyDetails'));
     }
 }

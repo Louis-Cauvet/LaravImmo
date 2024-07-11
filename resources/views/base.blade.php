@@ -37,6 +37,7 @@
         @include('components/header')
         @yield('content')
         @include('components/footer')
+
         <script type = "text/javascript" src="/resources/js/app.js"></script>
     </body>
 </html>

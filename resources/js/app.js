@@ -5,10 +5,13 @@ GLOBAL VARIABLES
  *************************************/
 const token = window.Laravel.csrfToken;
 
-
 /*************************************
  CLASSIC FUNCTIONS
  *************************************/
+
+/***
+ * Change the slide in a slider
+ ***/
 function changeSlide(slider, slideNumber) {
     const percentage = -100*slideNumber;
     const spaces = 4*slideNumber;
@@ -16,6 +19,9 @@ function changeSlide(slider, slideNumber) {
     sliderCounter = slideNumber;
 }
 
+/***
+ * Display an error message in an area passed in parameters
+ ***/
 function displayErrorMessage(errorArea, message) {
     errorArea.textContent = message;
     errorArea.style.display = 'inline-block';
@@ -36,7 +42,6 @@ function csrfFetch(url, options = {}) {
     };
     return fetch(url, options);
 }
-
 
 /*************************************
  EVENTS LISTENERS

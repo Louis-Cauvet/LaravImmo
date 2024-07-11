@@ -1,5 +1,9 @@
 @php
     session_start();
+
+    if (isset($_SESSION['user'])) {
+      $user = $_SESSION['user'];
+    }
 @endphp
 
 @extends('base')
@@ -24,7 +28,7 @@
                 <div class="carrousel-current-img">
                     <i class="slider-arrow arrow-left fa-solid fa-angle-left"></i>
                     <div class="slider">
-                        @foreach ($propertyDetails->images as $index => $image)
+                        @foreach ($propertyDetails->getImages as $index => $image)
                             <article>
                                 <div class="img-container">
                                     <img src="{{ asset('storage/' . $image->image_path) }}" alt="Image du bien n°{{ $index + 1 }}">
@@ -35,7 +39,7 @@
                     <i class="slider-arrow arrow-right fa-solid fa-angle-right"></i>
                 </div>
                 <ul class="slider-tags">
-                    @foreach ($propertyDetails->images as $index => $image)
+                    @foreach ($propertyDetails->getImages as $index => $image)
                         <li data-position="{{ $index }}" @if ($index == 0)  class="active" @endif>
                             <div class="img-container">
                                 <img src="{{ asset('storage/' . $image->image_path) }}" alt="Tag de l'image n°{{ $index + 1 }}">
@@ -52,38 +56,60 @@
                         <i class="fa-solid fa-handshake"></i>
                         <p>{{ $propertyDetails->achat ? 'A vendre' : 'A louer' }}</p>
                     </li>
+
                     <li>
-                        <i class="fa-solid fa-building"></i>
-                        <p>{{ $propertyDetails->typeBien->nom }}</p>
+                        @if ($propertyDetails->getTypeBien->intitule_type == 'maison')
+                            <i class="fa-solid fa-house"></i>
+                            <p>Maison</p>
+                        @elseif ($propertyDetails->getTypeBien->intitule_type == 'appartement')
+                            <i class="fa-solid fa-building"></i>
+                            <p>Appartement</p>
+                        @elseif ($propertyDetails->getTypeBien->intitule_type == 'terrain')
+                            <i class="fa-solid fa-leaf"></i>
+                            <p>Terrain</p>
+                        @endif
                     </li>
+
                     <li>
                         <i class="fa-solid fa-ruler-combined"></i>
                         <p>{{ $propertyDetails->surface }} m<sup>2</sup></p>
                     </li>
-                    <li>
-                        <i class="fa-solid fa-puzzle-piece"></i>
-                        <p>{{ $propertyDetails->nb_pieces }} pièces</p>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-bed"></i>
-                        <p>{{ $propertyDetails->nb_chambres }} chambre(s)</p>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-bath"></i>
-                        <p>{{ $propertyDetails->nb_sdb }} salle(s) de bain</p>
-                    </li>
+                    @if ($propertyDetails->getTypeBien->intitule_type != 'terrain')
+                        <li>
+                            <i class="fa-solid fa-puzzle-piece"></i>
+                            <p>{{ $propertyDetails->nb_pieces }} pièces</p>
+                        </li>
+                    @endif
+                    @if ($propertyDetails->getTypeBien->intitule_type != 'terrain')
+                        <li>
+                            <i class="fa-solid fa-bed"></i>
+                            <p>{{ $propertyDetails->nb_chambres }} chambre(s)</p>
+                        </li>
+                    @endif
+                    @if ($propertyDetails->getTypeBien->intitule_type != 'terrain')
+                        <li>
+                            <i class="fa-solid fa-bath"></i>
+                            <p>{{ $propertyDetails->nb_sdb }} salle(s) de bain</p>
+                        </li>
+                    @endif
+                    @if ($propertyDetails->garage == 1 && $propertyDetails->getTypeBien->intitule_type != 'terrain')
                     <li>
                         <i class="fa-solid fa-warehouse"></i>
-                        <p>{{ $propertyDetails->garage ? 'Garage' : 'Pas de garage' }}</p>
+                        <p>Avec garage</p>
                     </li>
-                    <li>
-                        <i class="fa-solid fa-leaf"></i>
-                        <p>{{ $propertyDetails->terrain ? 'Terrain' : 'Pas de terrain' }}</p>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        <p>{{ $propertyDetails->neuf ? 'Neuf' : 'Ancien' }}</p>
-                    </li>
+                    @endif
+                    @if ($propertyDetails->terrain == 1 && $propertyDetails->getTypeBien->intitule_type != 'terrain')
+                        <li>
+                            <i class="fa-solid fa-leaf"></i>
+                            <p>Avec terrain</p>
+                        </li>
+                    @endif
+                    @if ($propertyDetails->neuf == 1 && $propertyDetails->getTypeBien->intitule_type != 'terrain')
+                        <li>
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <p>Neuf</p>
+                        </li>
+                    @endif
                 </ul>
             </section>
 
@@ -95,23 +121,23 @@
                         <div class="contact-form">
                             <form action="#_" method="POST">
                                 <div>
-                                    <label for="lastname">Nom <span class="required-indicator">*</span></label>
-                                    <input type="text" id="lastname" name="lastname"  required>
+                                    <label for="contact-lastname">Nom <span class="required-indicator">*</span></label>
+                                    <input type="text" id="contact-lastname" name="contact-lastname" @if (isset($user)) value="{{ $user['prenom'] }}" @endif required>
                                 </div>
 
                                 <div>
-                                    <label for="lastname">Prénom <span class="required-indicator">*</span></label>
-                                    <input type="text" id="firstname" name="firstname" required>
+                                    <label for="contact-firstname">Prénom <span class="required-indicator">*</span></label>
+                                    <input type="text" id="contact-firstname" name="contact-firstname" @if (isset($user)) value="{{ $user['nom'] }}" @endif required>
                                 </div>
 
                                 <div>
-                                    <label for="mail">Email <span class="required-indicator">*</span></label>
-                                    <input type="email" id="mail" name="mail" required>
+                                    <label for="contact-mail">Email <span class="required-indicator">*</span></label>
+                                    <input type="email" id="contact-mail" name="contact-mail" @if (isset($user)) value="{{ $user['email'] }}" @endif  required>
                                 </div>
 
                                 <div>
-                                    <label for="phonenum">Numéro de téléphone <span class="required-indicator">*</span></label>
-                                    <input type="tel" id="phonenum" name="phonenum" required>
+                                    <label for="contact-phonenum">Numéro de téléphone <span class="required-indicator">*</span></label>
+                                    <input type="tel" id="contact-phonenum" name="contact-phonenum" @if (isset($user)) value="{{ $user['telephone'] }}" @endif required>
                                 </div>
 
                                 <button type="submit" value="submit-search" class="a-button h-bg-primary h-color-white">Envoyer</button>
@@ -121,9 +147,7 @@
                 </div>
                 <div class="right">
                     <h2>Localisation du bien</h2>
-                    <div class="property-map">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2783.7033194786063!2d4.845115975776697!3d45.75709341384933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f4ea5db0cd7601%3A0x93b6e1cf49ab2e44!2s24%20Rue%20Edison%2C%2069003%20Lyon!5e0!3m2!1sfr!2sfr!4v1717349154790!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
+                    <div id="property-map" class="property-map"></div>
                 </div>
             </section>
             <div class="text-center">
@@ -131,4 +155,40 @@
             </div>
         </div>
     </main>
+
+    <script>
+        "use strict";
+
+        function initMap() {
+            const geocoder = new google.maps.Geocoder();
+            const address = "{{ $propertyDetails->adresse }}, {{ $propertyDetails->ville }}";
+
+            geocoder.geocode({ address: address }, function(results, status) {
+                if (status === 'OK') {
+                    const map = new google.maps.Map(document.getElementById('property-map'), {
+                        zoom: 15,
+                        center: results[0].geometry.location
+                    });
+
+                    new google.maps.Marker({
+                        position: results[0].geometry.location,
+                        map: map
+                    });
+                } else {
+                    alert('La géolocation du bien n\'a pas fonctionné pour la raison suivante : ' + status);
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof initMap === 'function') {
+                initMap();
+            }
+        });
+
+        window.initMap = initMap;
+    </script>
+
+    <!-- Call to Google Maps' API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9oWKFb7BKbmCZs6wrUB3nNrAut3OctE"></script>
 @endsection

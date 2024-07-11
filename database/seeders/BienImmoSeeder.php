@@ -31,7 +31,7 @@ class BienImmoSeeder extends Seeder
                                       la tranquillité tout en étant proche de toutes les commodités. Ne manquez pas cette
                                       opportunité de vivre dans un cadre de vie agréable et paisible.',
                 'prix' => 350000.00,
-                'adresse' => '23 Rue des Fleurs',
+                'adresse' => '23 Rue de Clichy',
                 'ville' => 'Paris',
                 'code_postal' => '75000',
                 'surface' => 120,
@@ -66,7 +66,7 @@ class BienImmoSeeder extends Seeder
                                       disponible. Avec ses finitions modernes et son emplacement de choix, cet appartement
                                       représente une opportunité rare à ne pas manquer.',
                 'prix' => 970.00,
-                'adresse' => '45 Boulevard Haussmann',
+                'adresse' => '6 Rue d\'Abdeville',
                 'ville' => 'Paris',
                 'code_postal' => '75000',
                 'surface' => 80,
@@ -101,9 +101,9 @@ class BienImmoSeeder extends Seeder
                                       stratégique, il est parfaitement adapté pour réaliser un projet de qualité. Ne
                                       manquez pas cette chance de développer un projet immobilier dans une région prisée.',
                 'prix' => 150000.00,
-                'adresse' => 'Route de la Forêt',
+                'adresse' => '62 Rue Jean Sarrazin',
                 'ville' => 'Lyon',
-                'code_postal' => '69001',
+                'code_postal' => '69008',
                 'surface' => 2000,
                 'nb_pieces' => 0,
                 'nb_chambres' => 0,
@@ -130,7 +130,7 @@ class BienImmoSeeder extends Seeder
                                       un véritable havre de paix, idéal pour les familles en quête de confort et de
                                       tranquillité.',
                 'prix' => 750000.00,
-                'adresse' => '12 Avenue des Océans',
+                'adresse' => '11 Bd Franck Pilatte',
                 'ville' => 'Nice',
                 'code_postal' => '06000',
                 'surface' => 180,
@@ -189,7 +189,7 @@ class BienImmoSeeder extends Seeder
                                       privilégiée à seulement 30 minutes de la ville en fait un endroit idéal pour se
                                       détendre tout en étant proche des commodités urbaines.',
                 'prix' => 200000.00,
-                'adresse' => 'Chemin du Lac',
+                'adresse' => '20 Chem. de la Puya',
                 'ville' => 'Annecy',
                 'code_postal' => '74000',
                 'surface' => 1500,
@@ -218,7 +218,7 @@ class BienImmoSeeder extends Seeder
                                       paysager avec une terrasse et une piscine ajoute au confort et à la détente. Le
                                       garage peut accueillir deux véhicules et un espace de rangement est également disponible.',
                 'prix' => 950000.00,
-                'adresse' => '17 Route des Pré',
+                'adresse' => '31 Rue des Ecayennes',
                 'ville' => 'Dijon',
                 'code_postal' => '21000',
                 'surface' => 200,
@@ -248,7 +248,7 @@ class BienImmoSeeder extends Seeder
                                       et aux services. Ne manquez pas cette opportunité de posséder un bien avec un
                                       potentiel significatif pour vos projets agricoles.',
                 'prix' => 1500.00,
-                'adresse' => 'Route de la Campagne',
+                'adresse' => '5 Rue Maury',
                 'ville' => 'Toulouse',
                 'code_postal' => '31000',
                 'surface' => 3000,
@@ -275,7 +275,7 @@ class BienImmoSeeder extends Seeder
                                       Le bâtiment est bien entretenu et dispose d\'un ascenseur. Ce bien est parfait pour
                                       ceux qui recherchent le confort et le style dans un emplacement central.',
                 'prix' => 850.00,
-                'adresse' => '21 Rue du Commerce',
+                'adresse' => '13 Rue Toussaint-Féron',
                 'ville' => 'Paris',
                 'code_postal' => '75000',
                 'surface' => 65,
