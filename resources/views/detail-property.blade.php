@@ -19,10 +19,12 @@
                     <p class="h-color-secondary h-fz-22 h-fw-bold">{{ number_format($propertyDetails->prix, 2, ',', ' ') }} €</p>
                     <p class="h-fz-18 h-color-primary">{{ $propertyDetails->code_postal }} {{ $propertyDetails->ville }}</p>
                 </div>
-                <button class="a-button h-bg-primary" title="Ajouter aux favoris">
+                <button id="add-to-favorite" class="a-button h-bg-primary" title="Ajouter aux favoris" data-id-bien="{{ $propertyDetails->id_bienImmo }}">
                     <i class="fa-solid fa-heart"></i>
                 </button>
+
             </div>
+            <div id="error-check-user-connected"></div>
 
             <section class="property-carrousel">
                 <div class="carrousel-current-img">

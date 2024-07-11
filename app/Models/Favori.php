@@ -5,23 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DemandeContact extends Model
+class Favori extends Model
 {
     use HasFactory;
 
-    protected $table = 'Demandes_contact';
-
-    protected $primaryKey = 'id_demande';
-
     protected $fillable = [
-        'nom_demandeur',
-        'prenom_demandeur',
-        'mail_demandeur',
-        'contenu_demande',
+        'id_client',
         'id_bienImmo',
+        'date_ajout',
     ];
 
-    // Get the property linked to the contact request
+    // Get the user linked to the favorite
+    public function getUtilisateur()
+    {
+        return $this->belongsTo(Utilisateur::class, 'id_client');
+    }
+
+    // Get the property linked to the favorite
     public function getBienImmo()
     {
         return $this->belongsTo(BienImmo::class, 'id_bienImmo');

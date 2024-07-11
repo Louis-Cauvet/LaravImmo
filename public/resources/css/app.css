@@ -1011,6 +1011,10 @@ header .burger-menu .burger-body:after {
   transform: translateX(-50%) translateY(-50%);
   z-index: 2;
 }
+.property-presentation #error-check-user-connected {
+  display: block !important;
+  text-align: right;
+}
 .property-presentation .property-criterias {
   border-top: 2px solid #8E8E8E;
   border-bottom: 2px solid #8E8E8E;

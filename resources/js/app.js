@@ -226,6 +226,46 @@ openNotificationTextarea.forEach((openTextarea) => {
     });
 });
 
+
+/***
+ * Add the property in user's favorites
+ ***/
+const addToFavoriteButton = document.getElementById('add-to-favorite');
+const id_bienImmo = addToFavoriteButton.getAttribute('data-id-bien');
+addToFavoriteButton.addEventListener("click", () => {
+    csrfFetch('/check-user-connected' ,{
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.isConnected === true) {
+
+            csrfFetch('/add-favorite', {
+                method: 'POST',
+                body: JSON.stringify({ id_bienImmo: id_bienImmo })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.registeredFavorite === true) {
+                    alert(data.message);
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Une erreur est survenue durant l\'ajout du bien en favoris', error);
+            });
+
+        } else {
+            displayErrorMessage(document.getElementById('error-check-user-connected'), 'Connectez-vous à votre compte pour pouvoir ajouter des biens en favoris !');
+        }
+    })
+    .catch(error => {
+        console.error('Une erreur est survenue durant la vérification de la connexion de l\'utilisateur :', error);
+    });
+});
+
+
 /*************************************
  FORM SUBMISSIONS
  *************************************/

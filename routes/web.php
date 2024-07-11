@@ -74,4 +74,12 @@ Route::middleware(['web'])->group(function () {
 
     // Get the form submission of contact request
     Route::post('/send-contact-request', [UtilisateurController::class, 'sendContactRequest'])->name('send-contact-request');
+
+
+    /*************************
+     * OTHER ACTIONS
+     *************************/
+
+    // Add a property as user's favorite
+    Route::post('/add-favorite', [UtilisateurController::class, 'addFavorite'])->name('add-favorite');
 });

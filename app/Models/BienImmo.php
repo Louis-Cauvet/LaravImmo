@@ -19,7 +19,7 @@ class BienImmo extends Model
     ];
 
 
-    // Get all the images lied to a property
+    // Get all the images linked to a property
     public function getImages()
     {
         return $this->hasMany(Image::class, 'id_bien', 'id_bienImmo');

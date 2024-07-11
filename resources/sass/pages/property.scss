@@ -115,6 +115,11 @@
         }
     }
 
+    #error-check-user-connected {
+        display: block !important;
+        text-align: right;
+    }
+
     .property-criterias {
         border-top: 2px solid $color-grey;
         border-bottom: 2px solid $color-grey;
@@ -232,5 +237,4 @@
             }
         }
     }
-
 }

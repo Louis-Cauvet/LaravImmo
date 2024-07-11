@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DemandeContact;
 use App\Models\Utilisateur;
+use App\Models\Favori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -97,6 +98,20 @@ class UtilisateurController extends Controller
         return redirect()->back()->withErrors([
             'error' => 'Adresse mail ou mot de passe invalide.',
         ]);
+    }
+
+    // Add a property in favorites
+    public function addFavorite(Request $request){
+        session_start();
+
+        Favori::create([
+            'id_client' => $_SESSION['user']['id'],
+            'id_bienImmo' => $request->input('id_bienImmo'),
+            'date_ajout' => now(),
+        ]);
+
+
+        return response()->json(['registeredFavorite' => true, 'message' => 'Ce bien à été ajouté à vos favoris ! Retrouvez-les tous depuis votre compte.']);
     }
 
     // Send a contact request
