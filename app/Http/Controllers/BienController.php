@@ -9,9 +9,58 @@ use Illuminate\Support\Facades\Session;
 
 class BienController extends Controller
 {
-    public function search(Request $request)
+    // Get the properties which corresponds to all the user's criterias
+    public function searchProperties(Request $request)
     {
-        return redirect()->route('listing-property');
+        $query = BienImmo::query()->where('disponible', 1);
+
+        $query->join('types_biens', 'biens_immo.typeBien_id', '=', 'types_biens.id_typeBien');
+
+        // Property's status filter
+        if (!is_null($request['property-status'])) {
+            $isAchat = $request->input('property-status') === 'acheter' ? 1 : 0;
+
+            $query->where('achat', $isAchat);
+        }
+
+        // Property's type filter
+        if (!is_null($request['property-type'])) {
+            $query->where('types_biens.intitule_type', $request->input('property-type'));
+        }
+
+        // Property's keywords filter
+        if (!is_null($request['property-keywords'])) {
+            $keywords = $request->input('property-keywords');
+            $query->where(function ($q) use ($keywords) {
+                $q->where('titre_annonce', 'like', "%$keywords%")
+                    ->orWhere('contenu_annonce', 'like', "%$keywords%");
+            });
+        }
+
+        // Property's city filter
+        if (!is_null($request['property-city'])) {
+            $query->where('ville', 'like', "%".$request->input('property-city')."%");
+        }
+
+        // Property's budget filters
+        if (!is_null($request['property-min-price'])) {
+            $query->where('prix', '>=', $request->input('property-min-price'));
+        }
+        if (!is_null($request['property-max-price'])) {
+            $query->where('prix', '<=', $request->input('property-max-price'));
+        }
+
+        $properties = $query->get();
+
+        return view('listing-property', compact('properties', 'request'));
+    }
+
+    // Get all the properties for display them in the listing page
+    public function showAllProperties()
+    {
+        $properties = BienImmo::where('disponible', 1)->get();
+
+        return view('listing-property', compact('properties'));
     }
 
     // Check the property's data before register it in te database

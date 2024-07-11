@@ -17,9 +17,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('/', [ViewsController::class, 'showHomepage'])->name('homepage');
 
     // Go to the properties' listing
-    Route::get('/listing-property', function () {
-        return view('listing-property');
-    })->name('listing-property');
+    Route::get('/listing-property', [BienController::class, 'showAllProperties'])->name('listing-property');
 
     // Go to the property's detail
     Route::get('/detail-property/{id}', [ViewsController::class, 'showPropertyDetail'])->name('detail-property');
@@ -70,7 +68,7 @@ Route::middleware(['web'])->group(function () {
     Route::post('/register-property', [BienController::class, 'registerProperty'])->name('register-property');
 
     // Get the form submission of properties' search
-    Route::post('/search-property', [BienController::class, 'search'])->name('search-property');
+    Route::post('/search-properties', [BienController::class, 'searchProperties'])->name('search-properties');
 
     // Get the form submission of contact request
     Route::post('/send-contact-request', [UtilisateurController::class, 'sendContactRequest'])->name('send-contact-request');

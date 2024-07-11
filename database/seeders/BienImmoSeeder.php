@@ -30,7 +30,7 @@ class BienImmoSeeder extends Seeder
                                       des transports en commun, cette maison est parfaite pour une famille recherchant
                                       la tranquillité tout en étant proche de toutes les commodités. Ne manquez pas cette
                                       opportunité de vivre dans un cadre de vie agréable et paisible.',
-                'prix' => 350000.00,
+                'prix' => 1400.00,
                 'adresse' => '23 Rue de Clichy',
                 'ville' => 'Paris',
                 'code_postal' => '75000',
@@ -38,7 +38,7 @@ class BienImmoSeeder extends Seeder
                 'nb_pieces' => 6,
                 'nb_chambres' => 3,
                 'nb_sdb' => 1,
-                'achat' => true,
+                'achat' => false,
                 'neuf' => false,
                 'garage' => true,
                 'terrain' => true,
@@ -274,7 +274,7 @@ class BienImmoSeeder extends Seeder
                                       ou les couples, il se trouve à proximité des boutiques, cafés et transports en commun.
                                       Le bâtiment est bien entretenu et dispose d\'un ascenseur. Ce bien est parfait pour
                                       ceux qui recherchent le confort et le style dans un emplacement central.',
-                'prix' => 850.00,
+                'prix' => 215000.00,
                 'adresse' => '13 Rue Toussaint-Féron',
                 'ville' => 'Paris',
                 'code_postal' => '75000',
@@ -282,7 +282,7 @@ class BienImmoSeeder extends Seeder
                 'nb_pieces' => 3,
                 'nb_chambres' => 1,
                 'nb_sdb' => 1,
-                'achat' => false,
+                'achat' => true,
                 'neuf' => true,
                 'garage' => false,
                 'terrain' => false,
