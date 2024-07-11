@@ -513,3 +513,57 @@ if (document.querySelector('#sale-property-form')) {
         }
     });
 }
+
+
+/***
+ * Contact form
+ ***/
+document.querySelector('#contact-form').addEventListener('submit', function(event) {
+
+    event.preventDefault();
+
+    document.querySelectorAll('.text-danger').forEach(function(element) {
+        element.style.display = 'none';
+        element.textContent = '';
+    });
+
+    let hasError = false;
+
+    const contactFirstname = document.getElementById('contact-firstname').value;
+    if (contactFirstname === '') {
+        displayErrorMessage(document.getElementById('error-contact-firstname'), 'Ce champ est obligatoire.');
+        hasError = true;
+    }
+
+    const contactLastname = document.getElementById('contact-lastname').value;
+    if (contactLastname === '') {
+        displayErrorMessage(document.getElementById('error-contact-lastname'), 'Ce champ est obligatoire.');
+        hasError = true;
+    }
+
+    const contactMail = document.getElementById('contact-mail').value;
+    if (contactMail === '') {
+        displayErrorMessage(document.getElementById('error-contact-mail'), 'Ce champ est obligatoire.');
+        hasError = true;
+    } else if (!/\S+@\S+\.\S+/.test(contactMail)) {
+        displayErrorMessage(document.getElementById('error-contact-mail'), 'Votre adresse doit posséder une @ et un . entourés d\'autres caractères pour être valide');
+        hasError = true;
+    }
+
+    const contactPhone = document.getElementById('contact-phonenum').value;
+    const onlyDigitPattern = /^[0-9]+$/;
+    if (contactPhone === '') {
+        displayErrorMessage(document.getElementById('error-contact-phonenum'), 'Ce champ est obligatoire.');
+        hasError = true;
+    }
+    else if (!onlyDigitPattern.test(contactPhone)) {
+        displayErrorMessage(document.getElementById('error-contact-phonenum'), 'Ce champ peut contenir uniquement des chiffres');
+        hasError = true;
+    }
+
+    // Check if the user's mail already exists with an AJAX function
+    if (!hasError) {
+        event.target.submit();
+    }
+});
+

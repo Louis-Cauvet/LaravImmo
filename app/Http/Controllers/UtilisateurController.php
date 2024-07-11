@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DemandeContact;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -98,6 +99,28 @@ class UtilisateurController extends Controller
         ]);
     }
 
+    // Send a contact request
+    public function sendContactRequest(Request $request){
+        $validatedData = $request->validate([
+            'contact-lastname' => 'required|string|max:255',
+            'contact-firstname' => 'required|string|max:255',
+            'contact-mail' => 'required|email|max:255',
+            'contact-phonenum' => 'required|string|max:20',
+            'contact-message' => 'nullable|string',
+            'id_bienImmo' => 'nullable|integer|exists:biens_immo,id_bienImmo'
+        ]);
+
+        $demandeContact = new DemandeContact();
+        $demandeContact->nom_demandeur = $validatedData['contact-lastname'];
+        $demandeContact->prenom_demandeur = $validatedData['contact-firstname'];
+        $demandeContact->mail_demandeur = $validatedData['contact-mail'];
+        $demandeContact->contenu_demande = $validatedData['contact-message'] ?? '';
+        $demandeContact->id_bienImmo = $validatedData['id_bienImmo'] ?? null;
+        $demandeContact->save();
+
+        return redirect()->back()->with('user_alert_message', 'Merci, votre demande de contact nous a bien été transmise. Nous vous répondrons sous 72 heures !');
+    }
+
 
     public function checkConnectedUser(Request $request)
     {
@@ -120,6 +143,5 @@ class UtilisateurController extends Controller
             ? redirect()->back()
             : redirect('/');
     }
-
 
 }

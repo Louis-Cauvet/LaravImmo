@@ -207,7 +207,7 @@
                 border-radius: 20px;
                 max-width: 600px;
 
-                >div {
+                >div:not(:has(textarea)) {
                     width: calc(50% - 2rem);
                     min-width: 175px;
                 }

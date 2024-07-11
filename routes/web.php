@@ -71,4 +71,7 @@ Route::middleware(['web'])->group(function () {
 
     // Get the form submission of properties' search
     Route::post('/search-property', [BienController::class, 'search'])->name('search-property');
+
+    // Get the form submission of contact request
+    Route::post('/send-contact-request', [UtilisateurController::class, 'sendContactRequest'])->name('send-contact-request');
 });

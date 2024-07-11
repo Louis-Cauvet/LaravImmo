@@ -1,5 +1,9 @@
 @php
     session_start();
+
+    if (isset($_SESSION['user'])) {
+      $user = $_SESSION['user'];
+    }
 @endphp
 
 @extends('base')
@@ -18,30 +22,36 @@
                 aider à réaliser vos ambitions immobilières.
             </p>
             <div class="contact-form">
-                <form action="#_" method="POST">
+                <form action="{{ route('send-contact-request') }}" id="contact-form" method="POST">
+                    @csrf
                     <div>
-                        <label for="lastname">Nom<span class="required-indicator">*</span></label>
-                        <input type="text" id="lastname" name="lastname"  required>
+                        <label for="contact-firstname">Prénom <span class="required-indicator">*</span></label>
+                        <input type="text" id="contact-firstname" name="contact-firstname" @if (isset($user)) value="{{  $user['prenom'] }}" @endif required>
+                        <span class="text-danger" id="error-contact-firstname"></span>
                     </div>
 
                     <div>
-                        <label for="lastname">Prénom<span class="required-indicator">*</span></label>
-                        <input type="text" id="firstname" name="firstname" required>
+                        <label for="contact-lastname">Nom de famille<span class="required-indicator">*</span></label>
+                        <input type="text" id="contact-lastname" name="contact-lastname" @if (isset($user)) value="{{ $user['nom'] }}" @endif required>
+                        <span class="text-danger" id="error-contact-lastname"></span>
                     </div>
 
                     <div>
-                        <label for="mail">Email<span class="required-indicator">*</span></label>
-                        <input type="email" id="mail" name="mail" required>
+                        <label for="contact-mail">Email <span class="required-indicator">*</span></label>
+                        <input type="email" id="contact-mail" name="contact-mail" @if (isset($user)) value="{{ $user['email'] }}" @endif  required>
+                        <span class="text-danger" id="error-contact-mail"></span>
                     </div>
 
                     <div>
-                        <label for="phonenum">Numéro de téléphone<span class="required-indicator">*</span></label>
-                        <input type="tel" id="phonenum" name="phonenum" required>
+                        <label for="contact-phonenum">Numéro de téléphone <span class="required-indicator">*</span></label>
+                        <input type="tel" id="contact-phonenum" name="contact-phonenum" @if (isset($user)) value="{{ $user['telephone'] }}" @endif required>
+                        <span class="text-danger" id="error-contact-phonenum"></span>
                     </div>
 
                     <div>
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="7"></textarea>
+                        <label for="contact-message">Message</label>
+                        <textarea id="contact-message" name="contact-message" rows="7"></textarea>
+                        <span class="text-danger" id="error-contact-message"></span>
                     </div>
 
                     <div>

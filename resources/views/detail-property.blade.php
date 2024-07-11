@@ -8,7 +8,7 @@
 
 @extends('base')
 
-@section('title', 'Titre du bien')
+@section('title', $propertyDetails->titre_annonce)
 
 @section('content')
     <main>
@@ -119,28 +119,41 @@
                     <div>
                         <h2 class="text-center">Intéréssé ? Laissez-nous vos coordonnées</h2>
                         <div class="contact-form">
-                            <form action="#_" method="POST">
+                            <form action="{{ route('send-contact-request') }}" id="contact-form" method="POST">
+                                @csrf
                                 <div>
-                                    <label for="contact-lastname">Nom <span class="required-indicator">*</span></label>
-                                    <input type="text" id="contact-lastname" name="contact-lastname" @if (isset($user)) value="{{ $user['prenom'] }}" @endif required>
+                                    <label for="contact-firstname">Prénom <span class="required-indicator">*</span></label>
+                                    <input type="text" id="contact-firstname" name="contact-firstname" @if (isset($user)) value="{{  $user['prenom'] }}" @endif required>
+                                    <span class="text-danger" id="error-contact-firstname"></span>
                                 </div>
 
                                 <div>
-                                    <label for="contact-firstname">Prénom <span class="required-indicator">*</span></label>
-                                    <input type="text" id="contact-firstname" name="contact-firstname" @if (isset($user)) value="{{ $user['nom'] }}" @endif required>
+                                    <label for="contact-lastname">Nom de famille<span class="required-indicator">*</span></label>
+                                    <input type="text" id="contact-lastname" name="contact-lastname" @if (isset($user)) value="{{ $user['nom'] }}" @endif required>
+                                    <span class="text-danger" id="error-contact-lastname"></span>
                                 </div>
 
                                 <div>
                                     <label for="contact-mail">Email <span class="required-indicator">*</span></label>
                                     <input type="email" id="contact-mail" name="contact-mail" @if (isset($user)) value="{{ $user['email'] }}" @endif  required>
+                                    <span class="text-danger" id="error-contact-mail"></span>
                                 </div>
 
                                 <div>
                                     <label for="contact-phonenum">Numéro de téléphone <span class="required-indicator">*</span></label>
                                     <input type="tel" id="contact-phonenum" name="contact-phonenum" @if (isset($user)) value="{{ $user['telephone'] }}" @endif required>
+                                    <span class="text-danger" id="error-contact-phonenum"></span>
                                 </div>
 
-                                <button type="submit" value="submit-search" class="a-button h-bg-primary h-color-white">Envoyer</button>
+                                <div>
+                                    <label for="contact-message">Message</label>
+                                    <textarea id="contact-message" name="contact-message" rows="7"></textarea>
+                                    <span class="text-danger" id="error-contact-message"></span>
+                                </div>
+
+                                <input type="hidden" name="id_bienImmo" value="{{ $propertyDetails->id_bienImmo }}">
+
+                                <button type="submit" value="submit-contact" class="a-button h-bg-primary h-color-white">Envoyer</button>
                             </form>
                         </div>
                     </div>
@@ -156,6 +169,8 @@
         </div>
     </main>
 
+
+    <!-- Script for display the property's map -->
     <script>
         "use strict";
 

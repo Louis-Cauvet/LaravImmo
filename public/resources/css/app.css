@@ -1102,7 +1102,7 @@ header .burger-menu .burger-body:after {
   border-radius: 20px;
   max-width: 600px;
 }
-.property-presentation .property-description .contact-form form > div {
+.property-presentation .property-description .contact-form form > div:not(:has(textarea)) {
   width: calc(50% - 2rem);
   min-width: 175px;
 }
