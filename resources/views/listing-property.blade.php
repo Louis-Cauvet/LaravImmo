@@ -20,7 +20,7 @@
             @if ($properties->isEmpty())
                 <p>Aucun de nos biens immobiliers ne correspond à vos critères de recherche... Essayez avec d'autres critères ou alors retentez votre chance plus tard !</p>
             @else
-                <div class="cards-container news-cards">
+                <div id="property-list" class="cards-container news-cards">
                     @foreach ($properties as $property)
                         <a href="{{ route('detail-property', $property->id_bienImmo) }}" class="card-immo">
                             <div class="img-container">
@@ -33,11 +33,11 @@
                             <div class="criterias-property">
                                 <div>
                                     <i class="fas fa-bed"></i>
-                                    <p><strong>{{ $property->nombre_chambres }}</strong> chambre(s)</p>
+                                    <p><strong>{{ $property->nb_chambres }}</strong> chambre(s)</p>
                                 </div>
                                 <div>
                                     <i class="fas fa-bath"></i>
-                                    <p><strong>{{ $property->nombre_salles_de_bain }}</strong> salle(s) de bain</p>
+                                    <p><strong>{{ $property->nb_sdb }}</strong> salle(s) de bain</p>
                                 </div>
                                 <div>
                                     <i class="fas fa-ruler-combined"></i>
@@ -48,9 +48,11 @@
                         </a>
                     @endforeach
                 </div>
-                <div class="pagination text-center">
-                    <button class="a-button h-color-dark-primary">Voir plus de biens</button>
-                </div>
+                @if ($properties->hasMorePages())
+                    <div class="pagination text-center">
+                        <button class="a-button h-color-dark-primary" id="load-more-properties" data-next-page="{{ $properties->currentPage() + 1 }}">Voir plus de biens</button>
+                    </div>
+                @endif
             @endif
         </div>
     </main>

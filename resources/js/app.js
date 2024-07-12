@@ -231,59 +231,120 @@ openNotificationTextarea.forEach((openTextarea) => {
  * Add the property in user's favorites
  ***/
 const addToFavoriteButton = document.getElementById('add-to-favorite');
-const id_bienImmo = addToFavoriteButton.getAttribute('data-id-bien');
-addToFavoriteButton.addEventListener("click", () => {
-    csrfFetch('/check-user-connected' ,{
-        method: 'POST'
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.isConnected === true) {
+if (addToFavoriteButton) {
+    const id_bienImmo = addToFavoriteButton.getAttribute('data-id-bien');
+    addToFavoriteButton.addEventListener("click", () => {
+        csrfFetch('/check-user-connected' ,{
+            method: 'POST'
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.isConnected === true) {
 
-            if (addToFavoriteButton.classList.contains('as--favorite')) {
-                csrfFetch('/remove-favorite', {
-                    method: 'POST',
-                    body: JSON.stringify({ id_bienImmo: id_bienImmo })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.removedFavorite === true) {
-                        addToFavoriteButton.classList.remove('as--favorite');
-                        addToFavoriteButton.title = "Ajouter aux favoris";
-                        alert(data.message);
-                    }  else {
-                        alert(data.message);
+                    if (addToFavoriteButton.classList.contains('as--favorite')) {
+                        csrfFetch('/remove-favorite', {
+                            method: 'POST',
+                            body: JSON.stringify({ id_bienImmo: id_bienImmo })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.removedFavorite === true) {
+                                    addToFavoriteButton.classList.remove('as--favorite');
+                                    addToFavoriteButton.title = "Ajouter aux favoris";
+                                    alert(data.message);
+                                }  else {
+                                    alert(data.message);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Une erreur est survenue durant le retrait du bien en favoris', error);
+                            })
+                    } else {
+                        csrfFetch('/add-favorite', {
+                            method: 'POST',
+                            body: JSON.stringify({ id_bienImmo: id_bienImmo })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.registeredFavorite === true) {
+                                    addToFavoriteButton.classList.add('as--favorite');
+                                    addToFavoriteButton.title = "Retirer des favoris";
+                                    alert(data.message);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Une erreur est survenue durant l\'ajout du bien en favoris', error);
+                            });
                     }
-                })
-                .catch(error => {
-                    console.error('Une erreur est survenue durant le retrait du bien en favoris', error);
-                })
-            } else {
-                csrfFetch('/add-favorite', {
-                    method: 'POST',
-                    body: JSON.stringify({ id_bienImmo: id_bienImmo })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.registeredFavorite === true) {
-                        addToFavoriteButton.classList.add('as--favorite');
-                        addToFavoriteButton.title = "Retirer des favoris";
-                        alert(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Une erreur est survenue durant l\'ajout du bien en favoris', error);
-                });
-            }
 
 
-        } else {
-            displayErrorMessage(document.getElementById('error-check-user-connected'), 'Connectez-vous à votre compte pour pouvoir ajouter des biens en favoris !');
-        }
-    })
-    .catch(error => {
-        console.error('Une erreur est survenue durant la vérification de la connexion de l\'utilisateur :', error);
+                } else {
+                    displayErrorMessage(document.getElementById('error-check-user-connected'), 'Connectez-vous à votre compte pour pouvoir ajouter des biens en favoris !');
+                }
+            })
+            .catch(error => {
+                console.error('Une erreur est survenue durant la vérification de la connexion de l\'utilisateur :', error);
+            });
     });
+}
+
+
+/***
+ * Display the properties loaded when we clicked on pagination's button
+ ***/
+const propertiesPaginationButton = document.getElementById("load-more-properties");
+propertiesPaginationButton.addEventListener('click', function () {
+    const nextPage = propertiesPaginationButton.getAttribute('data-next-page');
+
+    if (nextPage) {
+        csrfFetch('/load-more-properties', {
+            method: 'POST',
+            body: JSON.stringify({ page: nextPage })
+        })
+            .then(response => response.json())
+            .then(data => {
+                const propertyList = document.getElementById('property-list');
+
+                data.properties.forEach(property => {
+                    const propertyCard = `
+                        <a href="/detail-property/${property.id_bienImmo}" class="card-immo">
+                            <div class="img-container">
+                                <img src="${property.image_url}" alt="${property.titre_annonce}">
+                                <span class="filter-img"></span>
+                                <p class="price-property">${property.prix_formatted.toLocaleString()} €</p>
+                            </div>
+                            <p class="title-property">${property.titre_annonce}</p>
+                            <p class="city-property"><i class="fas fa-map-marker-alt"></i>${property.ville}</p>
+                            <div class="criterias-property">
+                                <div>
+                                    <i class="fas fa-bed"></i>
+                                    <p><strong>${property.nb_chambres}</strong> chambre(s)</p>
+                                </div>
+                                <div>
+                                    <i class="fas fa-bath"></i>
+                                    <p><strong>${property.nb_sdb}</strong> salle(s) de bain</p>
+                                </div>
+                                <div>
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <p><strong>${property.surface}</strong> m2</p>
+                                </div>
+                            </div>
+                            <button class="a-button h-bg-primary h-color-white">Découvrir ce bien</button>
+                        </a>
+                    `;
+
+                    propertyList.insertAdjacentHTML('beforeend', propertyCard);
+                });
+
+
+                if (data.next_page) {
+                    propertiesPaginationButton.setAttribute('data-next-page', data.next_page);
+                } else {
+                    propertiesPaginationButton.style.display = 'none';
+                }
+            })
+            .catch(error => console.error('Il y a eu une erreur durant le chargement de davantage de biens immobiliers : ', error));
+    }
 });
 
 
@@ -579,52 +640,54 @@ if (document.querySelector('#sale-property-form')) {
 /***
  * Contact form
  ***/
-document.querySelector('#contact-form').addEventListener('submit', function(event) {
+if (document.querySelector('#contact-form')) {
+    document.querySelector('#contact-form').addEventListener('submit', function(event) {
 
-    event.preventDefault();
+        event.preventDefault();
 
-    document.querySelectorAll('.text-danger').forEach(function(element) {
-        element.style.display = 'none';
-        element.textContent = '';
+        document.querySelectorAll('.text-danger').forEach(function(element) {
+            element.style.display = 'none';
+            element.textContent = '';
+        });
+
+        let hasError = false;
+
+        const contactFirstname = document.getElementById('contact-firstname').value;
+        if (contactFirstname === '') {
+            displayErrorMessage(document.getElementById('error-contact-firstname'), 'Ce champ est obligatoire.');
+            hasError = true;
+        }
+
+        const contactLastname = document.getElementById('contact-lastname').value;
+        if (contactLastname === '') {
+            displayErrorMessage(document.getElementById('error-contact-lastname'), 'Ce champ est obligatoire.');
+            hasError = true;
+        }
+
+        const contactMail = document.getElementById('contact-mail').value;
+        if (contactMail === '') {
+            displayErrorMessage(document.getElementById('error-contact-mail'), 'Ce champ est obligatoire.');
+            hasError = true;
+        } else if (!/\S+@\S+\.\S+/.test(contactMail)) {
+            displayErrorMessage(document.getElementById('error-contact-mail'), 'Votre adresse doit posséder une @ et un . entourés d\'autres caractères pour être valide');
+            hasError = true;
+        }
+
+        const contactPhone = document.getElementById('contact-phonenum').value;
+        const onlyDigitPattern = /^[0-9]+$/;
+        if (contactPhone === '') {
+            displayErrorMessage(document.getElementById('error-contact-phonenum'), 'Ce champ est obligatoire.');
+            hasError = true;
+        }
+        else if (!onlyDigitPattern.test(contactPhone)) {
+            displayErrorMessage(document.getElementById('error-contact-phonenum'), 'Ce champ peut contenir uniquement des chiffres');
+            hasError = true;
+        }
+
+        // Check if the user's mail already exists with an AJAX function
+        if (!hasError) {
+            event.target.submit();
+        }
     });
-
-    let hasError = false;
-
-    const contactFirstname = document.getElementById('contact-firstname').value;
-    if (contactFirstname === '') {
-        displayErrorMessage(document.getElementById('error-contact-firstname'), 'Ce champ est obligatoire.');
-        hasError = true;
-    }
-
-    const contactLastname = document.getElementById('contact-lastname').value;
-    if (contactLastname === '') {
-        displayErrorMessage(document.getElementById('error-contact-lastname'), 'Ce champ est obligatoire.');
-        hasError = true;
-    }
-
-    const contactMail = document.getElementById('contact-mail').value;
-    if (contactMail === '') {
-        displayErrorMessage(document.getElementById('error-contact-mail'), 'Ce champ est obligatoire.');
-        hasError = true;
-    } else if (!/\S+@\S+\.\S+/.test(contactMail)) {
-        displayErrorMessage(document.getElementById('error-contact-mail'), 'Votre adresse doit posséder une @ et un . entourés d\'autres caractères pour être valide');
-        hasError = true;
-    }
-
-    const contactPhone = document.getElementById('contact-phonenum').value;
-    const onlyDigitPattern = /^[0-9]+$/;
-    if (contactPhone === '') {
-        displayErrorMessage(document.getElementById('error-contact-phonenum'), 'Ce champ est obligatoire.');
-        hasError = true;
-    }
-    else if (!onlyDigitPattern.test(contactPhone)) {
-        displayErrorMessage(document.getElementById('error-contact-phonenum'), 'Ce champ peut contenir uniquement des chiffres');
-        hasError = true;
-    }
-
-    // Check if the user's mail already exists with an AJAX function
-    if (!hasError) {
-        event.target.submit();
-    }
-});
+}
 

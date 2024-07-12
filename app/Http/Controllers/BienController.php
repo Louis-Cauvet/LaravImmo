@@ -6,6 +6,7 @@ use App\Models\BienImmo;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class BienController extends Controller
 {
@@ -50,7 +51,7 @@ class BienController extends Controller
             $query->where('prix', '<=', $request->input('property-max-price'));
         }
 
-        $properties = $query->get();
+        $properties = $query->paginate(6);
 
         return view('listing-property', compact('properties', 'request'));
     }
@@ -58,9 +59,29 @@ class BienController extends Controller
     // Get all the properties for display them in the listing page
     public function showAllProperties()
     {
-        $properties = BienImmo::where('disponible', 1)->get();
+        $properties = BienImmo::where('disponible', 1)->paginate(6);
 
         return view('listing-property', compact('properties'));
+    }
+
+    // Load and display the following 6 properties
+    public function loadMoreProperties(Request $request) {
+        $page = $request->input('page', 1);
+        $perPage = 6;
+
+        $properties = BienImmo::where('disponible', 1)->with('getImages')->paginate($perPage, ['*'], 'page', $page);
+
+        $properties->getCollection()->transform(function ($property) {
+            $property->image_url = $property->getImages->first() ? asset('storage/' . $property->getImages->first()->image_path) : null;
+            $property->prix_formatted = number_format($property->prix, 0, ',', ' ');
+            return $property;
+        });
+
+
+        return response()->json([
+            'properties' => $properties->items(),
+            'next_page' => $properties->hasMorePages() ? $properties->currentPage() + 1 : null,
+        ]);
     }
 
     // Check the property's data before register it in te database

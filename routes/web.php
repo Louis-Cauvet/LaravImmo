@@ -83,4 +83,7 @@ Route::middleware(['web'])->group(function () {
 
     // Remove a property from user's favorite
     Route::post('/remove-favorite', [UtilisateurController::class, 'removeFavorite'])->name('remove-favorite');
+
+    // Load and display the following 6 properties
+    Route::post('/load-more-properties', [BienController::class, 'loadMoreProperties'])->name('load-more-properties');
 });
