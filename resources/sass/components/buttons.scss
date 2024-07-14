@@ -8,8 +8,13 @@
     &:not(span):hover {
         background-color: $color-dark-primary;
     }
-}
 
+    &[disabled] {
+        cursor: not-allowed;
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
 
 .pagination {
     margin: 4rem 0;

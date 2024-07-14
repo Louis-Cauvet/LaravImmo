@@ -1,6 +1,4 @@
-@php
-    session_start();
-@endphp
+{{-- "session_start()" activated in the controller --}}
 
 @extends('base')
 
@@ -13,9 +11,16 @@
         <div class="inner-page">
             <div class="title-save">
                 <h1>Nos biens correspondant à vos envies</h1>
-                <button href="#" class="a-button h-bg-primary h-color-white">
-                    <i class="fa-solid fa-floppy-disk"></i>Enregistrer la recherche
-                </button>
+                <div id="error-check-user-connected"></div>
+                @if ($searchExists)
+                    <button class="a-button h-bg-primary h-color-white" disabled>
+                        <i class="fa-solid fa-floppy-disk"></i>Recherche enregistrée
+                    </button>
+                @else
+                    <button id="save-search" class="a-button h-bg-primary h-color-white">
+                        <i class="fa-regular fa-floppy-disk"></i>Enregistrer la recherche
+                    </button>
+                @endif
             </div>
             @if ($properties->isEmpty())
                 <p>Aucun de nos biens immobiliers ne correspond à vos critères de recherche... Essayez avec d'autres critères ou alors retentez votre chance plus tard !</p>

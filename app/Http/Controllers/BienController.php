@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\BienImmo;
 use App\Models\Image;
+use App\Models\Recherche;
+use App\Models\TypeBien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +15,8 @@ class BienController extends Controller
     // Get the properties which corresponds to all the user's criterias
     public function searchProperties(Request $request)
     {
+        session_start();
+
         $query = BienImmo::query()->where('disponible', 1);
 
         $query->join('types_biens', 'biens_immo.typeBien_id', '=', 'types_biens.id_typeBien');
@@ -20,7 +24,6 @@ class BienController extends Controller
         // Property's status filter
         if (!is_null($request['property-status'])) {
             $isAchat = $request->input('property-status') === 'acheter' ? 1 : 0;
-
             $query->where('achat', $isAchat);
         }
 
@@ -53,7 +56,22 @@ class BienController extends Controller
 
         $properties = $query->paginate(6);
 
-        return view('listing-property', compact('properties', 'request'));
+        // Check if the search already exists
+        $typeBien = TypeBien::where('intitule_type', $request->input('property-type'))->first();
+        if (isset($_SESSION['user']['id'])) {
+            $searchExists = Recherche::where('id_client', $_SESSION['user']['id'])
+                ->where('id_typeBien', $typeBien->id_typeBien)
+                ->where('achat', $isAchat)
+                ->where('mots_cles', $request->input('property-keywords'))
+                ->where('ville', $request->input('property-city'))
+                ->where('budget_min', $request->input('property-min-price'))
+                ->where('budget_max', $request->input('property-max-price'))
+                ->exists();
+        } else {
+            $searchExists = '';
+        }
+
+        return view('listing-property', compact('properties', 'request', 'searchExists'));
     }
 
     // Get all the properties for display them in the listing page

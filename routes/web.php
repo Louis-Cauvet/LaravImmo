@@ -86,4 +86,8 @@ Route::middleware(['web'])->group(function () {
 
     // Load and display the following 6 properties
     Route::post('/load-more-properties', [BienController::class, 'loadMoreProperties'])->name('load-more-properties');
+
+    // Save the user's search
+    Route::post('/save-search', [UtilisateurController::class, 'saveSearch'])->name('save-search');
+
 });

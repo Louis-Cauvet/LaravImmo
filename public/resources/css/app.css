@@ -441,6 +441,10 @@ iframe {
   color: red;
 }
 
+#error-check-user-connected {
+  color: red;
+}
+
 header {
   position: fixed;
   display: flex;
@@ -1149,6 +1153,11 @@ header .burger-menu .burger-body:after {
 }
 .a-button:not(span):hover {
   background-color: #014256;
+}
+.a-button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .pagination {

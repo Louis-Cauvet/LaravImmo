@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\DemandeContact;
 use App\Models\Utilisateur;
 use App\Models\Favori;
+use App\Models\Recherche;
+use App\Models\TypeBien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 
 class UtilisateurController extends Controller
 {
@@ -129,6 +133,38 @@ class UtilisateurController extends Controller
         DB::table('favoris')->where('id_client', $id_client)->where('id_bienImmo', $id_bienImmo)->delete();
 
         return response()->json(['removedFavorite' => true, 'message' => 'Ce bien à été retiré de vos favoris !']);
+    }
+
+    // Register the user's search in the database
+    public function saveSearch(Request $request)
+    {
+        session_start();
+
+        $validatedData = $request->validate([
+            'propertyStatus' => 'required|in:acheter,louer',
+            'propertyType' => 'required|string',
+            'propertyKeywords' => 'nullable|string',
+            'propertyCity' => 'nullable|string',
+            'propertyMinPrice' => 'nullable|numeric',
+            'propertyMaxPrice' => 'nullable|numeric'
+        ]);
+
+        $typeBien = TypeBien::where('intitule_type', $validatedData['propertyType'])->firstOrFail();
+
+        $recherche = new Recherche();
+
+        $recherche->date_enregistrement_recherche = Carbon::now();
+        $recherche->id_client = $_SESSION['user']['id'];
+        $recherche->id_typeBien = $typeBien->id_typeBien;
+        $recherche->achat = $validatedData['propertyStatus'] === 'acheter';
+        $recherche->mots_cles = $validatedData['propertyKeywords'];
+        $recherche->ville = $validatedData['propertyCity'];
+        $recherche->budget_min = $validatedData['propertyMinPrice'];
+        $recherche->budget_max = $validatedData['propertyMaxPrice'];
+
+        $recherche->save();
+
+        return response()->json(['searchRegistered' => true]);
     }
 
     // Send a contact request

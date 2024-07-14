@@ -237,54 +237,52 @@ if (addToFavoriteButton) {
         csrfFetch('/check-user-connected' ,{
             method: 'POST'
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.isConnected === true) {
+        .then(response => response.json())
+        .then(data => {
+            if (data.isConnected === true) {
 
-                    if (addToFavoriteButton.classList.contains('as--favorite')) {
-                        csrfFetch('/remove-favorite', {
-                            method: 'POST',
-                            body: JSON.stringify({ id_bienImmo: id_bienImmo })
+                if (addToFavoriteButton.classList.contains('as--favorite')) {
+                    csrfFetch('/remove-favorite', {
+                        method: 'POST',
+                        body: JSON.stringify({ id_bienImmo: id_bienImmo })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.removedFavorite === true) {
+                                addToFavoriteButton.classList.remove('as--favorite');
+                                addToFavoriteButton.title = "Ajouter aux favoris";
+                                alert(data.message);
+                            }  else {
+                                alert(data.message);
+                            }
                         })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.removedFavorite === true) {
-                                    addToFavoriteButton.classList.remove('as--favorite');
-                                    addToFavoriteButton.title = "Ajouter aux favoris";
-                                    alert(data.message);
-                                }  else {
-                                    alert(data.message);
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Une erreur est survenue durant le retrait du bien en favoris', error);
-                            })
-                    } else {
-                        csrfFetch('/add-favorite', {
-                            method: 'POST',
-                            body: JSON.stringify({ id_bienImmo: id_bienImmo })
+                        .catch(error => {
+                            console.error('Une erreur est survenue durant le retrait du bien en favoris', error);
                         })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.registeredFavorite === true) {
-                                    addToFavoriteButton.classList.add('as--favorite');
-                                    addToFavoriteButton.title = "Retirer des favoris";
-                                    alert(data.message);
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Une erreur est survenue durant l\'ajout du bien en favoris', error);
-                            });
-                    }
-
-
                 } else {
-                    displayErrorMessage(document.getElementById('error-check-user-connected'), 'Connectez-vous à votre compte pour pouvoir ajouter des biens en favoris !');
+                    csrfFetch('/add-favorite', {
+                        method: 'POST',
+                        body: JSON.stringify({ id_bienImmo: id_bienImmo })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.registeredFavorite === true) {
+                                addToFavoriteButton.classList.add('as--favorite');
+                                addToFavoriteButton.title = "Retirer des favoris";
+                                alert(data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Une erreur est survenue durant l\'ajout du bien en favoris', error);
+                        });
                 }
-            })
-            .catch(error => {
-                console.error('Une erreur est survenue durant la vérification de la connexion de l\'utilisateur :', error);
-            });
+            } else {
+                displayErrorMessage(document.getElementById('error-check-user-connected'), 'Connectez-vous à votre compte pour pouvoir ajouter des biens en favoris !');
+            }
+        })
+        .catch(error => {
+            console.error('Une erreur est survenue durant la vérification de la connexion de l\'utilisateur :', error);
+        });
     });
 }
 
@@ -293,20 +291,21 @@ if (addToFavoriteButton) {
  * Display the properties loaded when we clicked on pagination's button
  ***/
 const propertiesPaginationButton = document.getElementById("load-more-properties");
-propertiesPaginationButton.addEventListener('click', function () {
-    const nextPage = propertiesPaginationButton.getAttribute('data-next-page');
+if(propertiesPaginationButton) {
+    propertiesPaginationButton.addEventListener('click', function () {
+        const nextPage = propertiesPaginationButton.getAttribute('data-next-page');
 
-    if (nextPage) {
-        csrfFetch('/load-more-properties', {
-            method: 'POST',
-            body: JSON.stringify({ page: nextPage })
-        })
-            .then(response => response.json())
-            .then(data => {
-                const propertyList = document.getElementById('property-list');
+        if (nextPage) {
+            csrfFetch('/load-more-properties', {
+                method: 'POST',
+                body: JSON.stringify({ page: nextPage })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const propertyList = document.getElementById('property-list');
 
-                data.properties.forEach(property => {
-                    const propertyCard = `
+                    data.properties.forEach(property => {
+                        const propertyCard = `
                         <a href="/detail-property/${property.id_bienImmo}" class="card-immo">
                             <div class="img-container">
                                 <img src="${property.image_url}" alt="${property.titre_annonce}">
@@ -333,19 +332,66 @@ propertiesPaginationButton.addEventListener('click', function () {
                         </a>
                     `;
 
-                    propertyList.insertAdjacentHTML('beforeend', propertyCard);
-                });
+                        propertyList.insertAdjacentHTML('beforeend', propertyCard);
+                    });
 
 
-                if (data.next_page) {
-                    propertiesPaginationButton.setAttribute('data-next-page', data.next_page);
+                    if (data.next_page) {
+                        propertiesPaginationButton.setAttribute('data-next-page', data.next_page);
+                    } else {
+                        propertiesPaginationButton.style.display = 'none';
+                    }
+                })
+                .catch(error => console.error('Il y a eu une erreur durant le chargement de davantage de biens immobiliers : ', error));
+        }
+    });
+}
+
+const saveSearchButton = document.getElementById('save-search');
+
+if (saveSearchButton) {
+    saveSearchButton.addEventListener('click', function() {
+        csrfFetch('/check-user-connected' ,{
+            method: 'POST'
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.isConnected === true) {
+                    const formData = {
+                        propertyStatus: document.querySelector('input[name="property-status"]:checked').value,
+                        propertyType: document.getElementById('select-type').value,
+                        propertyKeywords: document.getElementById('text-keywords').value,
+                        propertyCity: document.getElementById('text-city').value,
+                        propertyMinPrice: document.getElementById('number-min-price').value,
+                        propertyMaxPrice: document.getElementById('number-max-price').value
+                    };
+
+                    csrfFetch('/save-search', {
+                        method: 'POST',
+                        body: JSON.stringify(formData)
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.searchRegistered) {
+                                this.disabled = true;
+                                this.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>Recherche enregistrée';
+                                this.removeAttribute('id');
+                                alert('Votre recherche a été enregistrée avec succès !');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Une erreur est survenue durant l\'enregistrement de la recherche : ', error);
+                        });
+
                 } else {
-                    propertiesPaginationButton.style.display = 'none';
+                    displayErrorMessage(document.getElementById('error-check-user-connected'), 'Connectez-vous à votre compte pour pouvoir ajouter des biens en favoris !');
                 }
             })
-            .catch(error => console.error('Il y a eu une erreur durant le chargement de davantage de biens immobiliers : ', error));
-    }
-});
+            .catch(error => {
+                console.error('Une erreur est survenue durant la vérification de la connexion de l\'utilisateur :', error);
+            });
+    });
+}
 
 
 /*************************************
