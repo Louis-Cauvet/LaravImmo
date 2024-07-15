@@ -1,5 +1,5 @@
 <section class="search-bar">
-    <form class="limited-width" action="{{ route('search-properties') }}" method="POST">
+    <form class="limited-width" action="{{ route('search-properties') }}" method="GET">
         @csrf
         <span class="radio-inputs">
             <div>

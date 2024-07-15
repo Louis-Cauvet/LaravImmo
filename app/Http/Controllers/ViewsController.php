@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\BienImmo;
+use App\Models\Favori;
+use App\Models\Recherche;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -28,6 +30,23 @@ class ViewsController extends Controller
         }
 
         return view('detail-property', compact('propertyDetails', 'isFavorited'));
+    }
 
+
+    public function showUserAccount() {
+        session_start();
+
+        if (!isset($_SESSION['user'])) {
+            $homeUrl = route('homepage');
+
+            header('Location: ' . $homeUrl);
+            exit();
+        }
+
+        $id_user = $_SESSION['user']['id'];
+        $favorites = Favori::where('id_client', $id_user)->with('getBienImmo')->get();
+        $researches = Recherche::where('id_client', $id_user)->with('getTypeBien')->get();
+
+        return view('user-account', compact('favorites', 'researches'));
     }
 }

@@ -33,16 +33,13 @@ Route::middleware(['web'])->group(function () {
     })->name('sale-form');
 
     // Go to the user account's page
-    Route::get('/user-account', function () {
-        return view('user-account');
-    })->name('user-account');
+    Route::get('user-account', [ViewsController::class, 'showUserAccount'])->name('user-account');
 
     // Go to the admin account's page
     Route::get('/admin-account', function () {
         return view('admin-account');
     })->name('admin-account');
 
-    Route::get('/logout-user', [UtilisateurController::class, 'logoutUser'])->name('logout-user');
 
 
     /*************************
@@ -68,7 +65,7 @@ Route::middleware(['web'])->group(function () {
     Route::post('/register-property', [BienController::class, 'registerProperty'])->name('register-property');
 
     // Get the form submission of properties' search
-    Route::post('/search-properties', [BienController::class, 'searchProperties'])->name('search-properties');
+    Route::get('/search-properties', [BienController::class, 'searchProperties'])->name('search-properties');
 
     // Get the form submission of contact request
     Route::post('/send-contact-request', [UtilisateurController::class, 'sendContactRequest'])->name('send-contact-request');
@@ -90,4 +87,9 @@ Route::middleware(['web'])->group(function () {
     // Save the user's search
     Route::post('/save-search', [UtilisateurController::class, 'saveSearch'])->name('save-search');
 
+    // Retake the user's search registered in database
+    Route::get('retake-search/{id}', [BienController::class, 'retakeUserSearch'])->name('retake-search');
+
+    // Logout the connected user
+    Route::get('/logout-user', [UtilisateurController::class, 'logoutUser'])->name('logout-user');
 });

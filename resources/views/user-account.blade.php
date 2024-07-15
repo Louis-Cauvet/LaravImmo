@@ -1,15 +1,7 @@
 @php
-    session_start();
+    // "session_start()" activated in the controller
 
-    if (!isset($_SESSION['user'])) {
-        $homeUrl = route('homepage');
-
-        header('Location: ' . $homeUrl);
-        exit();
-    } else {
-      $user = $_SESSION['user'];
-    }
-
+    $user = $_SESSION['user'];
 @endphp
 
 
@@ -39,54 +31,87 @@
 
             <section>
                 <h2>Mes favoris</h2>
-                <div class="favorites-container horizontal">
-                    @for ($i = 1; $i <= 7; $i++)
-                    <div class="favorite-card">
-                        <a href="#_" class="card-immo">
-                            <div class="img-container">
-                                <p class="favorite-date">02/05/2024</p>
-                                <img src="/resources/img/photo-annonce1.jpg" alt="texte alternatif">
-                                <span class="filter-img"></span>
-                                <p class="price-property">115 500 €</p>
+                @if ($favorites->isEmpty())
+                    <p>Vous n'avez aucun bien en favoris pour l'instant, n'hésitez pas à en ajouter un lorsque l'un de nos biens vous plaît !</p>
+                @else
+                    <div class="favorites-container horizontal">
+                        @foreach ($favorites as $favorite)
+                            <div class="favorite-card">
+                                <a href="{{ route('detail-property', $favorite->id_bienImmo) }}" class="card-immo">
+                                    <div class="img-container">
+                                        <p class="favorite-date">{{ \Carbon\Carbon::parse($favorite->date_ajout)->format('d/m/Y') }}</p>
+                                        <img src="{{ asset('storage/' . $favorite->getBienImmo->getImages->first()->image_path) }}" alt="{{ $favorite->titre_annonce }}">
+                                        <span class="filter-img"></span>
+                                        <p class="price-property">{{ number_format($favorite->getBienImmo->prix, 0, ',', ' ') }} €</p>
+                                    </div>
+                                    <p class="title-property">{{ $favorite->getBienImmo->titre_annonce }}</p>
+                                    <p class="city-property"><i class="fas fa-map-marker-alt"></i>{{ $favorite->getBienImmo->ville }}</p>
+                                </a>
                             </div>
-                            <p class="title-property">Appartement 5 pièces</p>
-                            <p class="city-property"><i class="fas fa-map-marker-alt"></i>Dijon</p>
-                        </a>
+                        @endforeach
                     </div>
-                    @endfor
-                </div>
+                @endif
             </section>
 
             <section class="user-researches">
                 <h2>Mes recherches sauvegardées</h2>
-                <div class="favorites-container horizontal">
-                    @for ($i = 1; $i <= 7; $i++)
-                        <a href="#_" title="Reprendre cette recherche">
-                            <ul class="register-research">
-                                <li>
-                                    <i class="fa-solid fa-handshake"></i>
-                                    <p>A louer</p>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-building"></i>
-                                    <p>Maison</p>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                    <p>Bon état - soleil</p>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <p>Dijon</p>
-                                </li><li>
-                                    <i class="fa-solid fa-sack-dollar"></i>
-                                    <p>350 000€ max.</p>
-                                </li>
-                                <i class="delete-favorite fa-solid fa-xmark" title="Supprimer cette recherche"></i>
-                            </ul>
-                        </a>
-                    @endfor
-                </div>
+                @if ($researches->isEmpty())
+                    <p>Vous n'avez aucune recherche enregistrée, n'hésitez pas à le faire pour retrouver ici plus facilement vos recherches préférées !</p>
+                @else
+                    <div class="favorites-container horizontal">
+                        @foreach ($researches as $research)
+                            <a  href="{{ route('retake-search', ['id' => $research->id_recherche]) }}" title="Reprendre cette recherche" class="search-card">
+                                <ul class="register-research">
+                                    <li>
+                                        <i class="fa-solid fa-handshake"></i>
+                                        <p>{{ $research->achat ? 'A acheter' : 'A louer' }}</p>
+                                    </li>
+
+                                    @if($research->getTypeBien->intitule_type == 'maison')
+                                        <li>
+                                            <i class="fa-solid fa-home"></i>
+                                            <p>Maison</p>
+                                        </li>
+                                    @elseif($research->getTypeBien->intitule_type == 'appartement')
+                                        <li>
+                                            <i class="fa-solid fa-building"></i>
+                                            <p>Appartement</p>
+                                        </li>
+                                    @elseif($research->getTypeBien->intitule_type == 'terrain')
+                                        <li>
+                                            <i class="fa-solid fa-leaf"></i>
+                                            <p>Terrain</p>
+                                        </li>
+                                    @endif
+
+                                    @if($research->mots_cles)
+                                        <li>
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                            <p>{{ $research->mots_cles }}</p>
+                                        </li>
+                                    @endif
+
+                                    @if($research->ville)
+                                        <li>
+                                            <i class="fa-solid fa-location-dot"></i>
+                                            <p>{{ $research->ville }}</p>
+                                        </li>
+                                    @endif
+
+                                    @if($research->budget_max)
+                                        <li>
+                                            <i class="fa-solid fa-sack-dollar"></i>
+
+                                            <p>{{ number_format($research->budget_max, 0, ',', ' ') . '€ max.' }}</p>
+                                        </li>
+                                    @endif
+
+                                    <i class="delete-favorite fa-solid fa-xmark" title="Supprimer cette recherche"></i>
+                                </ul>
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
             </section>
             <section class="account-form">
                 <h2 class="text-center">Mes informations</h2>

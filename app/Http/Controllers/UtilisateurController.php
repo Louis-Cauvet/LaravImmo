@@ -112,7 +112,7 @@ class UtilisateurController extends Controller
         Favori::create([
             'id_client' => $_SESSION['user']['id'],
             'id_bienImmo' => $request->input('id_bienImmo'),
-            'date_ajout' => now()->format('Y-m-d'),
+            'date_ajout' => Carbon::now(),
         ]);
 
 

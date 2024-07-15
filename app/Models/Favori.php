@@ -18,12 +18,12 @@ class Favori extends Model
     // Get the user linked to the favorite
     public function getUtilisateur()
     {
-        return $this->belongsTo(Utilisateur::class, 'id_client');
+        return $this->belongsTo(Utilisateur::class, 'id_client', 'id_client');
     }
 
     // Get the property linked to the favorite
     public function getBienImmo()
     {
-        return $this->belongsTo(BienImmo::class, 'id_bienImmo');
+        return $this->belongsTo(BienImmo::class, 'id_bienImmo', 'id_bienImmo');
     }
 }

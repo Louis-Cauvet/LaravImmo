@@ -36,8 +36,7 @@ class BienController extends Controller
         if (!is_null($request['property-keywords'])) {
             $keywords = $request->input('property-keywords');
             $query->where(function ($q) use ($keywords) {
-                $q->where('titre_annonce', 'like', "%$keywords%")
-                    ->orWhere('contenu_annonce', 'like', "%$keywords%");
+                $q->where('titre_annonce', 'like', "%$keywords%")->orWhere('contenu_annonce', 'like', "%$keywords%");
             });
         }
 
@@ -74,12 +73,38 @@ class BienController extends Controller
         return view('listing-property', compact('properties', 'request', 'searchExists'));
     }
 
+
+    // Retake the user's search registered in database
+    public function retakeUserSearch($id) {
+        $recherche = Recherche::with('getTypeBien')->findOrFail($id);
+
+        if ($recherche->getTypeBien) {
+            $typeBienIntitule = $recherche->getTypeBien->intitule_type;
+        } else {
+            $typeBienIntitule = null;
+        }
+
+        $queryParams = [
+            'property-status' => $recherche->achat ? 'acheter' : 'louer',
+            'property-type' => $typeBienIntitule,
+            'property-keywords' => $recherche->mots_cles,
+            'property-city' => $recherche->ville,
+            'property-min-price' => $recherche->budget_min,
+            'property-max-price' => $recherche->budget_max
+        ];
+
+        return redirect()->route('search-properties', $queryParams);
+    }
+
+
     // Get all the properties for display them in the listing page
     public function showAllProperties()
     {
+        session_start();
         $properties = BienImmo::where('disponible', 1)->paginate(6);
+        $searchExists = '';
 
-        return view('listing-property', compact('properties'));
+        return view('listing-property', compact('properties', 'searchExists'));
     }
 
     // Load and display the following 6 properties
