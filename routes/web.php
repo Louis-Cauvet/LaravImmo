@@ -90,6 +90,9 @@ Route::middleware(['web'])->group(function () {
     // Retake the user's search registered in database
     Route::get('retake-search/{id}', [BienController::class, 'retakeUserSearch'])->name('retake-search');
 
+    // Delete a search registered in database
+    Route::delete('/delete-search/{id}', [UtilisateurController::class, 'deleteUserSearch'])->name('delete-search');
+
     // Logout the connected user
     Route::get('/logout-user', [UtilisateurController::class, 'logoutUser'])->name('logout-user');
 });

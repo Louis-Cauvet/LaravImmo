@@ -167,6 +167,13 @@ class UtilisateurController extends Controller
         return response()->json(['searchRegistered' => true]);
     }
 
+    public function deleteUserSearch($id) {
+        $recherche = Recherche::findOrFail($id);
+        $recherche->delete();
+
+        return response()->json(['searchDeleted' => true]);
+    }
+
     // Send a contact request
     public function sendContactRequest(Request $request){
         $validatedData = $request->validate([

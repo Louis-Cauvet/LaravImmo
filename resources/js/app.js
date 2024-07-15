@@ -347,8 +347,11 @@ if(propertiesPaginationButton) {
     });
 }
 
-const saveSearchButton = document.getElementById('save-search');
 
+/***
+ * Register a user's search in the database
+ ***/
+const saveSearchButton = document.getElementById('save-search');
 if (saveSearchButton) {
     saveSearchButton.addEventListener('click', function() {
         csrfFetch('/check-user-connected' ,{
@@ -393,6 +396,30 @@ if (saveSearchButton) {
     });
 }
 
+/***
+ * Delete a user's search from the database
+ ***/
+const deleteSearchButton = document.querySelectorAll('.delete-search');
+if (deleteSearchButton) {
+    deleteSearchButton.forEach(deleteButton => {
+        deleteButton.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const searchId = this.dataset.searchId;
+            csrfFetch(`/delete-search/${searchId}`, {
+                method: 'DELETE',
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.searchDeleted) {
+                    this.closest('.search-card').remove();
+                }
+            })
+            .catch(error => console.error('Une erreur s\'est produite au moment de la suppression de la recherche : ', error));
+
+        });
+    });
+}
 
 /*************************************
  FORM SUBMISSIONS

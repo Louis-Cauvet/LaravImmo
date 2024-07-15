@@ -60,7 +60,7 @@
                 @else
                     <div class="favorites-container horizontal">
                         @foreach ($researches as $research)
-                            <a  href="{{ route('retake-search', ['id' => $research->id_recherche]) }}" title="Reprendre cette recherche" class="search-card">
+                            <a href="{{ route('retake-search', ['id' => $research->id_recherche]) }}" title="Reprendre cette recherche" class="search-card">
                                 <ul class="register-research">
                                     <li>
                                         <i class="fa-solid fa-handshake"></i>
@@ -106,7 +106,7 @@
                                         </li>
                                     @endif
 
-                                    <i class="delete-favorite fa-solid fa-xmark" title="Supprimer cette recherche"></i>
+                                    <i class="delete-favorite delete-search fa-solid fa-xmark" data-search-id="{{ $research->id_recherche }}" title="Supprimer cette recherche"></i>
                                 </ul>
                             </a>
                         @endforeach
