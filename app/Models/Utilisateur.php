@@ -10,6 +10,10 @@ class Utilisateur extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected $table = 'Utilisateurs';
+
+    protected $primaryKey = 'id_client';
+
     protected $fillable = [
         'prenom',
         'nom',

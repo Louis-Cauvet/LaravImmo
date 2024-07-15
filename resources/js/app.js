@@ -764,3 +764,78 @@ if (document.querySelector('#contact-form')) {
     });
 }
 
+
+/***
+ * Update user form
+ ***/
+if (document.querySelector('#update-user-form')) {
+    document.querySelector('#update-user-form').addEventListener('submit', function(event) {
+
+        event.preventDefault();
+
+        document.querySelectorAll('.text-danger').forEach(function(element) {
+            element.style.display = 'none';
+            element.textContent = '';
+        });
+
+        let hasError = false;
+
+        const updateFirstname = document.getElementById('update-firstname').value;
+        if (updateFirstname === '') {
+            displayErrorMessage(document.getElementById('error-update-firstname'), 'Ce champ est obligatoire.');
+            hasError = true;
+        }
+
+        const updateLastname = document.getElementById('update-lastname').value;
+        if (updateLastname === '') {
+            displayErrorMessage(document.getElementById('error-update-lastname'), 'Ce champ est obligatoire.');
+            hasError = true;
+        }
+
+        const updatePhone = document.getElementById('update-phone').value;
+        const onlyDigitPattern = /^[0-9]+$/;
+        if (updatePhone === '') {
+            displayErrorMessage(document.getElementById('error-update-phone'), 'Ce champ est obligatoire.');
+            hasError = true;
+        }
+        else if (!onlyDigitPattern.test(updatePhone)) {
+            displayErrorMessage(document.getElementById('error-update-phone'), 'Ce champ peut contenir uniquement des chiffres');
+            hasError = true;
+        }
+
+        const updateMail = document.getElementById('update-mail').value;
+        if (updateMail === '') {
+            displayErrorMessage(document.getElementById('update-mail'), 'Ce champ est obligatoire.');
+            hasError = true;
+        } else if (!/\S+@\S+\.\S+/.test(updateMail)) {
+            displayErrorMessage(document.getElementById('error-update-mail'), 'Votre adresse doit posséder une @ et un . entourés d\'autres caractères pour être valide');
+            hasError = true;
+        }
+
+
+        const updatePassword = document.getElementById('update-password').value;
+        const digitPattern = /[0-9]/;
+        const letterPattern = /[a-zA-Z]/;
+        const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
+        if (updatePassword.length < 8) {
+            displayErrorMessage(document.getElementById('error-update-password'), 'Le mot de passe doit contenir au moins 8 caractères.');
+            hasError = true;
+        } else if (!digitPattern.test(updatePassword)) {
+            displayErrorMessage(document.getElementById('error-update-password'), 'Le mot de passe doit contenir au moins 1 chiffre.');
+            hasError = true;
+        } else if (!letterPattern.test(updatePassword)) {
+            displayErrorMessage(document.getElementById('error-update-password'), 'Le mot de passe doit contenir au moins 1 lettre.');
+            document.getElementById('error-update-password').style.display = 'block';
+            hasError = true;
+        } else if (!specialCharPattern.test(updatePassword)) {
+            displayErrorMessage(document.getElementById('error-update-password'), 'Le mot de passe doit contenir au moins 1 caractère spécial.');
+            hasError = true;
+        }
+
+        // Check if the user's mail already exists with an AJAX function
+        if (!hasError) {
+            event.target.submit();
+        }
+    });
+}
+

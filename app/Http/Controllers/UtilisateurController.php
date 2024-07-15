@@ -54,7 +54,6 @@ class UtilisateurController extends Controller
         return redirect('/');
     }
 
-
     // Check if the user's mail already exists in the database (for the client's side verification)
     public function verifyExistingUser(Request $request) {
         $request->validate([
@@ -103,6 +102,39 @@ class UtilisateurController extends Controller
         return redirect()->back()->withErrors([
             'error' => 'Adresse mail ou mot de passe invalide.',
         ]);
+    }
+
+    public function updateUser(Request $request){
+        session_start();
+
+        $userId = $_SESSION['user']['id'];
+
+        $user = Utilisateur::where('id_client', $userId)->first();
+
+        $user->prenom = $request->input('update-firstname');
+        $user->nom = $request->input('update-lastname');
+        $user->telephone = $request->input('update-phone');
+        $user->email = $request->input('update-mail');
+
+        if ($request->input('update-password') !== $_SESSION['user']['mot_de_passe']) {
+            $user->mot_de_passe = Hash::make($request->input('update-password'));
+        }
+
+        $user->save();
+
+        unset($_SESSION['user']);
+        $_SESSION['user'] = [
+            'id' => $userId,
+            'prenom' =>  $user->prenom,
+            'nom' => $user->nom,
+            'email' => $user->email,
+            'telephone' => $user->telephone,
+            'mot_de_passe' => $request->input('update-password'),
+            'role' => $user->getUserRole->intitule_role,
+        ];
+
+
+        return redirect()->back()->with('user_alert_message', 'Vos informations personnelles ont été mise à jour avec succès !');
     }
 
     // Add a property in favorites

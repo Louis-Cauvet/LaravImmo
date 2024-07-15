@@ -116,30 +116,36 @@
             <section class="account-form">
                 <h2 class="text-center">Mes informations</h2>
                 <div class="contact-form">
-                    <form action="#_" method="POST">
+                    <form id="update-user-form" action="{{ route('update-user') }}" method="POST">
+                        @csrf
                         <div>
-                            <label for="firstname">Prénom<span class="required-indicator">*</span></label>
-                            <input type="text" id="firstname" name="firstname" value="{{ $user['prenom'] }}" required>
+                            <label for="update-firstname">Prénom<span class="required-indicator">*</span></label>
+                            <input type="text" id="update-firstname" name="update-firstname" value="{{ $user['prenom'] }}" required>
+                            <span class="text-danger" id="error-update-firstname"></span>
                         </div>
 
                         <div>
-                            <label for="lastname">Nom de famille<span class="required-indicator">*</span></label>
-                            <input type="text" id="lastname" name="lastname" value="{{ $user['nom'] }}" required>
+                            <label for="update-lastname">Nom de famille<span class="required-indicator">*</span></label>
+                            <input type="text" id="update-lastname" name="update-lastname" value="{{ $user['nom'] }}" required>
+                            <span class="text-danger" id="error-update-lastname"></span>
                         </div>
 
                         <div>
-                            <label for="phone">Numéro de téléphone<span class="required-indicator">*</span></label>
-                            <input type="tel" id="phone" name="phone" value="{{ $user['telephone'] }}" required>
+                            <label for="update-phone">Numéro de téléphone<span class="required-indicator">*</span></label>
+                            <input type="tel" id="update-phone" name="update-phone" value="{{ $user['telephone'] }}" required>
+                            <span class="text-danger" id="error-update-phone"></span>
                         </div>
 
                         <div>
-                            <label for="mail">Email<span class="required-indicator">*</span></label>
-                            <input type="email" id="mail" name="mail" value="{{ $user['email'] }}"  required>
+                            <label for="update-mail">Email<span class="required-indicator">*</span></label>
+                            <input type="email" id="update-mail" name="update-mail" value="{{ $user['email'] }}" required>
+                            <span class="text-danger" id="error-update-mail"></span>
                         </div>
 
                         <div>
-                            <label for="password">Mot de passe<span class="required-indicator">*</span></label>
-                            <input type="password" id="password" name="password" value="{{ $user['mot_de_passe'] }}" required>
+                            <label for="update-password">Mot de passe<span class="required-indicator">*</span></label>
+                            <input type="password" id="update-password" name="update-password" value="{{ $user['mot_de_passe'] }}" required>
+                            <span class="text-danger" id="error-update-password"></span>
                         </div>
 
                         <div>

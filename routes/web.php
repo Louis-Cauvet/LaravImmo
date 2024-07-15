@@ -70,6 +70,9 @@ Route::middleware(['web'])->group(function () {
     // Get the form submission of contact request
     Route::post('/send-contact-request', [UtilisateurController::class, 'sendContactRequest'])->name('send-contact-request');
 
+    // Get the form submission of update user
+    Route::post('/update-user', [UtilisateurController::class, 'updateUser'])->name('update-user');
+
 
     /*************************
      * OTHER ACTIONS
