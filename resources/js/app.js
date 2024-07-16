@@ -182,7 +182,7 @@ openNotifButton.forEach((openNotif) => {
         const notification = openNotif.parentElement;
 
         if (notification.classList.contains('open')) {
-            notification.style.height = '90px';
+            notification.style.height = '110px';
             notification.classList.remove('open');
         } else {
             const notificationContentHeight = notification.scrollHeight + 30;

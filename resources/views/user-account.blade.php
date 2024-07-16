@@ -17,16 +17,20 @@
             <h1 class="h-color-dark-primary">Bonjour {{ $user['prenom'] }} {{ $user['nom'] }} !</h1>
             <section>
                 <h2>Mes notifications</h2>
-                <div class="favorites-container horizontal">
-                    @for ($i = 1; $i <= 7; $i++)
-                        <div class="notification">
-                            <p class="notification-title">Nouvel appartement disponible pour Lyon 3ème</p>
-                            <p class="notification-date">12/05/2024</p>
-                            <p class="notification-content">Un nouvel appartement correspondant à vos critères est disponible !! Vueillez suivre le lien suivant pour le consulter :https://hdhdydddhfdyc.com. C'est une super bonne nouvelle hahahhouhihouhhh.</p>
-                            <button class="open-notification"><i class="fa fa-plus"></i></button>
-                        </div>
-                    @endfor
-                </div>
+                @if ($notifications->isEmpty())
+                    <p>Vous n'avez aucune notification pour l'instant !</p>
+                @else
+                    <div class="favorites-container horizontal">
+                        @foreach ($notifications as $notification)
+                            <div class="notification">
+                                <p class="notification-title">{{ $notification->titre_alerte }}</p>
+                                <p class="notification-date">{{ \Carbon\Carbon::parse($notification->created_at)->format('d/m/Y') }}</p>
+                                <p class="notification-content">{{ $notification->contenu_alerte }}</p>
+                                <button class="open-notification"><i class="fa fa-plus"></i></button>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </section>
 
             <section>

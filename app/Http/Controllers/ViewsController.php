@@ -6,6 +6,7 @@ use App\Models\BienImmo;
 use App\Models\Utilisateur;
 use App\Models\Favori;
 use App\Models\Recherche;
+use App\Models\AlerteClient;
 use App\Models\DemandeContact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -47,10 +48,11 @@ class ViewsController extends Controller
         }
 
         $id_user = $_SESSION['user']['id'];
-        $favorites = Favori::where('id_client', $id_user)->with('getBienImmo')->get();
-        $researches = Recherche::where('id_client', $id_user)->with('getTypeBien')->get();
+        $favorites = Favori::where('id_client', $id_user)->with('getBienImmo')->orderBy('created_at', 'desc')->get();
+        $researches = Recherche::where('id_client', $id_user)->with('getTypeBien')->orderBy('created_at', 'desc')->get();
+        $notifications = AlerteClient::where('id_client', $id_user)->orderBy('created_at', 'desc')->get();
 
-        return view('user-account', compact('favorites', 'researches'));
+        return view('user-account', compact('favorites', 'researches', 'notifications'));
     }
 
 

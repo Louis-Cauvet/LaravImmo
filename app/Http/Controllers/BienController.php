@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlerteClient;
 use App\Models\BienImmo;
 use App\Models\Image;
 use App\Models\Recherche;
@@ -200,9 +201,35 @@ class BienController extends Controller
         if ($bienStatus == 0) {
             $bien->disponible = 1;
             $returnStatus = "visible";
+
+            $usersInterested = $bien->getClientsInteressés;
+            foreach ($usersInterested as $user) {
+                $utilisateurId = $user->id_client;
+                $titreAlerte = '"'.$bien->titre_annonce .'" de nouveau disponible';
+                $contenuAlerte = 'Un bien que vous aviez ajouté à vos favoris est de nouveau disponible ! N\'hésitez pas à aller le consulter !';
+
+                AlerteClient::create([
+                    'id_client' => $utilisateurId,
+                    'titre_alerte' => $titreAlerte,
+                    'contenu_alerte' => $contenuAlerte
+                ]);
+            }
         } else {
             $bien->disponible = 0;
             $returnStatus = "hidden";
+
+            $usersInterested = $bien->getClientsInteressés;
+            foreach ($usersInterested as $user) {
+                $utilisateurId = $user->id_client;
+                $titreAlerte = '"'.$bien->titre_annonce .'" indisponible';
+                $contenuAlerte = 'Ce bien que vous aviez ajouté à vos favoris n\'est plus disponible pour l\'instant. S\'il le redevient, une autre notification vous l\'informera.';
+
+                AlerteClient::create([
+                    'id_client' => $utilisateurId,
+                    'titre_alerte' => $titreAlerte,
+                    'contenu_alerte' => $contenuAlerte
+                ]);
+            }
         }
         $bien->save();
 
@@ -212,6 +239,20 @@ class BienController extends Controller
     // Delete the property
     public function deleteProperty($id) {
         $bien = BienImmo::findOrFail($id);
+
+        $usersInterested = $bien->getClientsInteressés;
+
+        foreach ($usersInterested as $user) {
+            $utilisateurId = $user->id_client;
+            $titreAlerte = 'Favori supprimé';
+            $contenuAlerte = 'Un bien que vous aviez ajouté à vos favoris a été supprimé : ' . $bien->titre_annonce;
+
+            AlerteClient::create([
+                'id_client' => $utilisateurId,
+                'titre_alerte' => $titreAlerte,
+                'contenu_alerte' => $contenuAlerte
+            ]);
+        }
 
         $bien->delete();
 

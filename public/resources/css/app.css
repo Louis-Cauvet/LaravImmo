@@ -621,14 +621,9 @@ header .burger-menu .burger-body:after {
   min-width: calc(320px - 4rem);
   max-width: -moz-min-content;
   max-width: min-content;
-  height: 90px;
+  height: 110px;
   border-radius: 5px;
   transition: height 0.5s ease;
-}
-@media only screen and (min-width: 769px) {
-  .notification {
-    min-width: initial;
-  }
 }
 .notification.open .notification-content {
   height: -moz-fit-content;
@@ -645,11 +640,6 @@ header .burger-menu .burger-body:after {
   font-weight: bold;
   color: #014256;
   white-space: break-spaces;
-}
-@media only screen and (min-width: 769px) {
-  .notification .notification-title {
-    white-space: nowrap;
-  }
 }
 .notification .notification-date {
   color: #00779A;
