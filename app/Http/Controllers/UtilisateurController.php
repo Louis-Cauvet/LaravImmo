@@ -199,6 +199,7 @@ class UtilisateurController extends Controller
         return response()->json(['searchRegistered' => true]);
     }
 
+    // Delete a research registered in the database
     public function deleteUserSearch($id) {
         $recherche = Recherche::findOrFail($id);
         $recherche->delete();
@@ -221,11 +222,22 @@ class UtilisateurController extends Controller
         $demandeContact->nom_demandeur = $validatedData['contact-lastname'];
         $demandeContact->prenom_demandeur = $validatedData['contact-firstname'];
         $demandeContact->mail_demandeur = $validatedData['contact-mail'];
+        $demandeContact->tel_demandeur = $validatedData['contact-phonenum'];
         $demandeContact->contenu_demande = $validatedData['contact-message'] ?? '';
         $demandeContact->id_bienImmo = $validatedData['id_bienImmo'] ?? null;
         $demandeContact->save();
 
         return redirect()->back()->with('user_alert_message', 'Merci, votre demande de contact nous a bien été transmise. Nous vous répondrons sous 72 heures !');
+    }
+
+
+    // Delete a contact request registered in the database
+    public function deleteContactRequest($id){
+
+        $demande = DemandeContact::findOrFail($id);
+        $demande->delete();
+
+        return response()->json(['contactRequestDeleted' => true]);
     }
 
 

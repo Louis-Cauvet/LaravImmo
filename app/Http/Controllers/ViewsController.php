@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BienImmo;
 use App\Models\Favori;
 use App\Models\Recherche;
+use App\Models\DemandeContact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,6 +34,7 @@ class ViewsController extends Controller
     }
 
 
+    // Get the user's favorites properties & registered researches for display them in the user account page
     public function showUserAccount() {
         session_start();
 
@@ -48,5 +50,13 @@ class ViewsController extends Controller
         $researches = Recherche::where('id_client', $id_user)->with('getTypeBien')->get();
 
         return view('user-account', compact('favorites', 'researches'));
+    }
+
+
+    // Get the contact requests for display them in the admin account page
+    public function showAdminAccount() {
+        $contactRequests = DemandeContact::all();
+
+        return view('admin-account', compact('contactRequests'));
     }
 }

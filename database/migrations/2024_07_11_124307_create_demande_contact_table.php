@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nom_demandeur');
             $table->string('prenom_demandeur');
             $table->string('mail_demandeur');
+            $table->string('tel_demandeur');
             $table->text('contenu_demande')->nullable();
             $table->unsignedBigInteger('id_bienImmo')->nullable();
             $table->foreign('id_bienImmo')->references('id_bienImmo')->on('Biens_Immo')->onDelete('set null');

@@ -36,10 +36,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('user-account', [ViewsController::class, 'showUserAccount'])->name('user-account');
 
     // Go to the admin account's page
-    Route::get('/admin-account', function () {
-        return view('admin-account');
-    })->name('admin-account');
-
+    Route::get('/admin-account', [ViewsController::class, 'showAdminAccount'])->name('admin-account');
 
 
     /*************************
@@ -95,6 +92,9 @@ Route::middleware(['web'])->group(function () {
 
     // Delete a search registered in database
     Route::delete('/delete-search/{id}', [UtilisateurController::class, 'deleteUserSearch'])->name('delete-search');
+
+    // Delete a contact request registered in database
+    Route::delete('/delete-contact-request/{id}', [UtilisateurController::class, 'deleteContactRequest'])->name('delete-contact-request');
 
     // Logout the connected user
     Route::get('/logout-user', [UtilisateurController::class, 'logoutUser'])->name('logout-user');

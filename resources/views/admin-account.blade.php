@@ -29,24 +29,31 @@
             <h1 class="h-color-dark-primary">Compte administrateur de {{ $user['prenom'] }} {{ $user['nom'] }}</h1>
             <section>
                 <h2>Nos demandes de contact</h2>
-                <div class="favorites-container horizontal">
-                    @for ($i = 1; $i <= 7; $i++)
-                        <div class="notification">
-                            <i class="delete-favorite fa-solid fa-xmark" title="Supprimer cette demande"></i>
-                            <p class="notification-title">René Girard</p>
-                            <p class="notification-date">12/05/2024</p>
-                            <div class="notification-content">
-                                <p><strong>Adresse mail : </strong>r.girard@gmail.com</p>
-                                <p><strong>Téléphone : </strong>0785794825</p>
-                                <p><strong>Bien concerné : </strong><a href="#">Appartement 5 pièces</a></p>
-                                <br>
-                                Bonjour, je souhaiterais connaitre les horaires d'ouverture de l'agence svp, j'ai
-                                l'impression qu'elle est fermée depuis plusieurs jours, est-ce normal ?
+                @if ($contactRequests->isEmpty())
+                    <p>Vous n'avez aucune demande de contact pour l'instant !</p>
+                @else
+                    <div class="favorites-container horizontal">
+                        @foreach($contactRequests as $request)
+                            <div class="notification">
+                                <i class="delete-favorite delete-contact-request fa-solid fa-xmark" data-contact-request-id="{{ $request->id_demande }}" title="Supprimer cette demande"></i>
+                                <p class="notification-title">{{ $request->prenom_demandeur }} {{ $request->nom_demandeur }}</p>
+                                <p class="notification-date">{{ \Carbon\Carbon::parse($request->created_at)->format('d/m/Y') }}</p>
+                                <div class="notification-content">
+                                    <p><strong>Adresse mail : </strong>{{$request->mail_demandeur}}</p>
+                                    <p><strong>Téléphone : </strong>{{$request->tel_demandeur}}</p>
+                                    @if(isset($request->id_bienImmo))
+                                        <p><strong>Bien concerné : </strong><a href="{{ route('detail-property', ['id' => $request->id_bienImmo]) }}">{{ $request->getBienImmo->titre_annonce }}</a></p>
+                                    @endif
+                                    @if(isset($request->contenu_demande))
+                                        <br>
+                                        {{ $request->contenu_demande }}
+                                    @endif
+                                </div>
+                                <button class="open-notification"><i class="fa fa-plus"></i></button>
                             </div>
-                            <button class="open-notification"><i class="fa fa-plus"></i></button>
-                        </div>
-                    @endfor
-                </div>
+                        @endforeach
+                    </div>
+                @endif
             </section>
 
             <section>
@@ -118,30 +125,36 @@
             <section class="account-form">
                 <h2 class="text-center">Mes informations</h2>
                 <div class="contact-form">
-                    <form action="#_" method="POST">
+                    <form id="update-user-form" action="{{ route('update-user') }}" method="POST">
+                        @csrf
                         <div>
-                            <label for="firstname">Prénom<span class="required-indicator">*</span></label>
-                            <input type="text" id="firstname" name="firstname" required>
+                            <label for="update-firstname">Prénom<span class="required-indicator">*</span></label>
+                            <input type="text" id="update-firstname" name="update-firstname" value="{{ $user['prenom'] }}" required>
+                            <span class="text-danger" id="error-update-firstname"></span>
                         </div>
 
                         <div>
-                            <label for="lastname">Nom de famille<span class="required-indicator">*</span></label>
-                            <input type="text" id="lastname" name="lastname" required>
+                            <label for="update-lastname">Nom de famille<span class="required-indicator">*</span></label>
+                            <input type="text" id="update-lastname" name="update-lastname" value="{{ $user['nom'] }}" required>
+                            <span class="text-danger" id="error-update-lastname"></span>
                         </div>
 
                         <div>
-                            <label for="phone">Numéro de téléphone<span class="required-indicator">*</span></label>
-                            <input type="tel" id="phone" name="phone" required>
+                            <label for="update-phone">Numéro de téléphone<span class="required-indicator">*</span></label>
+                            <input type="tel" id="update-phone" name="update-phone" value="{{ $user['telephone'] }}" required>
+                            <span class="text-danger" id="error-update-phone"></span>
                         </div>
 
                         <div>
-                            <label for="mail">Email<span class="required-indicator">*</span></label>
-                            <input type="email" id="mail" name="mail" required>
+                            <label for="update-mail">Email<span class="required-indicator">*</span></label>
+                            <input type="email" id="update-mail" name="update-mail" value="{{ $user['email'] }}" required>
+                            <span class="text-danger" id="error-update-mail"></span>
                         </div>
 
                         <div>
-                            <label for="password">Mot de passe<span class="required-indicator">*</span></label>
-                            <input type="password" id="password" name="password" required>
+                            <label for="update-password">Mot de passe<span class="required-indicator">*</span></label>
+                            <input type="password" id="update-password" name="update-password" value="{{ $user['mot_de_passe'] }}" required>
+                            <span class="text-danger" id="error-update-password"></span>
                         </div>
 
                         <div>

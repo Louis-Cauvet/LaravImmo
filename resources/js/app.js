@@ -421,6 +421,28 @@ if (deleteSearchButton) {
     });
 }
 
+const deleteContactRequestButton = document.querySelectorAll('.delete-contact-request');
+if (deleteContactRequestButton) {
+    deleteContactRequestButton.forEach(deleteButton => {
+        deleteButton.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const contactRequestId = this.dataset.contactRequestId;
+            csrfFetch(`/delete-contact-request/${contactRequestId}`, {
+                method: 'DELETE',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.contactRequestDeleted) {
+                        this.closest('.notification').remove();
+                    }
+                })
+                .catch(error => console.error('Une erreur s\'est produite au moment de la suppression de la demande de contact : ', error));
+
+        });
+    });
+}
+
 /*************************************
  FORM SUBMISSIONS
  *************************************/

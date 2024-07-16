@@ -17,6 +17,7 @@ class DemandeContact extends Model
         'nom_demandeur',
         'prenom_demandeur',
         'mail_demandeur',
+        'tel_demandeur',
         'contenu_demande',
         'id_bienImmo',
     ];
