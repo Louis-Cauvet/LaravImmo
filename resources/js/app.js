@@ -251,9 +251,6 @@ if (addToFavoriteButton) {
                             if (data.removedFavorite === true) {
                                 addToFavoriteButton.classList.remove('as--favorite');
                                 addToFavoriteButton.title = "Ajouter aux favoris";
-                                alert(data.message);
-                            }  else {
-                                alert(data.message);
                             }
                         })
                         .catch(error => {
@@ -269,7 +266,6 @@ if (addToFavoriteButton) {
                             if (data.registeredFavorite === true) {
                                 addToFavoriteButton.classList.add('as--favorite');
                                 addToFavoriteButton.title = "Retirer des favoris";
-                                alert(data.message);
                             }
                         })
                         .catch(error => {
@@ -411,7 +407,7 @@ if (deleteSearchButton) {
             })
             .then(response => response.json())
             .then(data => {
-                if (data.searchDeleted) {
+                if (data.searchDeleted === true) {
                     this.closest('.search-card').remove();
                 }
             })
@@ -421,6 +417,9 @@ if (deleteSearchButton) {
     });
 }
 
+/***
+ * Delete a contact request from the database
+ ***/
 const deleteContactRequestButton = document.querySelectorAll('.delete-contact-request');
 if (deleteContactRequestButton) {
     deleteContactRequestButton.forEach(deleteButton => {
@@ -433,12 +432,65 @@ if (deleteContactRequestButton) {
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.contactRequestDeleted) {
+                    if (data.contactRequestDeleted === true) {
                         this.closest('.notification').remove();
                     }
                 })
                 .catch(error => console.error('Une erreur s\'est produite au moment de la suppression de la demande de contact : ', error));
 
+        });
+    });
+}
+
+/***
+ * Change the visibility of a property
+ ***/
+const changeVisibilityButton = document.querySelectorAll('.visibility-button');
+if (changeVisibilityButton) {
+    changeVisibilityButton.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const propertyId = this.dataset.id;
+            csrfFetch(`/change-visibility-property/${propertyId}`, {
+                method: 'POST',
+            })
+            .then(response => response.json())
+            .then(data => {
+                const cardImmo = this.closest('.favorite-card');
+                if (data.visibilityChanged === "hidden") {
+                    cardImmo.querySelector('.card-immo').classList.add('hidden-to-clients');
+                    cardImmo.querySelector('.visibility-button').textContent = "Rendre visible";
+                } else if(data.visibilityChanged === "visible") {
+                    cardImmo.querySelector('.card-immo').classList.remove('hidden-to-clients');
+                    cardImmo.querySelector('.visibility-button').textContent = "Masquer";
+                }
+            })
+            .catch(error => console.error('Une erreur s\'est produite au moment du changement de visibilité du bien immobilier : ', error));
+        });
+    });
+}
+
+/***
+ * Delete a property
+ ***/
+const deletePropertyButton = document.querySelectorAll('.delete-property-button');
+if (deletePropertyButton) {
+    deletePropertyButton.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const propertyId = this.dataset.id;
+            csrfFetch(`/delete-property/${propertyId}`, {
+                method: 'POST',
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.propertyDeleted === true) {
+                    this.closest('.favorite-card').remove();
+                }
+            })
+            .catch(error => console.error('Une erreur s\'est produite au moment de la suppression du bien immobilier : ', error));
         });
     });
 }
@@ -861,3 +913,50 @@ if (document.querySelector('#update-user-form')) {
     });
 }
 
+/***
+ * Send notification to user form
+ ***/
+document.querySelectorAll('.send-notification-client').forEach(form => {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        let hasError = false;
+
+        const clientId = form.querySelector('input[name="id_client"]').value;
+
+        const titre_notif = form.querySelector('input[name="titre_notif"]').value;
+        if (titre_notif === '') {
+            displayErrorMessage(document.getElementById('error-titre_notif'), 'Ce champ est obligatoire.');
+            hasError = true;
+        }
+
+        const contenu_notif = form.querySelector('textarea[name="contenu_notif"]').value;
+        if (contenu_notif === '') {
+            displayErrorMessage(document.getElementById('error-contenu_notif'), 'Ce champ est obligatoire.');
+            hasError = true;
+        }
+
+        if (!hasError) {
+            const requestData = {
+                id_client: clientId,
+                titre_alerte: titre_notif,
+                contenu_alerte: contenu_notif
+            };
+
+            csrfFetch("/send-notification-client", {
+                method: 'POST',
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.notificationSended === true) {
+                    alert("La notification à bien été envoyée à l'utilisateur !");
+                    this.reset();
+                } else {
+                    alert('Erreur lors de l\'envoi de la notification à l\'utilisateur');
+                }
+            })
+            .catch(error => console.error('Une erreur est survenue lors de l\'envoi de la notification à l\'utilisateur : ', error));
+        }
+    });
+});

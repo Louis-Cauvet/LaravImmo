@@ -191,4 +191,30 @@ class BienController extends Controller
 
         return redirect()->route('sale-form');
     }
+
+    // Change the property's visibility
+    public function changeVisibilityProperty($id)
+    {
+        $bien = BienImmo::findOrFail($id);
+        $bienStatus = $bien->disponible;
+        if ($bienStatus == 0) {
+            $bien->disponible = 1;
+            $returnStatus = "visible";
+        } else {
+            $bien->disponible = 0;
+            $returnStatus = "hidden";
+        }
+        $bien->save();
+
+        return response()->json(['visibilityChanged' => $returnStatus]);
+    }
+
+    // Delete the property
+    public function deleteProperty($id) {
+        $bien = BienImmo::findOrFail($id);
+
+        $bien->delete();
+
+        return response()->json(['propertyDeleted' => true]);
+    }
 }

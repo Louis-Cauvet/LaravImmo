@@ -70,6 +70,9 @@ Route::middleware(['web'])->group(function () {
     // Get the form submission of update user
     Route::post('/update-user', [UtilisateurController::class, 'updateUser'])->name('update-user');
 
+    // Get the form submission of client's notification
+    Route::post('/send-notification-client', [UtilisateurController::class, 'sendNotificationClient'])->name('send-notification-client');
+
 
     /*************************
      * OTHER ACTIONS
@@ -95,6 +98,12 @@ Route::middleware(['web'])->group(function () {
 
     // Delete a contact request registered in database
     Route::delete('/delete-contact-request/{id}', [UtilisateurController::class, 'deleteContactRequest'])->name('delete-contact-request');
+
+    // Change the property's visibility
+    Route::post('change-visibility-property/{id}', [BienController::class, 'changeVisibilityProperty'])->name('change-visibility-property');
+
+    // Delete a property
+    Route::post('delete-property/{id}', [BienController::class, 'deleteProperty'])->name('delete-property');
 
     // Logout the connected user
     Route::get('/logout-user', [UtilisateurController::class, 'logoutUser'])->name('logout-user');

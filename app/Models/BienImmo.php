@@ -30,4 +30,11 @@ class BienImmo extends Model
     {
         return $this->belongsTo(TypeBien::class, 'typeBien_id', 'id_typeBien');
     }
+
+
+    // Get all the clients interested by the property
+    public function getClientsInteressés()
+    {
+        return $this->belongsToMany(Utilisateur::class, 'Favoris', 'id_bienImmo', 'id_client');
+    }
 }

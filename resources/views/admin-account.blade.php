@@ -58,69 +58,88 @@
 
             <section>
                 <h2>Nos biens</h2>
-                <div class="favorites-container horizontal">
-                    @for ($i = 1; $i <= 7; $i++)
-                        <div class="favorite-card">
-                            <a href="#_" class="card-immo hidden-to-clients">
-                                <div class="img-container">
-                                    <img src="/resources/img/photo-annonce1.jpg" alt="texte alternatif">
-                                    <span class="filter-img"></span>
-                                    <p class="price-property">115 500 €</p>
-                                    <i class="hidden-property fas fa-eye-slash"></i>
+                @if ($biens->isEmpty())
+                    <p>Vous n'avez aucun bien dans la base de données pour l'instant</p>
+                @else
+                    <div class="favorites-container horizontal">
+                        @foreach($biens as $bien)
+                            <div class="favorite-card">
+                                <a href="{{ route('detail-property', $bien->id_bienImmo) }}" class="card-immo @if($bien->disponible == 0) hidden-to-clients @endif">
+                                    <div class="img-container">
+                                        <img src="{{ asset('storage/' . $bien->getImages->first()->image_path) }}" alt="texte alternatif">
+                                        <span class="filter-img"></span>
+                                        <p class="price-property">{{ number_format($bien->prix, 0, ',', ' ') }} €</p>
+                                        <i class="hidden-property fas fa-eye-slash"></i>
+                                    </div>
+                                    <p class="title-property">{{ $bien->titre_annonce }}</p>
+                                    <p class="city-property"><i class="fas fa-map-marker-alt"></i>{{ $bien->ville }}</p>
+                                </a>
+                                <div class="admin-actions">
+                                    <button class="a-button visibility-button h-bg-primary h-color-white" data-id="{{ $bien->id_bienImmo }}">@if($bien->disponible == 0) Rendre visible @else Masquer @endif</button>
+                                    <button class="a-button delete-property-button h-bg-primary h-color-white" data-id="{{ $bien->id_bienImmo }}">Supprimer</button>
+                                    <button class="show-interested-clients a-button h-bg-primary h-color-white">Consulter les clients intéréssés</button>
                                 </div>
-                                <p class="title-property">Appartement 5 pièces</p>
-                                <p class="city-property"><i class="fas fa-map-marker-alt"></i>Dijon</p>
-                            </a>
-                            <div class="admin-actions">
-                                <a href="#_" class="a-button h-bg-primary h-color-white">Modifier</a>
-                                <button class="a-button h-bg-primary h-color-white">Masquer</button>
-                                <button class="a-button h-bg-primary h-color-white">Supprimer</button>
-                                <button class="show-interested-clients a-button h-bg-primary h-color-white">Consulter les clients intéréssés</button>
+                                <div class="interested-clients">
+                                    @if ($bien->getClientsInteressés->count() == 0)
+                                        <p>Aucun client n'a mis ce bien en favoris pour l'instant...</p>
+                                    @else
+                                        <p><strong>{{ $bien->getClientsInteressés()->count() }} clients intéressés :</strong></p>
+                                        <ul>
+                                            @foreach ($bien->getClientsInteressés as $client)
+                                                <li>
+                                                    <a href="#user-{{ $client->id_client }}">{{ $client->prenom }} {{ $client->nom }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </div>
                             </div>
-                            <div class="interested-clients">
-                                <p><strong>10 clients intéressés :</strong></p>
-                                <ul>
-                                    @for ($j = 1; $j <= 10; $j++)
-                                    <li>
-                                        <a href="#_id">Jean Pierre Mader</a>
-                                    </li>
-                                    @endfor
-                                </ul>
-                            </div>
-                        </div>
-                    @endfor
-                </div>
+                        @endforeach
+                    </div>
+                @endif
             </section>
 
             <section class="profiles-clients">
                 <h2>Nos clients</h2>
-                <div class="favorites-container horizontal">
-                    @for ($i = 1; $i <= 7; $i++)
-                        <div class="user-profile">
-                            <ul id="id_user">
-                                <li>
-                                    <i class="fa-solid fa-user"></i>
-                                    <p>Louis Cauvet</p>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-at"></i>
-                                    <p>louiscauvet8@gmail.com</p>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-phone"></i>
-                                    <p>0782756984</p>
-                                </li>
-                            </ul>
-                            <div class="write-notif-area">
-                                <button class="write-notification-client a-button h-bg-primary h-color-white">Rédiger une notification personnelle</button>
-                                <div>
-                                    <textarea rows="8"></textarea>
-                                    <button class="send-notification-client a-button h-bg-primary h-color-white">Envoyer la notification</button>
+                @if ($clients->isEmpty())
+                    <p>Aucun client n'a crée de compte pour l'instant !</p>
+                @else
+                    <div class="favorites-container horizontal">
+                        @foreach($clients as $client)
+                            <div id="user-{{ $client->id_client }}" class="user-profile">
+                                <ul>
+                                    <li>
+                                        <i class="fa-solid fa-user"></i>
+                                        <p>{{ $client->prenom }} {{ $client->nom }}</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-at"></i>
+                                        <p>{{ $client->email }}</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-phone"></i>
+                                        <p>{{ $client->telephone }}</p>
+                                    </li>
+                                </ul>
+                                <div class="write-notif-area">
+                                    <button class="write-notification-client a-button h-bg-primary h-color-white">Rédiger une notification personnelle</button>
+                                    <form class="send-notification-client">
+                                        @csrf
+                                        <input type="hidden" name="id_client" value="{{ $client->id_client }}">
+
+                                        <input type="text" name="titre_notif" placeholder="Titre" required>
+                                        <span class="text-danger" id="error-titre_notif"></span>
+
+                                        <textarea rows="8" name="contenu_notif" placeholder="Message" required></textarea>
+                                        <span class="text-danger" id="error-contenu_notif"></span>
+
+                                        <button type="submit" class="send-notification-client a-button h-bg-primary h-color-white">Envoyer la notification</button>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
-                    @endfor
-                </div>
+                        @endforeach
+                    </div>
+                @endif
             </section>
             <section class="account-form">
                 <h2 class="text-center">Mes informations</h2>

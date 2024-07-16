@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BienImmo;
+use App\Models\Utilisateur;
 use App\Models\Favori;
 use App\Models\Recherche;
 use App\Models\DemandeContact;
@@ -56,7 +57,9 @@ class ViewsController extends Controller
     // Get the contact requests for display them in the admin account page
     public function showAdminAccount() {
         $contactRequests = DemandeContact::all();
+        $biens = BienImmo::all();
+        $clients = Utilisateur::where('role_id', 2)->get();
 
-        return view('admin-account', compact('contactRequests'));
+        return view('admin-account', compact('contactRequests', 'biens', 'clients'));
     }
 }

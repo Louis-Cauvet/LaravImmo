@@ -763,10 +763,10 @@ header .burger-menu .burger-body:after {
 .profiles-clients .user-profile .write-notif-area.active .write-notification-client {
   display: none;
 }
-.profiles-clients .user-profile .write-notif-area.active > div {
+.profiles-clients .user-profile .write-notif-area.active form {
   display: flex;
 }
-.profiles-clients .user-profile .write-notif-area > div {
+.profiles-clients .user-profile .write-notif-area form {
   display: none;
   flex-direction: column;
   align-items: center;

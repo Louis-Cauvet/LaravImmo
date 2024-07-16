@@ -7,6 +7,7 @@ use App\Models\Utilisateur;
 use App\Models\Favori;
 use App\Models\Recherche;
 use App\Models\TypeBien;
+use App\Models\AlerteClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +19,8 @@ use Carbon\Carbon;
 class UtilisateurController extends Controller
 {
     // Check if the user's mail already exists in the database (for the client's side verification)
-    public function checkExistingEmail(Request $request) {
+    public function checkExistingEmail(Request $request)
+    {
 
         $email = $request->input('email');
         $exists = Utilisateur::where('email', $email)->exists();
@@ -29,7 +31,8 @@ class UtilisateurController extends Controller
 
 
     // Check the user's data entered in the registration form, and saves it in the database if everything is correct (server's side verification)
-    public function registerUser(Request $request) {
+    public function registerUser(Request $request)
+    {
 
         $validatedData = $request->validate([
             'firstname' => 'required|string|max:50',
@@ -55,7 +58,8 @@ class UtilisateurController extends Controller
     }
 
     // Check if the user's mail already exists in the database (for the client's side verification)
-    public function verifyExistingUser(Request $request) {
+    public function verifyExistingUser(Request $request)
+    {
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
@@ -72,7 +76,8 @@ class UtilisateurController extends Controller
 
 
     // Check the user's data entered in the login form, and connect it if they are valid.
-    public function connectUser(Request $request) {
+    public function connectUser(Request $request)
+    {
         $request->validate([
             'mail' => 'required|email',
             'password' => 'required|string',
@@ -104,7 +109,9 @@ class UtilisateurController extends Controller
         ]);
     }
 
-    public function updateUser(Request $request){
+    // Update the user's data
+    public function updateUser(Request $request)
+    {
         session_start();
 
         $userId = $_SESSION['user']['id'];
@@ -138,7 +145,8 @@ class UtilisateurController extends Controller
     }
 
     // Add a property in favorites
-    public function addFavorite(Request $request){
+    public function addFavorite(Request $request)
+    {
         session_start();
 
         Favori::create([
@@ -148,11 +156,12 @@ class UtilisateurController extends Controller
         ]);
 
 
-        return response()->json(['registeredFavorite' => true, 'message' => 'Ce bien à été ajouté à vos favoris ! Retrouvez-les tous depuis votre compte.']);
+        return response()->json(['registeredFavorite' => true]);
     }
 
     // Remove a property from favorites
-    public function removeFavorite(Request $request){
+    public function removeFavorite(Request $request)
+    {
         session_start();
 
         if (!isset($_SESSION['user'])) {
@@ -200,7 +209,8 @@ class UtilisateurController extends Controller
     }
 
     // Delete a research registered in the database
-    public function deleteUserSearch($id) {
+    public function deleteUserSearch($id)
+    {
         $recherche = Recherche::findOrFail($id);
         $recherche->delete();
 
@@ -208,7 +218,8 @@ class UtilisateurController extends Controller
     }
 
     // Send a contact request
-    public function sendContactRequest(Request $request){
+    public function sendContactRequest(Request $request)
+    {
         $validatedData = $request->validate([
             'contact-lastname' => 'required|string|max:255',
             'contact-firstname' => 'required|string|max:255',
@@ -232,12 +243,32 @@ class UtilisateurController extends Controller
 
 
     // Delete a contact request registered in the database
-    public function deleteContactRequest($id){
+    public function deleteContactRequest($id)
+    {
 
         $demande = DemandeContact::findOrFail($id);
         $demande->delete();
 
         return response()->json(['contactRequestDeleted' => true]);
+    }
+
+
+    public function sendNotificationClient(Request $request)
+    {
+
+        $request->validate([
+            'id_client' => 'required|exists:Utilisateurs,id_client',
+            'titre_alerte' => 'required|string|max:255',
+            'contenu_alerte' => 'required|string',
+        ]);
+
+        AlerteClient::create([
+            'id_client' => $request->input('id_client'),
+            'titre_alerte' => $request->input('titre_alerte'),
+            'contenu_alerte' => $request->input('contenu_alerte'),
+        ]);
+
+        return response()->json(['notificationSended' => true]);
     }
 
 
@@ -253,7 +284,8 @@ class UtilisateurController extends Controller
     }
 
     // Logout the user and redirect in the previous page if it's possible
-    public function logoutUser(){
+    public function logoutUser()
+    {
         session_start();
         session_destroy();
 
