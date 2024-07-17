@@ -77,7 +77,7 @@ class BienImmoSeeder extends Seeder
                 'neuf' => true,
                 'garage' => false,
                 'terrain' => false,
-                'disponible' => true,
+                'disponible' => false,
                 'images' => [
                     'bien2-1.jpg',
                     'bien2-2.jpg',
@@ -171,7 +171,7 @@ class BienImmoSeeder extends Seeder
                 'neuf' => true,
                 'garage' => true,
                 'terrain' => false,
-                'disponible' => false,
+                'disponible' => true,
                 'images' => [
                     'bien5-1.jpg',
                     'bien5-2.jpg',
@@ -290,6 +290,232 @@ class BienImmoSeeder extends Seeder
                 'images' => [
                     'bien9-1.jpg',
                     'bien9-2.jpg',
+                ]
+            ],
+            [
+                'typeBien_id' => 2,
+                'titre_annonce' => 'Duplex moderne avec vue sur la ville',
+                'contenu_annonce' => 'Ce superbe duplex de 80 m² est situé dans un quartier prisé et offre une vue imprenable sur la ville.
+                          Avec son espace de vie spacieux et lumineux, il comprend un salon-salle à manger ouvert sur une cuisine
+                          américaine équipée. À l\'étage, vous trouverez deux chambres avec placards intégrés et une salle de bains
+                          contemporaine. Parfait pour les familles ou les jeunes couples, ce bien est proche des écoles, des
+                          commerces et des transports en commun. Le bâtiment est sécurisé et dispose d\'un ascenseur et d\'un
+                          parking souterrain.',
+                'prix' => 325000.00,
+                'adresse' => '15 Rue Claudius Pionchon',
+                'ville' => 'Lyon',
+                'code_postal' => '69003',
+                'surface' => 80,
+                'nb_pieces' => 4,
+                'nb_chambres' => 2,
+                'nb_sdb' => 1,
+                'achat' => true,
+                'neuf' => true,
+                'garage' => true,
+                'terrain' => false,
+                'disponible' => true,
+                'images' => [
+                    'bien10-1.jpg',
+                    'bien10-2.jpg',
+                    'bien10-3.jpg',
+                ]
+            ],
+            [
+                'typeBien_id' => 2,
+                'titre_annonce' => 'Studio cosy avec terrasse dans quartier animé',
+                'contenu_annonce' => 'Ce studio de 40 m² offre un espace de vie optimisé et moderne. Situé dans un quartier vivant,
+                          il dispose d\'une grande pièce à vivre avec une kitchenette équipée et un coin repas. La salle de bains
+                          est fonctionnelle et récente. La terrasse privée est parfaite pour profiter des beaux jours. Idéal pour
+                          les étudiants ou les jeunes professionnels, ce studio est proche des universités, des cafés et des
+                          transports en commun. Le bâtiment est récent et bien entretenu avec un gardien et un accès sécurisé.',
+                'prix' => 145000.00,
+                'adresse' => '9 Rue de Vaucouleurs',
+                'ville' => 'Paris',
+                'code_postal' => '75000',
+                'surface' => 28,
+                'nb_pieces' => 1,
+                'nb_chambres' => 0,
+                'nb_sdb' => 1,
+                'achat' => true,
+                'neuf' => true,
+                'garage' => false,
+                'terrain' => false,
+                'disponible' => true,
+                'images' => [
+                    'bien11-1.jpg',
+                    'bien11-2.jpg',
+                    'bien11-3.jpg',
+                ]
+            ],
+            [
+                'typeBien_id' => 1,
+                'titre_annonce' => 'Maison écologique moderne avec jardin',
+                'contenu_annonce' => 'Découvrez cette superbe maison familiale alliant confort moderne et respect de
+                                      l\'environnement. Dotée de trois chambres spacieuses, d\'un salon lumineux avec
+                                      cheminée écologique, et d\'une cuisine ouverte équipée, elle offre un cadre de vie
+                                      idéal. Le jardin paysager de 800 m² dispose d\'un système d\'irrigation intelligent
+                                      et d\'un potager pour les amateurs de jardinage. Profitez d\'une terrasse en bois
+                                      avec vue dégagée sur la forêt environnante et d’un garage pour deux voitures. Cette
+                                      maison est un véritable havre de paix, parfait pour une famille soucieuse de son empreinte écologique',
+                'prix' => 1780.00,
+                'adresse' => '4 Rue Emile Duclaux',
+                'ville' => 'Paris',
+                'code_postal' => '75000',
+                'surface' => 180,
+                'nb_pieces' => 5,
+                'nb_chambres' => 3,
+                'nb_sdb' => 1,
+                'achat' => false,
+                'neuf' => false,
+                'garage' => true,
+                'terrain' => true,
+                'disponible' => true,
+                'images' => [
+                    'bien12-1.jpg',
+                    'bien12-2.jpg',
+                ]
+            ],
+            [
+                'typeBien_id' => 2,
+                'titre_annonce' => 'Appartement penthouse luxueux avec vue panoramique',
+                'contenu_annonce' => 'Ce penthouse exceptionnel, situé au cœur du centre-ville, vous offre une vue
+                                      imprenable sur la skyline urbaine. Avec ses quatre chambres, un grand salon ouvert
+                                      avec baies vitrées, et une cuisine gourmet équipée, cet appartement incarne le luxe
+                                      moderne. La terrasse privée de 150 m² est équipée d\'une piscine à débordement et
+                                      d\'un espace barbecue, idéal pour les réceptions en plein air. Les finitions haut
+                                      de gamme, les sols en marbre et les équipements domotiques font de ce bien une
+                                      opportunité rare sur le marché. Profitez également d’un accès direct à un spa et
+                                      une salle de gym privative',
+                'prix' => 680000.00,
+                'adresse' => '28 Rue Augereau',
+                'ville' => 'Paris',
+                'code_postal' => '75000',
+                'surface' => 340,
+                'nb_pieces' => 8,
+                'nb_chambres' => 4,
+                'nb_sdb' => 2,
+                'achat' => true,
+                'neuf' => true,
+                'garage' => true,
+                'terrain' => false,
+                'disponible' => true,
+                'images' => [
+                    'bien13-1.jpg',
+                    'bien13-2.jpg',
+                    'bien13-3.jpg',
+                    'bien13-4.jpg',
+                ]
+            ],
+            [
+                'typeBien_id' => 1,
+                'titre_annonce' => 'Maison de campagne charmante avec terrain',
+                'contenu_annonce' => 'Nichée dans un écrin de verdure, cette maison de campagne allie charme rustique
+                                      et confort moderne. Offrant trois chambres confortables, un salon avec poutres
+                                      apparentes, et une cuisine en pierre, elle est idéale pour les amateurs de
+                                      tranquillité. Le terrain de 2 hectares comprend une écurie pour chevaux, un atelier
+                                      de jardinage, et un verger. Une grande terrasse couverte permet de profiter des
+                                      repas en extérieur tout en admirant la vue sur les collines environnantes. Parfaite
+                                      pour une famille à la recherche d\'un cadre paisible, cette maison est un vrai coup de cœur.',
+                'prix' => 2100.00,
+                'adresse' => '2 Rue Houdart de Lamotte',
+                'ville' => 'Paris',
+                'code_postal' => '75000',
+                'surface' => 240,
+                'nb_pieces' => 5,
+                'nb_chambres' => 2,
+                'nb_sdb' => 1,
+                'achat' => false,
+                'neuf' => false,
+                'garage' => false,
+                'terrain' => true,
+                'disponible' => true,
+                'images' => [
+                    'bien14-1.jpg',
+                    'bien14-2.jpg',
+                ]
+            ],
+            [
+                'typeBien_id' => 2,
+                'titre_annonce' => 'Appartement contemporain avec accès direct à la plage',
+                'contenu_annonce' => 'Ce magnifique appartement situé en bord de plage offre un accès direct au sable fin
+                                      et aux eaux cristallines. Avec deux chambres, une salle de bain moderne, et un
+                                      séjour spacieux baigné de lumière naturelle, il représente la vie côtière à son
+                                      meilleur. La cuisine ouverte est équipée des derniers appareils électroménagers,
+                                      tandis que la terrasse privée permet de savourer les couchers de soleil sur l\'océan.
+                                      Un espace de stationnement sécurisé et une piscine commune avec vue sur la mer ajoutent
+                                      au confort de ce bien unique. Idéal pour ceux qui recherchent un cadre de vie idyllique
+                                      en bord de mer.',
+                'prix' => 197000.00,
+                'adresse' => '14 Voie Georges Pompidou',
+                'ville' => 'Paris',
+                'code_postal' => '75000',
+                'surface' => 90,
+                'nb_pieces' => 4,
+                'nb_chambres' => 2,
+                'nb_sdb' => 1,
+                'achat' => false,
+                'neuf' => true,
+                'garage' => true,
+                'terrain' => false,
+                'disponible' => true,
+                'images' => [
+                    'bien15-1.jpg',
+                ]
+            ],
+            [
+                'typeBien_id' => 3,
+                'titre_annonce' => 'Terrain constructible avec vue imprenable sur les montagnes',
+                'contenu_annonce' => 'Ce terrain de 1500 m², situé dans une région montagnarde pittoresque, est parfait
+                                      pour construire la maison de vos rêves. Offrant une vue dégagée sur les sommets
+                                      environnants, il bénéficie d\'une orientation optimale pour maximiser l\'ensoleillement
+                                      tout au long de la journée. Le terrain est viabilisé et prêt à être développé, avec
+                                      un accès facile aux routes principales tout en préservant une certaine intimité. Que
+                                      vous souhaitiez un chalet en bois ou une maison contemporaine, cet emplacement idéal
+                                      combine tranquillité et beauté naturelle.',
+                'prix' => 140000.00,
+                'adresse' => '59 Rue Spontini',
+                'ville' => 'Paris',
+                'code_postal' => '75000',
+                'surface' => 1500,
+                'nb_pieces' => 0,
+                'nb_chambres' => 0,
+                'nb_sdb' => 0,
+                'achat' => true,
+                'neuf' => false,
+                'garage' => false,
+                'terrain' => false,
+                'disponible' => true,
+                'images' => [
+                    'bien16-1.jpg',
+                ]
+            ],
+            [
+                'typeBien_id' => 2,
+                'titre_annonce' => 'Appartement moderne avec jardin dans résidence sécurisée',
+                'contenu_annonce' => 'Situé dans une résidence sécurisée, cet appartement de deux chambres offre une vie
+                                      confortable avec un jardin privatif. Le séjour lumineux s\'ouvre sur une terrasse
+                                      avec accès direct au jardin, idéal pour se détendre ou recevoir des invités. La
+                                      cuisine est entièrement équipée avec des appareils modernes, et la chambre principale
+                                      dispose d\'une salle de bain en suite. Les espaces communs comprennent une piscine
+                                      et un parc pour enfants. Ce bien est parfait pour ceux qui recherchent un mélange
+                                      de sécurité, confort, et espaces extérieurs dans un cadre agréable.',
+                'prix' => 845.00,
+                'adresse' => '236 Rue de Tolbiac',
+                'ville' => 'Paris',
+                'code_postal' => '75000',
+                'surface' => 86,
+                'nb_pieces' => 3,
+                'nb_chambres' => 1,
+                'nb_sdb' => 1,
+                'achat' => false,
+                'neuf' => true,
+                'garage' => true,
+                'terrain' => true,
+                'disponible' => true,
+                'images' => [
+                    'bien17-1.jpg',
+                    'bien17-2.jpg',
+                    'bien17-3.jpg',
                 ]
             ],
         ];

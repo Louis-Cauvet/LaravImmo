@@ -102,7 +102,7 @@ class BienController extends Controller
     public function showAllProperties()
     {
         session_start();
-        $properties = BienImmo::where('disponible', 1)->paginate(6);
+        $properties = BienImmo::where('disponible', 1)->orderBy('created_at', 'desc')->paginate(6);
         $searchExists = '';
 
         return view('listing-property', compact('properties', 'searchExists'));
@@ -244,8 +244,8 @@ class BienController extends Controller
 
         foreach ($usersInterested as $user) {
             $utilisateurId = $user->id_client;
-            $titreAlerte = 'Favori supprimé';
-            $contenuAlerte = 'Un bien que vous aviez ajouté à vos favoris a été supprimé : ' . $bien->titre_annonce;
+            $titreAlerte = $bien->titre_annonce .' supprimé';
+            $contenuAlerte = 'Ce bien que vous aviez ajouté à vos favoris a été supprimé de notre base de données et ne sera plus proposé sur notre site !';
 
             AlerteClient::create([
                 'id_client' => $utilisateurId,

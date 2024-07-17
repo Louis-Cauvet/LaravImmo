@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             RolesUtilisateursSeeder::class,
             BienImmoSeeder::class,
             UtilisateursSeeder::class,
+            FavorisSeeder::class,
         ]);
     }
 }

@@ -48,7 +48,7 @@ class ViewsController extends Controller
         }
 
         $id_user = $_SESSION['user']['id'];
-        $favorites = Favori::where('id_client', $id_user)->with('getBienImmo')->orderBy('created_at', 'desc')->get();
+        $favorites = Favori::where('id_client', $id_user)->whereHas('getBienImmo', fn($query) => $query->where('disponible', 1))->with('getBienImmo')->orderBy('created_at', 'desc')->get();
         $researches = Recherche::where('id_client', $id_user)->with('getTypeBien')->orderBy('created_at', 'desc')->get();
         $notifications = AlerteClient::where('id_client', $id_user)->orderBy('created_at', 'desc')->get();
 

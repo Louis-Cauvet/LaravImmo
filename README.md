@@ -1,66 +1,33 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Larav'immo 🏠
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+>Projet final du cours de Laravel durant le S2 de 3èeme année de Bachelor Ingénierie du Web à l'ESGI Lyon
+### Objectif 🎯
+L'objectif de ce projet est de concevoir et développer, à l'aide des connaissances de base en Laravel abordées durant le cours, un site fictif d'agence immobilière, proposant plusieurs fonctionnalités aux utilisateurs :
+- Consulter tous les biens immobiliers disponibles
+- Filter sa recherche de bien immobilier selon plusieurs critères (type de bien, mots clés, ville, prix maximum...)
+- Consulter le détail d'un bien (caroussel de photos, surface, détail des pièces, neuf ou non, présence d'un garage ou d'un terrain, localisation sur Maps...)
+- Envoyer une demande de contact qui concerne un bien qui lui plaît (ou bien une demande de contact plus générale)
+- Enregistrer sa recherche dans son compte pour pouvoir la relancer facilement plus tard (nécéssite d'être connecté à son compte)
+- Enregistrer un bien dans ses favoris, afin de le retrouver depuis son compte et recevoir des notifications le concernant (nécéssite d'être connecté à son compte)
+- Proposer un nouveau bien immobilier sur le site, en renseignant tous les critères nécéssaires (nécéssite d'être connecté à son compte)
+- Créer son compte et pouvoir s'y connecter pour consulter ses notifications, ses biens favoris, ses recherches enregistrées ou modifier ses informations personnelles
 
-## About Laravel
+De plus , il existe un deuxième type d'utilisateur possédant un compte, les administrateurs du site.
+Ces derniers doivent également avoir la possibilité d'accéder à leur interface admin pour :
+- Consulter les demandes de contact envoyées par les autres utilisateurs
+- Gérer tous les biens immobiliers (les rendre disponible ou non, les supprimer), et consuler la liste des utilisateurs qui ont ajouté chaque bien en favori
+- Consulter la liste de tous les utilisateurs possédant un compte, et pouvoir leur envoyer une notification de manière individuelle
+- Modifier ses informations personnelles
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Technologies ⚙️
+Projet réalisé en **Laravel**, que je n'avais jusque-là jamais étudié ou utilisé. Le Front du site est réalisé avec le moteur de template **Blade**, du **Sass** et du **Vanilla JS**.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Prise en main du projet ⬇️
+Une fois le projet chargé en local (pensez à indiquer les informations de votre base de données dans un .env), lancez votre serveur local PHP, puis exécutez ``php artisan migrate`` pour charger les tables dans la base de données, et ``php artisan db:seed`` pour y injecter les données par défaut définies dans les seeders de Laravel.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Retour personnel sur ce projet 💭
+Pour ce projet, j'ai fait le choix de faire une interface simple et épurée (mais évidemment responsive) pour me concentrer rapidement sur le développement des fonctionnalités.
 
-## Learning Laravel
+Pour chaque soumission de formulaire j'effectue une vérificiation des données côté client avant de faire de même côté serveur, mais je pense qu'avec un peu plus de temps j'aurais également approfondir certaines fonctionnalités (comme envoyer des notifications par mail aux utilisateurs, ou la possibilité d'indiquer qu'il a oublié son mot de passe par exemple).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Quelques images du projet 📷
