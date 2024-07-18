@@ -45,7 +45,6 @@ Pour ce projet, j'ai fait le choix de faire une interface simple et épurée (ma
 Pour chaque soumission de formulaire j'effectue une vérificiation des données côté client avant de faire de même côté serveur, mais je pense qu'avec un peu plus de temps j'aurais également approfondir certaines fonctionnalités (comme envoyer des notifications par mail aux utilisateurs, ou la possibilité d'indiquer qu'il a oublié son mot de passe par exemple).
 
 
-</br></br>
 ### Quelques images du projet 📷
 ![Haut de la page d'accueil](https://github.com/Louis-Cauvet/Captures-des-projets/blob/main/Larav'immo/capture1.png)
 </br></br>
