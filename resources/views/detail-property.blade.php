@@ -208,5 +208,5 @@
     </script>
 
     <!-- Call to Google Maps' API -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9oWKFb7BKbmCZs6wrUB3nNrAut3OctE"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.api_key') }}"></script>
 @endsection
