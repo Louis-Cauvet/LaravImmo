@@ -2,7 +2,7 @@
 
 >Projet final du cours de Laravel durant le S2 de 3èeme année de Bachelor Ingénierie du Web à l'ESGI Lyon
 
-</br></br>
+
 ### Objectif 🎯
 L'objectif de ce projet est de concevoir et développer, à l'aide des connaissances de base en Laravel abordées durant le cours, un site fictif d'agence immobilière, proposant plusieurs fonctionnalités aux utilisateurs :
 - Consulter tous les biens immobiliers disponibles
@@ -21,16 +21,16 @@ Ces derniers doivent également avoir la possibilité d'accéder à leur interfa
 - Consulter la liste de tous les utilisateurs possédant un compte, et pouvoir leur envoyer une notification de manière individuelle
 - Modifier ses informations personnelles
 
-</br></br>
+
 ### Technologies ⚙️
 Projet réalisé en **Laravel**, que je n'avais jusque-là jamais étudié ou utilisé. Le Front du site est réalisé avec le moteur de template **Blade**, du **Sass** et du **Vanilla JS**.
 
-</br></br>
+
 ### Collaborateurs 👥
 *Projet développé en totale autonomie*
 - Louis Cauvet
 
-</br></br>
+
 ### Prise en main du projet ⬇️
 Une fois le projet chargé en local (pensez à indiquer les informations de votre base de données dans un fichier ".env"), lancez votre serveur local PHP, puis exécutez ``php artisan migrate`` pour charger les tables dans la base de données, et ``php artisan db:seed`` pour y injecter les données par défaut définies dans les seeders de Laravel.
 
@@ -38,7 +38,7 @@ Un compte admin de test est crée par défaut dans la base de données, vous pou
 
 **Remarque** : Si vous souhaitez accéder à la localisation sur la carte Maps d'un bien immobilier lorsque vous allez sur sa page de détail, définissez votre clé d'API Google Maps dans le fichier ".env" de la manière suivante : ``GOOGLE_MAPS_API_KEY=Votre_clé_d'API``.
 
-</br></br>
+
 ### Retour personnel sur ce projet 💭
 Pour ce projet, j'ai fait le choix de faire une interface simple et épurée (mais évidemment responsive) pour me concentrer rapidement sur le développement des fonctionnalités.
 
