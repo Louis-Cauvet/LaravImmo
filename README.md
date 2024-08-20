@@ -1,6 +1,6 @@
 # Larav'immo 🏠
 
->Projet final du cours de Laravel durant le S2 de 3èeme année de Bachelor Ingénierie du Web à l'ESGI Lyon
+>Projet final du cours de Laravel durant le S2 de 3ème année de Bachelor Ingénierie du Web à l'ESGI Lyon
 
 
 ### Objectif 🎯
