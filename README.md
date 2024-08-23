@@ -26,11 +26,6 @@ Ces derniers doivent également avoir la possibilité d'accéder à leur interfa
 Projet réalisé en **Laravel**, que je n'avais jusque-là jamais étudié ou utilisé. Le Front du site est réalisé avec le moteur de template **Blade**, du **Sass** et du **Vanilla JS**.
 
 
-### Collaborateurs 👥
-*Projet développé en totale autonomie*
-- Louis Cauvet
-
-
 ### Prise en main du projet ⬇️
 Une fois le projet chargé en local (pensez à indiquer les informations de votre base de données dans un fichier ".env"), lancez votre serveur local PHP, puis exécutez ``php artisan migrate`` pour charger les tables dans la base de données, et ``php artisan db:seed`` pour y injecter les données par défaut définies dans les seeders de Laravel.
 
