@@ -31,7 +31,7 @@ Une fois le projet chargé en local (pensez à indiquer les informations de votr
 
 Un compte admin de test est crée par défaut dans la base de données, vous pouvez l'utiliser pour tester les fonctionnalités des admins. Son adresse mail est 'admin@laravimmo.com' et son mot de passe est 'admin123!'.
 
-**Remarque** : Si vous souhaitez accéder à la localisation sur la carte Maps d'un bien immobilier lorsque vous allez sur sa page de détail, définissez votre clé d'API Google Maps dans le fichier ".env" de la manière suivante : ``GOOGLE_MAPS_API_KEY=Votre_clé_d'API``.
+**Remarque** : Si vous souhaitez accéder à la localisation sur la carte Maps d'un bien immobilier lorsque vous allez sur sa page de détail, définissez votre clé d'API Google Maps dans le fichier ".env" de la manière suivante : ``GOOGLE_MAPS_API_KEY=Votre_clé_d'API``. 
 
 
 ### Retour personnel sur ce projet 💭
